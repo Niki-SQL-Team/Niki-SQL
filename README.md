@@ -1,2 +1,2 @@
 # This is the next generation of SQL.
-Comming soom.
+Comming soon.
