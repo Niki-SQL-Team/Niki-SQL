@@ -1,5 +1,10 @@
 package Foundation;
 
+import Foundation.Exception.NKInterfaceException;
+import Foundation.Exception.NKInternalException;
+import Foundation.MemoryStorage.ConditionalAttribute;
+import Foundation.MemoryStorage.Tuple;
+
 import java.util.ArrayList;
 
 public class NKSql {

@@ -1,4 +1,4 @@
-package Foundation;
+package Foundation.MemoryStorage;
 
 import java.util.Vector;
 

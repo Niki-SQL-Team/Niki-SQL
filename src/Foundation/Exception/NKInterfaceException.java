@@ -1,10 +1,10 @@
-package Foundation;
+package Foundation.Exception;
 
-public class NKInternalException extends Throwable {
+public class NKInterfaceException extends Exception {
 
     private String description;
 
-    public NKInternalException(String description) {
+    public NKInterfaceException(String description) {
         this.description = description;
     }
 
