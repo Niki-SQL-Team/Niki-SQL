@@ -15,6 +15,7 @@ public class IndexManager{
 	public boolean	dropIndex();
 	
 	//等值查找
+	public 
 	
 	//范围查找
 	
