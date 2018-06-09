@@ -1,13 +1,13 @@
 package Foundation;
 
-import Foundation.Exception.NKInterfaceException;
-import Foundation.Exception.NKInternalException;
-import Foundation.MemoryStorage.ConditionalAttribute;
-import Foundation.MemoryStorage.Tuple;
+import Foundation.Exception.*;
+import Foundation.MemoryStorage.*;
 
 import java.util.ArrayList;
 
 public class NKSql {
+
+    public final String NKSqlHomeDirectory = "/Users/licanchen/Desktop/Niki SQL/DB Files";
 
     public NKSql() throws NKInternalException {
         System.out.println("NKSql initialized.");
