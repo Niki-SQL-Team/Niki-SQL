@@ -1,4 +1,4 @@
-package Foundation;
+package Foundation.Enumeration;
 
 public enum Operation {
 

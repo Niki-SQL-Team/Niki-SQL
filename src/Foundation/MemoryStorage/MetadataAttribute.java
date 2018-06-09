@@ -1,4 +1,7 @@
-package Foundation;
+package Foundation.MemoryStorage;
+
+import Foundation.Enumeration.*;
+import Foundation.Exception.*;
 
 public class MetadataAttribute {
 
