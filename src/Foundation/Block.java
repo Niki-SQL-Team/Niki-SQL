@@ -14,23 +14,28 @@ public class Block {
      * fileIdentifier is the corresponding file name of the block
      * attribute length is the length of the attribute in the block, the unit is byte
      * isFullyOccupied indicates whether the block have extra space for another attribute
+     * isDiscardable indicates whether the block is empty and could be discarded
      * firstAvailablePosition is the first empty place of the block, empty list are used
      * capacity is the maximum number of attributes that the block can store
      * storageData is used to store the data of the block
      */
-    final Integer blockSize = 4096;
-    String fileIdentifier;
-    Integer attributeLength;
-    Boolean isFullyOccupied;
-    Integer firstAvailablePosition;
+    public final Integer blockSize = 4096;
+    public String fileIdentifier;
+    public Integer attributeLength;
+    public Boolean isFullyOccupied;
+    public Boolean isDiscardable;
+    public Integer firstAvailablePosition;
+    public Integer currentSize;
     private Integer capacity;
-    byte[] storageData = new byte[blockSize];
+    public byte[] storageData = new byte[blockSize];
 
     public Block(String fileIdentifier, Integer attributeLength) {
         this.fileIdentifier = fileIdentifier;
         this.attributeLength = attributeLength;
         this.isFullyOccupied = false;
+        this.isDiscardable = true;
         this.firstAvailablePosition = 0;
+        this.currentSize = 0;
         this.capacity = blockSize / attributeLength;
         initializeEmptyList();
     }
@@ -112,24 +117,26 @@ public class Block {
      * When inserting or deleting an attribute from block
      * make sure that you've implemented the following methods first
      */
-    public Integer decleareOccupancyOn(Integer index) throws NKInternalException {
+    public Integer decleareOccupancy() throws NKInternalException {
         if (this.isFullyOccupied) {
             throw new NKInternalException("Inserting into a fully occupied block.");
-        } else if (index < 0 || index >= this.capacity) {
-            throw new NKInternalException("Wrong index format.");
         }
         Integer available = this.firstAvailablePosition;
         Integer nextAvailable = getInteger(firstAvailablePosition * attributeLength);
         this.firstAvailablePosition = nextAvailable;
+        this.currentSize ++;
         this.isFullyOccupied = (nextAvailable < 0);
+        this.isDiscardable = false;
         return available;
     }
 
-    public void releaseOccupancyOn(Integer index) throws NKInternalException {
+    public void releaseOccupancy(Integer index) throws NKInternalException {
         if (index < 0 || index >= this.capacity) {
             throw new NKInternalException("Wrong index format.");
         }
         this.isFullyOccupied = false;
+        this.currentSize --;
+        this.isDiscardable = (this.currentSize == 0);
         Integer nextAvailable = this.firstAvailablePosition;
         writeInteger(nextAvailable, index * attributeLength);
         this.firstAvailablePosition = index;
