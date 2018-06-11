@@ -26,7 +26,7 @@ public class Block {
     public Boolean isDiscardable;
     public Integer firstAvailablePosition;
     public Integer currentSize;
-    private Integer capacity;
+    public Integer capacity;
     public byte[] storageData = new byte[blockSize];
 
     public Block(String fileIdentifier, Integer attributeLength) {

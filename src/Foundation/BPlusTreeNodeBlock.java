@@ -1,161 +1,50 @@
 package Foundation;
 
-import Foundation.Enumeration.*;
 import Foundation.MemoryStorage.BPlusTreePointer;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
-public class BPlusTreeNodeBlock<Type extends Comparable> extends Block {
+public class BPlusTreeNodeBlock extends Block {
 
-    Boolean isLeafNode;     // Whether the node is the leaf node of the B+ tree
-    String attributeName;     // The attribute name of the index
+    public Boolean isLeafNode;
+    public Integer markerCapacity;
+    protected Integer markerLength;
+    private final Integer singlePointerSize = Integer.SIZE / 8;
 
-    Integer degreeOfNode;     // The maximum degree of the node, depending on the data type
-    final Integer pointerSize = 2 * Integer.SIZE / 8;
-    Integer currentElements;     // The current number of elements in the node
-    DataType dataType;
-
-    BPlusTreeNodeBlock(DataType dataType, Boolean isLeafNode) {
-        super("Index", 8);
-
-        this.dataType = dataType;
+    public BPlusTreeNodeBlock(String fileIdentifier, Integer attributeLength, Boolean isLeafNode) {
+        super(fileIdentifier, attributeLength);
         this.isLeafNode = isLeafNode;
-        this.degreeOfNode = this.blockSize / (elementSize() + pointerSize) - 1;
-        currentElements = 0;
-        this.attributeLength = elementSize() + pointerSize;
+        this.markerCapacity = this.capacity - 1;
+        this.markerLength = attributeLength - 2 * singlePointerSize;
     }
 
-    BPlusTreePointer searchFor(Type dataItem) {
-        for (int i = 0; i < currentElements; i ++) {
-            if (compare(getElement(i), dataItem)) {     // dataItem < i th sign
-                if (this.isLeafNode) {
-                    return getAttributePointer(i);
-                } else {
-                    return getInternalPointer(i);
-                }
-            }
-        }
-        if (this.isLeafNode) {
-            return getAttributePointer(currentElements + 1);
+    public BPlusTreePointer getPointer(Integer index) {
+        return this.isLeafNode ? getAttributePointer(index) : getInternalPointer(index);
+    }
+
+    public BPlusTreePointer getTailPointer(Integer index) {
+        Integer indexOffset = this.attributeLength * this.markerCapacity + 2 * singlePointerSize;
+        return getPointerByOffset(indexOffset, -1);
+    }
+
+    private BPlusTreePointer getAttributePointer(Integer index) {
+        Integer indexOffset = this.attributeLength * index;
+        Integer offsetOffset = this.attributeLength * index + singlePointerSize;
+        return getPointerByOffset(indexOffset, offsetOffset);
+    }
+
+    private BPlusTreePointer getInternalPointer(Integer index) {
+        Integer indexOffset = this.attributeLength * index;
+        return getPointerByOffset(indexOffset, -1);
+    }
+
+    private BPlusTreePointer getPointerByOffset(Integer indexOffset, Integer offsetOffset) {
+        if (offsetOffset < 0) {
+            return new BPlusTreePointer(getInteger(indexOffset));
         } else {
-            return getInternalPointer(currentElements + 1);
+            return new BPlusTreePointer(getInteger(indexOffset), getInteger(offsetOffset));
         }
-    }
-
-    // The index starts from 0
-    Type getElement(Integer index) {
-        switch (this.dataType) {
-            case IntegerType: return (Type)getIntegerSign(index);
-            case FloatType: return (Type)getFloatSign(index);
-            case StringType: return (Type)getStringSign(index);
-        }
-        return null;
-    }
-
-    // The index starts from 0
-    // The method should be called if the node is an internal node
-    BPlusTreePointer getInternalPointer(Integer index) {
-        Integer integerSize = Integer.SIZE / 8;
-        byte[] blockIndex = new byte[integerSize];
-        System.arraycopy(storageData, index * attributeLength,
-                blockIndex, 0, integerSize);
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(blockIndex);
-        DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
-        Integer tempIndex = 0;
-        try {
-            tempIndex = dataInputStream.readInt();
-        } catch (Exception exception) {
-            System.out.println("Error in getInternalPointer method.");
-            exception.printStackTrace();
-        }
-        return new BPlusTreePointer(tempIndex);
-    }
-
-    // The index starts from 0
-    // The method should be called if the node is an leaf node
-    BPlusTreePointer getAttributePointer(Integer index) {
-        Integer integerSize = Integer.SIZE / 8;
-        byte[] blockIndex = new byte[integerSize];
-        byte[] blockOffset = new byte[integerSize];
-        System.arraycopy(storageData, index * attributeLength,
-                blockIndex, 0, integerSize);
-        System.arraycopy(storageData, index * attributeLength + integerSize
-                , blockOffset, 0, integerSize);
-        Integer tempIndex = 0, tempOffset = 0;
-        try {
-            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(blockIndex);
-            DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
-            tempIndex = dataInputStream.readInt();
-            byteArrayInputStream = new ByteArrayInputStream(blockOffset);
-            dataInputStream = new DataInputStream(byteArrayInputStream);
-            tempOffset = dataInputStream.readInt();
-        } catch (Exception exception) {
-            System.out.println("Error in getPointer method.");
-            exception.printStackTrace();
-        }
-        return new BPlusTreePointer(tempIndex, tempOffset);
-    }
-
-    // The pointer that points to the first child of the node's parent's next sibling
-    BPlusTreePointer getTailPointer() {
-        Integer lastInteger = getIntegerSign(currentElements + 1);
-        return new BPlusTreePointer(lastInteger);
-    }
-
-    private Integer elementSize() {
-        switch (this.dataType) {
-            case IntegerType: return Integer.SIZE / 8;
-            case FloatType: return Float.SIZE / 8;
-            case StringType: return 255;
-        }
-        return 0;
-    }
-
-    private Integer getIntegerSign(Integer index) {
-        Integer integerSize = Integer.SIZE / 8;
-        byte[] integerBytes = new byte[integerSize];
-        System.arraycopy(storageData, index * attributeLength + pointerSize,
-                integerBytes, 0, integerSize);
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(integerBytes);
-        DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
-        Integer returnValue = 0;
-        try {
-            returnValue = dataInputStream.readInt();
-        } catch (Exception exception) {
-            System.out.println("Error in getIntegerSign method.");
-            exception.printStackTrace();
-        }
-        return returnValue;
-    }
-
-    private Float getFloatSign(Integer index) {
-        Integer floatSize = Float.SIZE / 8;
-        byte[] floatBytes = new byte[floatSize];
-        System.arraycopy(storageData, index * attributeLength + pointerSize,
-                floatBytes, 0, floatSize);
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(floatBytes);
-        DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
-        Float returnValue = (float) 0;
-        try {
-            returnValue = dataInputStream.readFloat();
-        } catch (Exception exception) {
-            System.out.println("Error in getFloatSign method.");
-            exception.printStackTrace();
-        }
-        return returnValue;
-    }
-
-    private String getStringSign(Integer index) {
-        byte[] stringBytes = new byte[255];
-        System.arraycopy(storageData, index * attributeLength + pointerSize,
-                stringBytes, 0, 255);
-        return new String(stringBytes).replaceFirst("\\s++$", "");
-    }
-
-    // The method returns true if a > b
-    private <Type extends Comparable<? super Type>> Boolean compare(Type a, Type b) {
-        return a.compareTo(b) > 0;
     }
 
 }
