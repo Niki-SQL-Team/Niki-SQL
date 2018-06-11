@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a10e842-66b8-4e9d-9600-c3068c183ced" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Foundation/BPlusTreeNodeBlock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreePointer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Foundation/Block/FloatBPlusTreeBlock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Foundation/Block/IntegerBPlusTreeBlock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Foundation/Block/StringBPlusTreeBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Foundation/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/Block.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Foundation/MemoryStorage/TupleStoragePointer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Foundation/BPlusTreeNodeBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/Block/BPlusTreeBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Foundation/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/Block/Block.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreePointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreePointer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Foundation/NKSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/NKSql.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,10 +22,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Block.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Foundation/Block.java">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Block/Block.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="200">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#5922#5923#0" expanded="true" />
+                <element signature="e#5961#5962#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BPlusTreeBlock.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Block/BPlusTreeBlock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -31,23 +47,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BPlusTreeNodeBlock.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Foundation/BPlusTreeNodeBlock.java">
+      <file leaf-file-name="FloatBPlusTreeBlock.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Block/FloatBPlusTreeBlock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+            <state relative-caret-position="60">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IntegerBPlusTreeBlock.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Block/IntegerBPlusTreeBlock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-142">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StringBPlusTreeBlock.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Block/StringBPlusTreeBlock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#BPlusTreeNodeBlock#0;class#BPlusTreeNodeBlock#0" />
-                <element signature="method#searchFor#0;class#BPlusTreeNodeBlock#0" />
-                <element signature="method#getElement#0;class#BPlusTreeNodeBlock#0" />
-                <element signature="method#getInternalPointer#0;class#BPlusTreeNodeBlock#0" />
-                <element signature="method#getPointer#0;class#BPlusTreeNodeBlock#0" />
-                <element signature="method#getTailPointer#0;class#BPlusTreeNodeBlock#0" />
-                <element signature="method#elementSize#0;class#BPlusTreeNodeBlock#0" />
-                <element signature="method#getIntegerSign#0;class#BPlusTreeNodeBlock#0" />
-                <element signature="method#getFloatSign#0;class#BPlusTreeNodeBlock#0" />
-                <element signature="method#getStringSign#0;class#BPlusTreeNodeBlock#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NKSql.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/NKSql.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,23 +92,11 @@
       <file leaf-file-name="BPlusTreePointer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreePointer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+            <state relative-caret-position="580">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
               <folding>
-                <element signature="e#852#853#0" expanded="true" />
-                <element signature="e#892#893#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConditionalAttribute.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/ConditionalAttribute.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#848#849#0" expanded="true" />
+                <element signature="e#889#890#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -88,13 +112,17 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>currentSize</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/NKAPI.java" />
         <option value="$PROJECT_DIR$/src/NKSql.java" />
         <option value="$PROJECT_DIR$/src/Foundation/Operation.java" />
@@ -110,11 +138,19 @@
         <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/TupleStoragePointer.java" />
         <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/Tuple.java" />
         <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java" />
-        <option value="$PROJECT_DIR$/src/Foundation/NKSql.java" />
         <option value="$PROJECT_DIR$/src/Foundation/BPlusTreePointer.java" />
-        <option value="$PROJECT_DIR$/src/Foundation/Block.java" />
         <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreePointer.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/Foundation/BPlusTreeNodeBlock.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/BPlusTreeBlock.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/IntegerBPlusTreeBlock.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/NKSql.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/FloatBPlusTreeBlock.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/Block.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/StringBPlusTreeBlock.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/Block/StringBPlusTreeBlock.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/Block/IntegerBPlusTreeBlock.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/Block/FloatBPlusTreeBlock.java" />
       </list>
     </option>
   </component>
@@ -139,9 +175,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -159,6 +192,13 @@
               <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Foundation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Foundation" type="462c0819:PsiDirectoryNode" />
+              <item name="Block" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
@@ -185,6 +225,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -195,6 +238,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -277,7 +321,11 @@
       <workItem from="1528367196018" duration="99000" />
       <workItem from="1528387841268" duration="3479000" />
       <workItem from="1528437749598" duration="8571000" />
-      <workItem from="1528518053336" duration="7418000" />
+      <workItem from="1528518053336" duration="8458000" />
+      <workItem from="1528633198909" duration="205000" />
+      <workItem from="1528673314238" duration="1029000" />
+      <workItem from="1528715682784" duration="8036000" />
+      <workItem from="1528728515661" duration="5591000" />
     </task>
     <task id="LOCAL-00001" summary="First commit.">
       <created>1528037503484</created>
@@ -286,11 +334,39 @@
       <option name="project" value="LOCAL" />
       <updated>1528037503484</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Block structure modified.">
+      <created>1528718691866</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1528718691866</updated>
+    </task>
+    <task id="LOCAL-00003" summary="class Block finished.">
+      <created>1528721978978</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1528721978978</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Modification.">
+      <created>1528725899191</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1528725899191</updated>
+    </task>
+    <task id="LOCAL-00005" summary="BPlusTreeNodeBlock class remastered.">
+      <created>1528730871794</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1528730871794</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24997000" />
+    <option name="totallyTimeSpent" value="40898000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -304,13 +380,14 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32969698" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32969698" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2746781" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28898427" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32969698" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -319,11 +396,10 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32969698" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,19 +410,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit." />
+    <MESSAGE value="Block structure modified." />
+    <MESSAGE value="class Block finished." />
+    <MESSAGE value="Modification." />
+    <MESSAGE value="BPlusTreeNodeBlock class remastered." />
+    <option name="LAST_COMMIT_MESSAGE" value="BPlusTreeNodeBlock class remastered." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Foundation/Block.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1188">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation/NKSql.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -377,22 +452,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/BPlusTreeNodeBlock.java">
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Block/BPlusTreeBlock.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#BPlusTreeNodeBlock#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#searchFor#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getElement#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getInternalPointer#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getPointer#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getTailPointer#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#elementSize#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getIntegerSign#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getFloatSign#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getStringSign#0;class#BPlusTreeNodeBlock#0" />
+            <element signature="e#6379#6380#0" expanded="true" />
+            <element signature="e#6420#6421#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -593,13 +660,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/NKAPI.java" />
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation.java" />
     <entry file="file://$PROJECT_DIR$/src/Foundation/Memory Storage/MetadataAttribute.java" />
     <entry file="file://$PROJECT_DIR$/src/Foundation/Enumeration/DataType.java">
@@ -649,16 +709,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/Block.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
@@ -669,54 +719,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/NKSql.java">
+    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/ConditionalAttribute.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="980">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/ConditionalAttribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreePointer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+        <state relative-caret-position="580">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
           <folding>
-            <element signature="e#852#853#0" expanded="true" />
-            <element signature="e#892#893#0" expanded="true" />
+            <element signature="e#848#849#0" expanded="true" />
+            <element signature="e#889#890#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/BPlusTreeNodeBlock.java">
+    <entry file="file://$PROJECT_DIR$/src/Foundation/NKSql.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+        <state relative-caret-position="200">
+          <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#BPlusTreeNodeBlock#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#searchFor#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getElement#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getInternalPointer#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getPointer#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getTailPointer#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#elementSize#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getIntegerSign#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getFloatSign#0;class#BPlusTreeNodeBlock#0" />
-            <element signature="method#getStringSign#0;class#BPlusTreeNodeBlock#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Block/Block.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5922#5923#0" expanded="true" />
+            <element signature="e#5961#5962#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Block/BPlusTreeBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Block/FloatBPlusTreeBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Block/StringBPlusTreeBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Block/IntegerBPlusTreeBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-142">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
@@ -783,6 +862,17 @@
         </settings>
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
         <settings>
           <splitter-proportions>
             <option name="proportions">
