@@ -43,7 +43,7 @@ public class BPlusTreeNodeBlock<Type extends Comparable> extends Block {
         }
     }
 
-    // The index starts from 1
+    // The index starts from 0
     Type getElement(Integer index) {
         switch (this.dataType) {
             case IntegerType: return (Type)getIntegerSign(index);
@@ -53,12 +53,12 @@ public class BPlusTreeNodeBlock<Type extends Comparable> extends Block {
         return null;
     }
 
-    // The index starts from 1
+    // The index starts from 0
     // The method should be called if the node is an internal node
     BPlusTreePointer getInternalPointer(Integer index) {
         Integer integerSize = Integer.SIZE / 8;
         byte[] blockIndex = new byte[integerSize];
-        System.arraycopy(storageData, (index - 1) * attributeLength,
+        System.arraycopy(storageData, index * attributeLength,
                 blockIndex, 0, integerSize);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(blockIndex);
         DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
@@ -72,15 +72,15 @@ public class BPlusTreeNodeBlock<Type extends Comparable> extends Block {
         return new BPlusTreePointer(tempIndex);
     }
 
-    // The index starts from 1
+    // The index starts from 0
     // The method should be called if the node is an leaf node
     BPlusTreePointer getAttributePointer(Integer index) {
         Integer integerSize = Integer.SIZE / 8;
         byte[] blockIndex = new byte[integerSize];
         byte[] blockOffset = new byte[integerSize];
-        System.arraycopy(storageData, (index - 1) * attributeLength,
+        System.arraycopy(storageData, index * attributeLength,
                 blockIndex, 0, integerSize);
-        System.arraycopy(storageData, (index - 1) * attributeLength + integerSize
+        System.arraycopy(storageData, index * attributeLength + integerSize
                 , blockOffset, 0, integerSize);
         Integer tempIndex = 0, tempOffset = 0;
         try {
@@ -115,7 +115,7 @@ public class BPlusTreeNodeBlock<Type extends Comparable> extends Block {
     private Integer getIntegerSign(Integer index) {
         Integer integerSize = Integer.SIZE / 8;
         byte[] integerBytes = new byte[integerSize];
-        System.arraycopy(storageData, (index - 1) * attributeLength + pointerSize,
+        System.arraycopy(storageData, index * attributeLength + pointerSize,
                 integerBytes, 0, integerSize);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(integerBytes);
         DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
@@ -132,7 +132,7 @@ public class BPlusTreeNodeBlock<Type extends Comparable> extends Block {
     private Float getFloatSign(Integer index) {
         Integer floatSize = Float.SIZE / 8;
         byte[] floatBytes = new byte[floatSize];
-        System.arraycopy(storageData, (index - 1) * attributeLength + pointerSize,
+        System.arraycopy(storageData, index * attributeLength + pointerSize,
                 floatBytes, 0, floatSize);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(floatBytes);
         DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
@@ -148,7 +148,7 @@ public class BPlusTreeNodeBlock<Type extends Comparable> extends Block {
 
     private String getStringSign(Integer index) {
         byte[] stringBytes = new byte[255];
-        System.arraycopy(storageData, (index - 1) * attributeLength + pointerSize,
+        System.arraycopy(storageData, index * attributeLength + pointerSize,
                 stringBytes, 0, 255);
         return new String(stringBytes).replaceFirst("\\s++$", "");
     }
