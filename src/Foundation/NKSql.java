@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 public class NKSql {
 
-    public final String NKSqlHomeDirectory = "/Users/licanchen/Desktop/Niki SQL/DB Files";
+    public static final String NKSqlHomeDirectory = "/Users/licanchen/Desktop/Niki SQL/DB Files";
+    public static final Integer maxLengthOfString = 255;
 
     public NKSql() throws NKInternalException {
         System.out.println("NKSql initialized.");

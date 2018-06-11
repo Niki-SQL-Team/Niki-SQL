@@ -1,6 +1,7 @@
-package Foundation;
+package Foundation.Block;
 
 import Foundation.Exception.NKInternalException;
+import Foundation.NKSql;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -71,9 +72,9 @@ public class Block {
         return returnValue;
     }
 
-    public String getString(int blockOffset, int stringLength) {
-        byte[] stringBytes = readFromStorage(blockOffset, stringLength);
-        return new String(stringBytes);
+    public String getString(int blockOffset) {
+        byte[] stringBytes = readFromStorage(blockOffset, NKSql.maxLengthOfString);
+        return new String(stringBytes).replaceFirst("\\s++$", "");
     }
 
     /*
@@ -106,6 +107,7 @@ public class Block {
     }
 
     public void writeString(String newValue, int blockOffset) {
+        newValue = extended(newValue);
         byte[] bytes = newValue.getBytes();
         System.arraycopy(bytes, 0, this.storageData, blockOffset, newValue.length());
     }
@@ -174,6 +176,15 @@ public class Block {
     private DataInputStream createDataInputStream(byte[] bytes) {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
         return new DataInputStream(byteArrayInputStream);
+    }
+
+    private String extended(String string) {
+        StringBuilder stringBuilder = new StringBuilder(string);
+        while (stringBuilder.length() < NKSql.maxLengthOfString) {
+            stringBuilder.append(" ");
+        }
+        string = stringBuilder.toString();
+        return string;
     }
 
     private void handleInternalException(Exception exception, String methodName) {

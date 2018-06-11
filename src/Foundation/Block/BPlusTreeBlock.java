@@ -1,18 +1,16 @@
-package Foundation;
+package Foundation.Block;
 
+import Foundation.Block.Block;
 import Foundation.MemoryStorage.BPlusTreePointer;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-
-public class BPlusTreeNodeBlock extends Block {
+public class BPlusTreeBlock extends Block {
 
     public Boolean isLeafNode;
     public Integer markerCapacity;
     protected Integer markerLength;
-    private final Integer singlePointerSize = Integer.SIZE / 8;
+    protected static final Integer singlePointerSize = Integer.SIZE / 8;
 
-    public BPlusTreeNodeBlock(String fileIdentifier, Integer attributeLength, Boolean isLeafNode) {
+    public BPlusTreeBlock(String fileIdentifier, Integer attributeLength, Boolean isLeafNode) {
         super(fileIdentifier, attributeLength);
         this.isLeafNode = isLeafNode;
         this.markerCapacity = this.capacity - 1;

@@ -8,7 +8,7 @@ public class BPlusTreePointer {
 
     // This init method is used for leaf node in the B+ tree
     // To obtain the name of the related table and the attribute
-    // You should refer to fileIdentifier and attributeName of BPlusTreeNodeBlock
+    // You should refer to fileIdentifier and attributeName of BPlusTreeBlock
     public BPlusTreePointer(Integer blockIndex, Integer blockOffset) {
         this.blockIndex = blockIndex;
         this.blockOffset = blockOffset;
