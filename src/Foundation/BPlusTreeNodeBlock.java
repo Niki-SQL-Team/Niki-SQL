@@ -17,7 +17,7 @@ public class BPlusTreeNodeBlock<Type extends Comparable> extends Block {
     DataType dataType;
 
     BPlusTreeNodeBlock(DataType dataType, Boolean isLeafNode) {
-        super();
+        super("Index", 8);
 
         this.dataType = dataType;
         this.isLeafNode = isLeafNode;

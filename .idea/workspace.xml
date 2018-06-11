@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8a10e842-66b8-4e9d-9600-c3068c183ced" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Foundation/BPlusTreeNodeBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/BPlusTreeNodeBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Foundation/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/Block.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -19,12 +18,12 @@
       <file leaf-file-name="Block.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Foundation/Block.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="548">
-              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+            <state relative-caret-position="200">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2637#2638#0" expanded="true" />
-                <element signature="e#2663#2664#0" expanded="true" />
+                <element signature="e#4280#4281#0" expanded="true" />
+                <element signature="e#4319#4320#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -233,7 +232,7 @@
       <workItem from="1528518053336" duration="8458000" />
       <workItem from="1528633198909" duration="205000" />
       <workItem from="1528673314238" duration="1029000" />
-      <workItem from="1528715682784" duration="2115000" />
+      <workItem from="1528715682784" duration="5187000" />
     </task>
     <task id="LOCAL-00001" summary="First commit.">
       <created>1528037503484</created>
@@ -242,11 +241,18 @@
       <option name="project" value="LOCAL" />
       <updated>1528037503484</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Block structure modified.">
+      <created>1528718691866</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1528718691866</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29386000" />
+    <option name="totallyTimeSpent" value="32458000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -290,7 +296,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit." />
+    <MESSAGE value="Block structure modified." />
+    <option name="LAST_COMMIT_MESSAGE" value="Block structure modified." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/ConditionalAttribute.java">
@@ -319,8 +326,8 @@
           <caret line="57" selection-start-line="57" selection-end-line="57" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2637#2638#0" expanded="true" />
-            <element signature="e#2663#2664#0" expanded="true" />
+            <element signature="e#4280#4281#0" expanded="true" />
+            <element signature="e#4319#4320#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -666,12 +673,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation/Block.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+        <state relative-caret-position="200">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2637#2638#0" expanded="true" />
-            <element signature="e#2663#2664#0" expanded="true" />
+            <element signature="e#4280#4281#0" expanded="true" />
+            <element signature="e#4319#4320#0" expanded="true" />
           </folding>
         </state>
       </provider>
