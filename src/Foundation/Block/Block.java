@@ -49,27 +49,13 @@ public class Block {
     public Integer getInteger(int blockOffset) {
         Integer integerSize = Integer.SIZE / 8;
         byte[] integerBytes = readFromStorage(blockOffset, integerSize);
-        DataInputStream dataInputStream = createDataInputStream(integerBytes);
-        Integer returnValue = 0;
-        try {
-            returnValue = dataInputStream.readInt();
-        } catch (Exception exception) {
-            handleInternalException(exception, "getInteger");
-        }
-        return returnValue;
+        return convertToIntegerFrom(integerBytes);
     }
 
     public Float getFloat(int blockOffset) {
         Integer floatSize = Float.SIZE / 8;
         byte[] floatBytes = readFromStorage(blockOffset, floatSize);
-        DataInputStream dataInputStream = createDataInputStream(floatBytes);
-        Float returnValue = (float) 0;
-        try {
-            returnValue = dataInputStream.readFloat();
-        } catch (Exception exception) {
-            handleInternalException(exception, "getFloat");
-        }
-        return returnValue;
+        return convertToFloatFrom(floatBytes);
     }
 
     public String getString(int blockOffset) {
@@ -149,6 +135,26 @@ public class Block {
      */
     public byte[] getStorageData() {
         return this.storageData;
+    }
+
+    protected Integer convertToIntegerFrom(byte[] bytes) {
+        DataInputStream dataInputStream = createDataInputStream(bytes);
+        try {
+            return dataInputStream.readInt();
+        } catch (Exception exception) {
+            handleInternalException(exception, "convertToIntegerFrom");
+        }
+        return -1;
+    }
+
+    protected Float convertToFloatFrom(byte[] bytes) {
+        DataInputStream dataInputStream = createDataInputStream(bytes);
+        try {
+            return dataInputStream.readFloat();
+        } catch (Exception exception) {
+            handleInternalException(exception, "convertToFloatFrom");
+        }
+        return (float)-1;
     }
 
     /*
