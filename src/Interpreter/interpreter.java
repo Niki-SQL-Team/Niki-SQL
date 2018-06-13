@@ -21,7 +21,9 @@ public class interpreter {
         }
     }
 
-    private static void Translating(BufferedReader reader)throws IOException{
+    public static void Translating(BufferedReader reader)throws IOException{
 
     }
+
+    public static void printSelectResult()
 }
