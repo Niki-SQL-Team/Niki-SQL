@@ -1,3 +1,5 @@
+package Top;
+
 import Foundation.Exception.*;
 import Foundation.MemoryStorage.*;
 
@@ -5,15 +7,23 @@ import java.util.ArrayList;
 
 public class NKSql {
 
-    public static final String NKSqlHomeDirectory = "/Users/licanchen/Desktop/Niki SQL/DB Files";
+    public static final String homeDirectory = "/Users/licanchen/Desktop/Niki SQL/DB Files/";
+    public static final String dataHomeDirectory = homeDirectory + "Data/";
+    public static final String indexHomeDirectory = homeDirectory + "Index/";
+    public static final String metadataHomeDirectory = homeDirectory + "Metadata/";
+
+    public static final String dataFilePostfix = ".nkdata";
+    public static final String indexFilePostfix = ".nkindex";
+    public static final String metadataFilePostfix = ".nkmetadata";
+
     public static final Integer maxLengthOfString = 255;
 
     public NKSql() throws NKInternalException {
-        System.out.println("NKSql initialized.");
+        System.out.println("Top.NKSql initialized.");
     }
 
     public void close() throws NKInternalException {
-        System.out.println("NKSql closed.");
+        System.out.println("Top.NKSql closed.");
     }
 
     public void createTable(String tableName, ArrayList<MetadataAttribute> attributes)
