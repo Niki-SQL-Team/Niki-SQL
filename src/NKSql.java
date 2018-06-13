@@ -1,5 +1,3 @@
-package Foundation;
-
 import Foundation.Exception.*;
 import Foundation.MemoryStorage.*;
 

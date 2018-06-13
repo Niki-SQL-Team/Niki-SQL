@@ -1,7 +1,7 @@
 package Foundation.Block;
 
 import Foundation.Exception.NKInternalException;
-import Foundation.NKSql;
+import NKSql;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

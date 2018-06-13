@@ -1,7 +1,7 @@
 package Foundation.Block;
 
 import Foundation.MemoryStorage.BPlusTreePointer;
-import Foundation.NKSql;
+import NKSql;
 
 public class StringBPlusTreeBlock extends BPlusTreeBlock {
 
