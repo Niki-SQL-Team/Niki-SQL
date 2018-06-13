@@ -21,7 +21,7 @@ public class BPlusTreeBlock extends Block {
         return this.isLeafNode ? getAttributePointer(index) : getInternalPointer(index);
     }
 
-    public BPlusTreePointer getTailPointer(Integer index) {
+    public BPlusTreePointer getTailPointer() {
         Integer indexOffset = this.attributeLength * this.markerCapacity + 2 * singlePointerSize;
         return getPointerByOffset(indexOffset, -1);
     }
