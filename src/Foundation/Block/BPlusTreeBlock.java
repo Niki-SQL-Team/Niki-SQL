@@ -1,10 +1,9 @@
 package Foundation.Block;
 
 import Foundation.Enumeration.DataType;
+import Foundation.Exception.NKInternalException;
 import Foundation.MemoryStorage.BPlusTreePointer;
 import Top.NKSql;
-
-import java.lang.reflect.Type;
 
 public class BPlusTreeBlock extends Block {
 
@@ -47,6 +46,72 @@ public class BPlusTreeBlock extends Block {
                         searchLeafStringFor(stringItem);
         }
         return null;
+    }
+
+    public void insert(BPlusTreePointer left, byte[] dataItem, BPlusTreePointer right,
+                       Integer atIndex) {
+        try {
+            shiftRight(atIndex);
+        } catch (Exception exception) {
+            handleInternalException(exception, "insert");
+        }
+        setPointer(atIndex, left);
+        setPointer(atIndex + 1, right);
+        Integer attributeOffset = atIndex * attributeLength + 2 * singlePointerSize;
+        System.arraycopy(dataItem, attributeOffset, storageData, attributeOffset
+                + attributeOffset, dataItem.length - attributeOffset);
+    }
+
+    public void insert(byte[] dataItem, BPlusTreePointer relatedPointer, Integer atIndex) {
+        try {
+            shiftRight(atIndex);
+        } catch (Exception exception) {
+            handleInternalException(exception, "insert");
+        }
+        setPointer(atIndex, relatedPointer);
+        Integer attributeOffset = atIndex * attributeLength + 2 * singlePointerSize;
+        System.arraycopy(dataItem, attributeOffset, storageData, attributeOffset
+                + attributeOffset, attributeOffset + dataItem.length - attributeOffset);
+    }
+
+    /*
+     * The following are some private supportive methods
+     */
+    private void setPointer(Integer index, BPlusTreePointer pointer) {
+        Integer indexOffset = attributeLength * index;
+        Integer offsetOffset = indexOffset + singlePointerSize;
+        writeInteger(pointer.blockIndex, indexOffset);
+        writeInteger(pointer.blockOffset, offsetOffset);
+    }
+
+    private void shiftRight(Integer fromIndex) throws NKInternalException {
+        if (this.currentSize.equals(this.markerCapacity)) {
+            throw new NKInternalException("Shift on a full block");
+        }
+        shiftAttributesRight(fromIndex);
+        shiftPointerRight(fromIndex);
+    }
+
+    private void shiftAttributesRight(Integer fromIndex) {
+        for (int i = this.currentSize - 1; i >= fromIndex; i --) {
+            Integer fromOffset = attributeLength * i + 2 * singlePointerSize;
+            Integer toOffset = fromOffset + attributeLength;
+            copyStorage(fromOffset, toOffset, markerLength);
+        }
+    }
+
+    private void shiftPointerRight(Integer fromIndex) {
+        for (int i = this.currentSize; i >= fromIndex; i --) {
+            Integer fromOffset = attributeLength * i;
+            Integer toOffset = fromOffset + attributeLength;
+            copyStorage(fromOffset, toOffset, 2 * singlePointerSize);
+        }
+    }
+
+    private void copyStorage(Integer fromOffset, Integer toOffset, Integer forLength) {
+        byte[] bytes = readFromStorage(fromOffset, forLength);
+        System.arraycopy(bytes, fromOffset, storageData, toOffset + fromOffset,
+                fromOffset + forLength - fromOffset);
     }
 
     private BPlusTreePointer searchInternalIntegerFor(Integer dataItem) {

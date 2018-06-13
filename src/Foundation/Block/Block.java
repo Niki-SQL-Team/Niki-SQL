@@ -167,7 +167,7 @@ public class Block {
         writeInteger(-1, (this.capacity - 1) * attributeLength);
     }
 
-    private byte[] readFromStorage(int blockOffset, int length) {
+    protected byte[] readFromStorage(int blockOffset, int length) {
         byte[] loadedBytes = new byte[length];
         System.arraycopy(storageData, blockOffset, loadedBytes, 0, length);
         return loadedBytes;
@@ -193,7 +193,7 @@ public class Block {
         return string;
     }
 
-    private void handleInternalException(Exception exception, String methodName) {
+    protected void handleInternalException(Exception exception, String methodName) {
         System.out.println("Error in " + methodName + " method, class Block.");
         exception.printStackTrace();
     }
