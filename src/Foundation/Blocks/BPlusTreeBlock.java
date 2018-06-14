@@ -7,6 +7,15 @@ import Top.NKSql;
 
 public class BPlusTreeBlock extends Block {
 
+    /*
+     * Here's the storage property of class BPlusTreeBlock
+     * isLeafNode indicates that whether the node is a leaf node in a B+ tree
+     * markerCapacity is the maximum capacity of markers in the node, it's one less than capacity
+     * markerLength is the length of the marker, the attributeLength is markerLength + pointer length
+     * dataType stores the data type of the node
+     * The pointer field consists of two pointers, index and offset, the pointers are stored
+     * in front of its corresponding marker
+     */
     public Boolean isLeafNode;
     public Integer markerCapacity;
     private Integer markerLength;
@@ -30,43 +39,45 @@ public class BPlusTreeBlock extends Block {
         return getPointerByOffset(indexOffset, -1);
     }
 
-    public BPlusTreePointer searchFor(byte[] dataItem) {
-        Integer index = searchInsertIndexFor(dataItem);
-        return index>= 0 ? null : getPointer(index);
+    public void setTailPointer(Integer blockIndex) {
+        Integer tailOffset = this.attributeLength * markerCapacity;
+        writeInteger(blockIndex, tailOffset);
     }
 
-    public Integer searchInsertIndexFor(byte[] dataItem) {
+    public BPlusTreePointer searchFor(byte[] dataItem) {
+        Integer index = searchIndexFor(dataItem, !this.isLeafNode);
+        return index == null ? null : getPointer(index);
+    }
+
+    public Integer searchIndexFor(byte[] dataItem, Boolean isMandatory) {
         Converter converter = new Converter();
         Integer pointerIndex = -1;
         switch (this.dataType) {
             case IntegerType:
                 Integer integerItem = converter.convertToInteger(dataItem);
-                pointerIndex = this.isLeafNode ? searchLeafIntegerFor(integerItem) :
-                        searchInternalIntegerFor(integerItem);
+                pointerIndex = searchIntegerFor(integerItem, isMandatory);
                 break;
             case FloatType:
                 Float floatItem = converter.convertToFloat(dataItem);
-                pointerIndex = this.isLeafNode ? searchLeafFloatFor(floatItem) :
-                        searchInternalFloatFor(floatItem);
+                pointerIndex = searchFloatFor(floatItem, isMandatory);
                 break;
             case StringType:
                 String stringItem = converter.convertToString(dataItem);
-                pointerIndex = this.isLeafNode ? searchLeafStringFor(stringItem) :
-                        searchInternalStringFor(stringItem);
+                pointerIndex = searchStringFor(stringItem, isMandatory);
                 break;
         }
         return pointerIndex;
     }
 
     public void insert(BPlusTreePointer left, byte[] dataItem, BPlusTreePointer right) {
-        Integer index = searchInsertIndexFor(dataItem);
+        Integer index = searchIndexFor(dataItem, true);
         index = index < 0 ? (- index - 1) : index;
         insert(dataItem, left);
         setPointer(index + 1, right);
     }
 
     public void insert(byte[] dataItem, BPlusTreePointer relatedPointer) {
-        Integer index = searchInsertIndexFor(dataItem);
+        Integer index = searchIndexFor(dataItem, true);
         index = index < 0 ? (- index - 1) : index;
         try {
             shiftRight(index);
@@ -77,6 +88,10 @@ public class BPlusTreeBlock extends Block {
         Integer attributeOffset = index * attributeLength + 2 * singlePointerSize;
         writeToStorage(dataItem, attributeOffset);
         this.currentSize ++;
+    }
+
+    public void remove(byte[] dataItem, Boolean isLeftPointerPreserved) {
+        
     }
 
     public void outputAttributes() {
@@ -146,70 +161,37 @@ public class BPlusTreeBlock extends Block {
         writeToStorage(bytes, toOffset);
     }
 
-    private Integer searchInternalIntegerFor(Integer dataItem) {
+    private Integer searchIntegerFor(Integer dataItem, Boolean isMandatoryFound) {
         for (int i = 0; i < this.currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
-            if (getInteger(offset) > dataItem) {
+            Integer content = getInteger(offset);
+            if (content.equals(dataItem) || (content >= dataItem && isMandatoryFound)) {
                 return i;
             }
         }
-        return currentSize;
+        return isMandatoryFound ? currentSize : null;
     }
 
-    private Integer searchInternalFloatFor(Float dataItem) {
+    private Integer searchFloatFor(Float dataItem, Boolean isMandatoryFound) {
         for (int i = 0; i < this.currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
-            if (getFloat(offset) > dataItem) {
+            Float content = getFloat(offset);
+            if (content.equals(dataItem) || (content >= dataItem && isMandatoryFound)) {
                 return i;
             }
         }
-        return currentSize;
+        return isMandatoryFound ? currentSize : null;
     }
 
-    private Integer searchInternalStringFor(String dataItem) {
+    private Integer searchStringFor(String dataItem, Boolean isMandatoryFound) {
         for (int i = 0; i < currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
-            if (getString(offset).compareTo(dataItem) > 0) {
+            String content = getString(offset);
+            if (content.equals(dataItem) || content.compareTo(dataItem) > 0 && isMandatoryFound) {
                 return i;
             }
         }
-        return currentSize;
-    }
-
-    private Integer searchLeafIntegerFor(Integer dataItem) {
-        for (int i = 0; i < this.currentSize; i ++) {
-            Integer offset = attributeLength * i + 2 * singlePointerSize;
-            if (getInteger(offset).equals(dataItem)) {
-                return i;
-            } else if (getInteger(offset) > dataItem) {
-                return - i - 1;
-            }
-        }
-        return -1;
-    }
-
-    private Integer searchLeafFloatFor(Float dataItem) {
-        for (int i = 0; i < this.currentSize; i ++ ) {
-            Integer offset = attributeLength * i + 2 * singlePointerSize;
-            if (getFloat(offset).equals(dataItem)) {
-                return i;
-            } else if (getFloat(offset) > dataItem) {
-                return - i - 1;
-            }
-        }
-        return -1;
-    }
-
-    private Integer searchLeafStringFor(String dataItem) {
-        for (int i = 0; i < currentSize; i ++) {
-            Integer offset = attributeLength * i + 2 * singlePointerSize;
-            if (getString(offset).equals(dataItem)) {
-                return i;
-            } else if (getString(offset).compareTo(dataItem) > 0) {
-                return - i - 1;
-            }
-        }
-        return -1;
+        return isMandatoryFound ? currentSize : null;
     }
 
     private BPlusTreePointer getAttributePointer(Integer index) {
