@@ -1,4 +1,4 @@
-package Foundation.Block;
+package Foundation.Blocks;
 
 import Foundation.Enumeration.DataType;
 import Foundation.Exception.NKInternalException;
@@ -31,17 +31,18 @@ public class BPlusTreeBlock extends Block {
     }
 
     public BPlusTreePointer searchFor(byte[] dataItem) {
+        Converter converter = new Converter();
         switch (this.dataType) {
             case IntegerType:
-                Integer integerItem = convertToIntegerFrom(dataItem);
+                Integer integerItem = converter.convertToInteger(dataItem);
                 return this.isLeafNode ? searchLeafIntegerFor(integerItem) :
                         searchInternalIntegerFor(integerItem);
             case FloatType:
-                Float floatItem = convertToFloatFrom(dataItem);
+                Float floatItem = converter.convertToFloat(dataItem);
                 return this.isLeafNode ? searchInternalFloatFor(floatItem) :
                         searchLeafFloatFor(floatItem);
             case StringType:
-                String stringItem = new String(dataItem);
+                String stringItem = converter.convertToString(dataItem);
                 return this.isLeafNode ? searchInternalStringFor(stringItem) :
                         searchLeafStringFor(stringItem);
         }
@@ -58,8 +59,8 @@ public class BPlusTreeBlock extends Block {
         setPointer(atIndex, left);
         setPointer(atIndex + 1, right);
         Integer attributeOffset = atIndex * attributeLength + 2 * singlePointerSize;
-        System.arraycopy(dataItem, attributeOffset, storageData, attributeOffset
-                + attributeOffset, dataItem.length - attributeOffset);
+        writeToStorage(dataItem, attributeOffset);
+        this.currentSize ++;
     }
 
     public void insert(byte[] dataItem, BPlusTreePointer relatedPointer, Integer atIndex) {
@@ -70,8 +71,20 @@ public class BPlusTreeBlock extends Block {
         }
         setPointer(atIndex, relatedPointer);
         Integer attributeOffset = atIndex * attributeLength + 2 * singlePointerSize;
-        System.arraycopy(dataItem, attributeOffset, storageData, attributeOffset
-                + attributeOffset, attributeOffset + dataItem.length - attributeOffset);
+        writeToStorage(dataItem, attributeOffset);
+        this.currentSize ++;
+    }
+
+    public void outputAttributes() {
+        for (int i = 0; i < this.currentSize; i ++) {
+            Integer offset = attributeLength * i + 2 * singlePointerSize;
+            switch (this.dataType) {
+                case IntegerType: System.out.println(getInteger(offset)); break;
+                case FloatType: System.out.println(getFloat(offset)); break;
+                case StringType: System.out.println(getString(offset)); break;
+            }
+        }
+        outputPointerAttributes();
     }
 
     /*
@@ -108,10 +121,25 @@ public class BPlusTreeBlock extends Block {
         }
     }
 
+    private void shiftAttributeLeft(Integer fromIndex) {
+        for (int i = fromIndex; i < this.currentSize; i ++) {
+            Integer fromOffset = attributeLength * i + 2 * singlePointerSize;
+            Integer toOffset = fromOffset - attributeLength;
+            copyStorage(fromOffset, toOffset, markerLength);
+        }
+    }
+
+    private void shiftPointerLeft(Integer fromIndex) {
+        for (int i = fromIndex; i <= this.currentSize; i ++) {
+            Integer fromOffset = attributeLength * i;
+            Integer toOffset = fromOffset - attributeLength;
+            copyStorage(fromOffset, toOffset, 2 * singlePointerSize);
+        }
+    }
+
     private void copyStorage(Integer fromOffset, Integer toOffset, Integer forLength) {
         byte[] bytes = readFromStorage(fromOffset, forLength);
-        System.arraycopy(bytes, fromOffset, storageData, toOffset + fromOffset,
-                fromOffset + forLength - fromOffset);
+        writeToStorage(bytes, toOffset);
     }
 
     private BPlusTreePointer searchInternalIntegerFor(Integer dataItem) {
@@ -195,11 +223,19 @@ public class BPlusTreeBlock extends Block {
 
     private static Integer getAttributeLength(DataType dataType) {
         switch (dataType) {
-            case IntegerType: return Integer.SIZE / 8;
-            case FloatType: return Float.SIZE / 8;
-            case StringType: return NKSql.maxLengthOfString;
+            case IntegerType: return Integer.SIZE / 8 + 2 * singlePointerSize;
+            case FloatType: return Float.SIZE / 8 + 2 * singlePointerSize;
+            case StringType: return NKSql.maxLengthOfString + 2 * singlePointerSize;
         }
         return -1;
+    }
+
+    private void outputPointerAttributes() {
+        for (int i = 0; i <= this.currentSize; i ++) {
+            Integer indexOffset = attributeLength * i;
+            Integer offsetOffset = indexOffset + singlePointerSize;
+            System.out.println(getInteger(indexOffset) + ", " + getInteger(offsetOffset));
+        }
     }
 
 }

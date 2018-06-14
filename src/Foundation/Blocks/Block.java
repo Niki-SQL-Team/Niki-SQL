@@ -1,4 +1,4 @@
-package Foundation.Block;
+package Foundation.Blocks;
 
 import Foundation.Exception.NKInternalException;
 import Top.NKSql;
@@ -11,7 +11,7 @@ import java.io.DataOutputStream;
 public class Block {
 
     /*
-     * Here's the storage property of class Block
+     * Here's the storage property of class Blocks
      * fileIdentifier is the corresponding file name of the block
      * attribute length is the length of the attribute in the block, the unit is byte
      * isFullyOccupied indicates whether the block have extra space for another attribute
@@ -42,25 +42,28 @@ public class Block {
     }
 
     /*
-     * The following 3 methods are read methods of Block
+     * The following 3 methods are read methods of Blocks
      * These methods read the corresponding data type from position with offset blockOffset
      * blockOffset starts from 0, the unit is byte
      */
     public Integer getInteger(int blockOffset) {
         Integer integerSize = Integer.SIZE / 8;
         byte[] integerBytes = readFromStorage(blockOffset, integerSize);
-        return convertToIntegerFrom(integerBytes);
+        Converter converter = new Converter();
+        return converter.convertToInteger(integerBytes);
     }
 
     public Float getFloat(int blockOffset) {
         Integer floatSize = Float.SIZE / 8;
         byte[] floatBytes = readFromStorage(blockOffset, floatSize);
-        return convertToFloatFrom(floatBytes);
+        Converter converter = new Converter();
+        return converter.convertToFloat(floatBytes);
     }
 
     public String getString(int blockOffset) {
         byte[] stringBytes = readFromStorage(blockOffset, NKSql.maxLengthOfString);
-        return new String(stringBytes).replaceFirst("\\s++$", "");
+        Converter converter = new Converter();
+        return converter.convertToString(stringBytes);
     }
 
     /*
@@ -69,33 +72,21 @@ public class Block {
      * blockOffset starts from 0, the unit is byte
      */
     public void writeInteger(int newValue, int blockOffset) {
-        Integer integerSize = Integer.SIZE / 8;
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
-        try {
-            dataOutputStream.writeInt(newValue);
-        } catch (Exception exception) {
-            handleInternalException(exception, "writeInteger");
-        }
-        writeToStorage(byteArrayOutputStream, blockOffset, integerSize);
+        Converter converter = new Converter();
+        byte[] bytes = converter.convertToBytes(newValue);
+        writeToStorage(bytes, blockOffset);
     }
 
     public void writeFloat(Float newValue, int blockOffset) {
-        Integer floatSize = Float.SIZE / 8;
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
-        try {
-            dataOutputStream.writeFloat(newValue);
-        } catch (Exception exception) {
-            handleInternalException(exception, "writeFloat");
-        }
-        writeToStorage(byteArrayOutputStream, blockOffset, floatSize);
+        Converter converter = new Converter();
+        byte[] bytes = converter.convertToBytes(newValue);
+        writeToStorage(bytes, blockOffset);
     }
 
     public void writeString(String newValue, int blockOffset) {
-        newValue = extended(newValue);
-        byte[] bytes = newValue.getBytes();
-        System.arraycopy(bytes, 0, this.storageData, blockOffset, newValue.length());
+        Converter converter = new Converter();
+        byte[] bytes = converter.convertToBytes(newValue);
+        writeToStorage(bytes, blockOffset);
     }
 
     /*
@@ -137,26 +128,6 @@ public class Block {
         return this.storageData;
     }
 
-    protected Integer convertToIntegerFrom(byte[] bytes) {
-        DataInputStream dataInputStream = createDataInputStream(bytes);
-        try {
-            return dataInputStream.readInt();
-        } catch (Exception exception) {
-            handleInternalException(exception, "convertToIntegerFrom");
-        }
-        return -1;
-    }
-
-    protected Float convertToFloatFrom(byte[] bytes) {
-        DataInputStream dataInputStream = createDataInputStream(bytes);
-        try {
-            return dataInputStream.readFloat();
-        } catch (Exception exception) {
-            handleInternalException(exception, "convertToFloatFrom");
-        }
-        return (float)-1;
-    }
-
     /*
      * The following are some private supportive methods
      */
@@ -173,28 +144,12 @@ public class Block {
         return loadedBytes;
     }
 
-    private void writeToStorage(ByteArrayOutputStream byteArrayOutputStream,
-                                int blockOffset, int length) {
-        byte[] bytes = byteArrayOutputStream.toByteArray();
-        System.arraycopy(bytes, 0, this.storageData, blockOffset, length);
-    }
-
-    private DataInputStream createDataInputStream(byte[] bytes) {
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
-        return new DataInputStream(byteArrayInputStream);
-    }
-
-    private String extended(String string) {
-        StringBuilder stringBuilder = new StringBuilder(string);
-        while (stringBuilder.length() < NKSql.maxLengthOfString) {
-            stringBuilder.append(" ");
-        }
-        string = stringBuilder.toString();
-        return string;
+    protected void writeToStorage(byte[] bytes, int blockOffset) {
+        System.arraycopy(bytes, 0, storageData, blockOffset, bytes.length);
     }
 
     protected void handleInternalException(Exception exception, String methodName) {
-        System.out.println("Error in " + methodName + " method, class Block.");
+        System.out.println("Error in " + methodName + " method, class Blocks.");
         exception.printStackTrace();
     }
 
