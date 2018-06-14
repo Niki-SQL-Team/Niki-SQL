@@ -51,16 +51,8 @@ public class BPlusTreeBlock extends Block {
 
     public void insert(BPlusTreePointer left, byte[] dataItem, BPlusTreePointer right,
                        Integer atIndex) {
-        try {
-            shiftRight(atIndex);
-        } catch (Exception exception) {
-            handleInternalException(exception, "insert");
-        }
-        setPointer(atIndex, left);
+        insert(dataItem, left, atIndex);
         setPointer(atIndex + 1, right);
-        Integer attributeOffset = atIndex * attributeLength + 2 * singlePointerSize;
-        writeToStorage(dataItem, attributeOffset);
-        this.currentSize ++;
     }
 
     public void insert(byte[] dataItem, BPlusTreePointer relatedPointer, Integer atIndex) {
