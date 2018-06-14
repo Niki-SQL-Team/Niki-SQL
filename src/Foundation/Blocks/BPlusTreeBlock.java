@@ -90,8 +90,20 @@ public class BPlusTreeBlock extends Block {
         this.currentSize ++;
     }
 
-    public void remove(byte[] dataItem, Boolean isLeftPointerPreserved) {
-        
+    public void remove(byte[] dataItem, Boolean isLeftPointerPreserved) throws NKInternalException {
+        Integer index = searchIndexFor(dataItem, false);
+        if (index == null) {
+            throw new NKInternalException("dataItem not found when intend to delete.");
+        }
+        if (index < currentSize - 1) {
+            shiftAttributeLeft(index + 1);
+            if (isLeftPointerPreserved) {
+                shiftPointerLeft(index + 1);
+            } else if (index < currentSize - 2) {
+                shiftPointerLeft(index + 2);
+            }
+        }
+        this.currentSize --;
     }
 
     public void outputAttributes() {

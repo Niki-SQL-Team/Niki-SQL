@@ -23,6 +23,12 @@ public class Main {
             bPlusTreeBlock.insert(converter.convertToBytes(words[i]), new BPlusTreePointer(i));
         }
         bPlusTreeBlock.outputAttributes();
+        try {
+            bPlusTreeBlock.remove(converter.convertToBytes("melon"), true);
+        } catch (Exception exception) {
+            System.out.println("Fuck the world.");
+        }
+        bPlusTreeBlock.outputAttributes();
     }
 
 }
