@@ -3,11 +3,6 @@ package Foundation.Blocks;
 import Foundation.Exception.NKInternalException;
 import Top.NKSql;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-
 public class Block {
 
     /*

@@ -63,7 +63,8 @@ public class Converter {
     }
 
     public String convertToString(byte[] bytes) {
-        return trimmed(Arrays.toString(bytes));
+        String string = new String(bytes);
+        return trimmed(string);
     }
 
     private DataInputStream createDataInputStream(byte[] bytes) {

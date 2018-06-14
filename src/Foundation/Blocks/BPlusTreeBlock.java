@@ -31,38 +31,50 @@ public class BPlusTreeBlock extends Block {
     }
 
     public BPlusTreePointer searchFor(byte[] dataItem) {
+        Integer index = searchInsertIndexFor(dataItem);
+        return index>= 0 ? null : getPointer(index);
+    }
+
+    public Integer searchInsertIndexFor(byte[] dataItem) {
         Converter converter = new Converter();
+        Integer pointerIndex = -1;
         switch (this.dataType) {
             case IntegerType:
                 Integer integerItem = converter.convertToInteger(dataItem);
-                return this.isLeafNode ? searchLeafIntegerFor(integerItem) :
+                pointerIndex = this.isLeafNode ? searchLeafIntegerFor(integerItem) :
                         searchInternalIntegerFor(integerItem);
+                break;
             case FloatType:
                 Float floatItem = converter.convertToFloat(dataItem);
-                return this.isLeafNode ? searchInternalFloatFor(floatItem) :
-                        searchLeafFloatFor(floatItem);
+                pointerIndex = this.isLeafNode ? searchLeafFloatFor(floatItem) :
+                        searchInternalFloatFor(floatItem);
+                break;
             case StringType:
                 String stringItem = converter.convertToString(dataItem);
-                return this.isLeafNode ? searchInternalStringFor(stringItem) :
-                        searchLeafStringFor(stringItem);
+                pointerIndex = this.isLeafNode ? searchLeafStringFor(stringItem) :
+                        searchInternalStringFor(stringItem);
+                break;
         }
-        return null;
+        return pointerIndex;
     }
 
-    public void insert(BPlusTreePointer left, byte[] dataItem, BPlusTreePointer right,
-                       Integer atIndex) {
-        insert(dataItem, left, atIndex);
-        setPointer(atIndex + 1, right);
+    public void insert(BPlusTreePointer left, byte[] dataItem, BPlusTreePointer right) {
+        Integer index = searchInsertIndexFor(dataItem);
+        index = index < 0 ? (- index - 1) : index;
+        insert(dataItem, left);
+        setPointer(index + 1, right);
     }
 
-    public void insert(byte[] dataItem, BPlusTreePointer relatedPointer, Integer atIndex) {
+    public void insert(byte[] dataItem, BPlusTreePointer relatedPointer) {
+        Integer index = searchInsertIndexFor(dataItem);
+        index = index < 0 ? (- index - 1) : index;
         try {
-            shiftRight(atIndex);
+            shiftRight(index);
         } catch (Exception exception) {
             handleInternalException(exception, "insert");
         }
-        setPointer(atIndex, relatedPointer);
-        Integer attributeOffset = atIndex * attributeLength + 2 * singlePointerSize;
+        setPointer(index, relatedPointer);
+        Integer attributeOffset = index * attributeLength + 2 * singlePointerSize;
         writeToStorage(dataItem, attributeOffset);
         this.currentSize ++;
     }
@@ -134,64 +146,70 @@ public class BPlusTreeBlock extends Block {
         writeToStorage(bytes, toOffset);
     }
 
-    private BPlusTreePointer searchInternalIntegerFor(Integer dataItem) {
+    private Integer searchInternalIntegerFor(Integer dataItem) {
         for (int i = 0; i < this.currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             if (getInteger(offset) > dataItem) {
-                return getPointer(i);
+                return i;
             }
         }
-        return getPointer(currentSize);
+        return currentSize;
     }
 
-    private BPlusTreePointer searchInternalFloatFor(Float dataItem) {
+    private Integer searchInternalFloatFor(Float dataItem) {
         for (int i = 0; i < this.currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             if (getFloat(offset) > dataItem) {
-                return getPointer(i);
+                return i;
             }
         }
-        return getPointer(currentSize);
+        return currentSize;
     }
 
-    private BPlusTreePointer searchInternalStringFor(String dataItem) {
+    private Integer searchInternalStringFor(String dataItem) {
         for (int i = 0; i < currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             if (getString(offset).compareTo(dataItem) > 0) {
-                return getPointer(i);
+                return i;
             }
         }
-        return getPointer(currentSize);
+        return currentSize;
     }
 
-    private BPlusTreePointer searchLeafIntegerFor(Integer dataItem) {
+    private Integer searchLeafIntegerFor(Integer dataItem) {
         for (int i = 0; i < this.currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             if (getInteger(offset).equals(dataItem)) {
-                return getPointer(i);
+                return i;
+            } else if (getInteger(offset) > dataItem) {
+                return - i - 1;
             }
         }
-        return null;
+        return -1;
     }
 
-    private BPlusTreePointer searchLeafFloatFor(Float dataItem) {
+    private Integer searchLeafFloatFor(Float dataItem) {
         for (int i = 0; i < this.currentSize; i ++ ) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             if (getFloat(offset).equals(dataItem)) {
-                return getPointer(i);
+                return i;
+            } else if (getFloat(offset) > dataItem) {
+                return - i - 1;
             }
         }
-        return null;
+        return -1;
     }
 
-    private BPlusTreePointer searchLeafStringFor(String dataItem) {
+    private Integer searchLeafStringFor(String dataItem) {
         for (int i = 0; i < currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             if (getString(offset).equals(dataItem)) {
-                return getPointer(i);
+                return i;
+            } else if (getString(offset).compareTo(dataItem) > 0) {
+                return - i - 1;
             }
         }
-        return null;
+        return -1;
     }
 
     private BPlusTreePointer getAttributePointer(Integer index) {
