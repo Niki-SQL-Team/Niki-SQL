@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="8a10e842-66b8-4e9d-9600-c3068c183ced" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexManager/IndexManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexManager/IndexManager.java" afterDir="false" />
+=======
+    <list default="true" id="8fb71b64-2106-4d1e-9a79-dde6c459ba73" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Foundation/Blocks/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/Blocks/Block.java" afterDir="false" />
+>>>>>>> origin/master
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,6 +21,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file leaf-file-name="IndexManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/IndexManager/IndexManager.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -36,31 +43,92 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
               <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+=======
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="618">
+              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> origin/master
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="DataType.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Foundation/Enumeration/DataType.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="133">
               <caret line="7" selection-start-line="7" selection-end-line="7" />
+=======
+      <file leaf-file-name="Converter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/Converter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="87" selection-start-line="87" selection-end-line="87" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#convertToBytes#0;class#Converter#0" />
+                <element signature="method#convertToBytes#1;class#Converter#0" />
+                <element signature="method#convertToInteger#0;class#Converter#0" />
+                <element signature="method#convertToFloat#0;class#Converter#0" />
+                <element signature="method#convertToString#0;class#Converter#0" />
+                <element signature="method#createDataInputStream#0;class#Converter#0" />
+                <element signature="method#extended#0;class#Converter#0" />
+              </folding>
+>>>>>>> origin/master
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="BPlusTreeBlock.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Foundation/Block/BPlusTreeBlock.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="266">
               <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+=======
+      <file leaf-file-name="BPlusTreeBlock.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="358">
+              <caret line="45" column="2" lean-forward="true" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="2" />
+>>>>>>> origin/master
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#BPlusTreeBlock#0;class#BPlusTreeBlock#0" />
+                <element signature="method#getTailPointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#setTailPointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#searchFor#0;class#BPlusTreeBlock#0" />
+                <element signature="method#searchInsertIndexFor#0;class#BPlusTreeBlock#0" />
+                <element signature="method#insert#0;class#BPlusTreeBlock#0" />
+                <element signature="method#insert#1;class#BPlusTreeBlock#0" />
+                <element signature="method#remove#0;class#BPlusTreeBlock#0" />
+                <element signature="method#outputAttributes#0;class#BPlusTreeBlock#0" />
+                <element signature="method#setPointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#shiftRight#0;class#BPlusTreeBlock#0" />
+                <element signature="method#shiftAttributesRight#0;class#BPlusTreeBlock#0" />
+                <element signature="method#shiftPointerRight#0;class#BPlusTreeBlock#0" />
+                <element signature="method#shiftAttributeLeft#0;class#BPlusTreeBlock#0" />
+                <element signature="method#shiftPointerLeft#0;class#BPlusTreeBlock#0" />
+                <element signature="method#copyStorage#0;class#BPlusTreeBlock#0" />
+                <element signature="method#searchInternalIntegerFor#0;class#BPlusTreeBlock#0" />
+                <element signature="method#searchInternalFloatFor#0;class#BPlusTreeBlock#0" />
+                <element signature="method#searchInternalStringFor#0;class#BPlusTreeBlock#0" />
+                <element signature="method#getAttributePointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#getInternalPointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#getPointerByOffset#0;class#BPlusTreeBlock#0" />
+                <element signature="method#getAttributeLength#0;class#BPlusTreeBlock#0" />
+                <element signature="method#outputPointerAttributes#0;class#BPlusTreeBlock#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="BPlusTree.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/IndexManager/BPlusTree.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -70,6 +138,28 @@
                 <element signature="imports" expanded="true" />
                 <element signature="method#searchKeyForNode#0;class#BPlusTree#0" />
                 <element signature="method#searchKeyInRange#0;class#BPlusTree#0" />
+=======
+      <file leaf-file-name="Block.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/Block.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1320">
+              <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#Block#0;class#Block#0" />
+                <element signature="method#getInteger#0;class#Block#0" />
+                <element signature="method#getFloat#0;class#Block#0" />
+                <element signature="method#getString#0;class#Block#0" />
+                <element signature="method#writeInteger#0;class#Block#0" />
+                <element signature="method#writeFloat#0;class#Block#0" />
+                <element signature="method#writeString#0;class#Block#0" />
+                <element signature="method#decleareOccupancy#0;class#Block#0" />
+                <element signature="method#releaseOccupancy#0;class#Block#0" />
+                <element signature="method#initializeEmptyList#0;class#Block#0" />
+                <element signature="method#readFromStorage#0;class#Block#0" />
+                <element signature="method#writeToStorage#0;class#Block#0" />
+                <element signature="method#handleInternalException#0;class#Block#0" />
+>>>>>>> origin/master
               </folding>
             </state>
           </provider>
@@ -80,14 +170,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>currentSize</find>
+      <find>markerLength</find>
+      <find>extended</find>
+      <find>exten</find>
+      <find>outputAttri</find>
+      <find>output</find>
+      <find>isMandatory</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -96,6 +190,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/NKAPI.java" />
         <option value="$PROJECT_DIR$/src/NKSql.java" />
         <option value="$PROJECT_DIR$/src/Foundation/Operation.java" />
@@ -130,6 +225,12 @@
         <option value="$PROJECT_DIR$/src/Foundation/Block/BPlusTreeBlock.java" />
         <option value="$PROJECT_DIR$/src/IndexManager/IndexManager.java" />
         <option value="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" />
+=======
+        <option value="$PROJECT_DIR$/src/Foundation/Blocks/Converter.java" />
+        <option value="$PROJECT_DIR$/src/Top/Main.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/Blocks/Block.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" />
+>>>>>>> origin/master
       </list>
     </option>
   </component>
@@ -146,38 +247,69 @@
     <option name="width" value="1920" />
     <option name="height" value="1080" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="PackagesPane" />
+=======
+      <pane id="Scope" />
+>>>>>>> origin/master
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
+<<<<<<< HEAD
               <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
               <item name="NikiSQL" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+>>>>>>> origin/master
             </path>
             <path>
               <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
               <item name="NikiSQL" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NikiSQL" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="BufferManager" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
               <item name="NikiSQL" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Foundation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+<<<<<<< HEAD
+              <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NikiSQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Foundation" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Foundation" type="462c0819:PsiDirectoryNode" />
+              <item name="Blocks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="IndexManager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Interpreter" type="462c0819:PsiDirectoryNode" />
+>>>>>>> origin/master
             </path>
             <path>
               <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
@@ -195,14 +327,20 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="Scope" />
       <pane id="AndroidView" />
+=======
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+>>>>>>> origin/master
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/orthogonalize/Desktop/NikiSQL/src/IndexManager/IndexManager.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -210,6 +348,9 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+=======
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+>>>>>>> origin/master
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -228,6 +369,12 @@
       <option name="MAIN_CLASS_NAME" value="Top.Main" />
       <module name="Niki SQL" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Top.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -281,10 +428,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8a10e842-66b8-4e9d-9600-c3068c183ced" name="Default" comment="" />
-      <created>1528037316599</created>
+      <changelist id="8fb71b64-2106-4d1e-9a79-dde6c459ba73" name="Default" comment="" />
+      <created>1528907049437</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
       <updated>1528037316599</updated>
       <workItem from="1528037318281" duration="793000" />
       <workItem from="1528289475855" duration="707000" />
@@ -316,51 +464,51 @@
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
       <updated>1528718691866</updated>
+=======
+      <updated>1528907049437</updated>
+      <workItem from="1528907052879" duration="159000" />
+      <workItem from="1528907248807" duration="12372000" />
+>>>>>>> origin/master
     </task>
-    <task id="LOCAL-00003" summary="class Block finished.">
-      <created>1528721978978</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1528721978978</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Modification.">
-      <created>1528725899191</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1528725899191</updated>
-    </task>
-    <task id="LOCAL-00005" summary="BPlusTreeNodeBlock class remastered.">
-      <created>1528730871794</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1528730871794</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="61204000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+=======
+    <option name="totallyTimeSpent" value="12531000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+>>>>>>> origin/master
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32876712" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32969698" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32969698" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28841147" />
+=======
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.48727274" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
+>>>>>>> origin/master
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -370,11 +518,18 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Messages" order="7" weight="0.32969698" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32969698" />
+=======
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+>>>>>>> origin/master
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,16 +538,9 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="First commit." />
-    <MESSAGE value="Block structure modified." />
-    <MESSAGE value="class Block finished." />
-    <MESSAGE value="Modification." />
-    <MESSAGE value="BPlusTreeNodeBlock class remastered." />
-    <option name="LAST_COMMIT_MESSAGE" value="BPlusTreeNodeBlock class remastered." />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+<<<<<<< HEAD
       <option name="time" value="3" />
     </breakpoint-manager>
   </component>
@@ -596,16 +744,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/Block/IntegerBPlusTreeBlock.java">
+=======
+      <option name="time" value="10" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-142">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="360">
+          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+>>>>>>> origin/master
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Index Manager/BPlusTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/Catalog Manager/Holder.txt" />
     <entry file="file://$PROJECT_DIR$/src/Foundation/Exception/NKInterfaceException.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -667,12 +836,35 @@
             <element signature="e#282#283#0" expanded="true" />
             <element signature="e#324#325#0" expanded="true" />
             <element signature="e#341#342#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/Index Manager/IndexManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/Converter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#convertToBytes#0;class#Converter#0" />
+            <element signature="method#convertToBytes#1;class#Converter#0" />
+            <element signature="method#convertToInteger#0;class#Converter#0" />
+            <element signature="method#convertToFloat#0;class#Converter#0" />
+            <element signature="method#convertToString#0;class#Converter#0" />
+            <element signature="method#createDataInputStream#0;class#Converter#0" />
+            <element signature="method#extended#0;class#Converter#0" />
+>>>>>>> origin/master
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation/Enumeration/DataType.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="133">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
@@ -682,22 +874,47 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+=======
+        <state relative-caret-position="618">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+>>>>>>> origin/master
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/BufferManager/FileManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="852">
           <caret line="62" column="34" lean-forward="true" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="34" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/Block.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1320">
+          <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
+>>>>>>> origin/master
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#Block#0;class#Block#0" />
+            <element signature="method#getInteger#0;class#Block#0" />
+            <element signature="method#getFloat#0;class#Block#0" />
+            <element signature="method#getString#0;class#Block#0" />
+            <element signature="method#writeInteger#0;class#Block#0" />
+            <element signature="method#writeFloat#0;class#Block#0" />
+            <element signature="method#writeString#0;class#Block#0" />
+            <element signature="method#decleareOccupancy#0;class#Block#0" />
+            <element signature="method#releaseOccupancy#0;class#Block#0" />
+            <element signature="method#initializeEmptyList#0;class#Block#0" />
+            <element signature="method#readFromStorage#0;class#Block#0" />
+            <element signature="method#writeToStorage#0;class#Block#0" />
+            <element signature="method#handleInternalException#0;class#Block#0" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -720,11 +937,44 @@
             <element signature="imports" expanded="true" />
             <element signature="method#searchKeyForNode#0;class#BPlusTree#0" />
             <element signature="method#searchKeyInRange#0;class#BPlusTree#0" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="45" column="2" lean-forward="true" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#BPlusTreeBlock#0;class#BPlusTreeBlock#0" />
+            <element signature="method#getTailPointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#setTailPointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#searchFor#0;class#BPlusTreeBlock#0" />
+            <element signature="method#searchInsertIndexFor#0;class#BPlusTreeBlock#0" />
+            <element signature="method#insert#0;class#BPlusTreeBlock#0" />
+            <element signature="method#insert#1;class#BPlusTreeBlock#0" />
+            <element signature="method#remove#0;class#BPlusTreeBlock#0" />
+            <element signature="method#outputAttributes#0;class#BPlusTreeBlock#0" />
+            <element signature="method#setPointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#shiftRight#0;class#BPlusTreeBlock#0" />
+            <element signature="method#shiftAttributesRight#0;class#BPlusTreeBlock#0" />
+            <element signature="method#shiftPointerRight#0;class#BPlusTreeBlock#0" />
+            <element signature="method#shiftAttributeLeft#0;class#BPlusTreeBlock#0" />
+            <element signature="method#shiftPointerLeft#0;class#BPlusTreeBlock#0" />
+            <element signature="method#copyStorage#0;class#BPlusTreeBlock#0" />
+            <element signature="method#searchInternalIntegerFor#0;class#BPlusTreeBlock#0" />
+            <element signature="method#searchInternalFloatFor#0;class#BPlusTreeBlock#0" />
+            <element signature="method#searchInternalStringFor#0;class#BPlusTreeBlock#0" />
+            <element signature="method#getAttributePointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#getInternalPointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#getPointerByOffset#0;class#BPlusTreeBlock#0" />
+            <element signature="method#getAttributeLength#0;class#BPlusTreeBlock#0" />
+            <element signature="method#outputPointerAttributes#0;class#BPlusTreeBlock#0" />
+>>>>>>> origin/master
           </folding>
         </state>
       </provider>
     </entry>
   </component>
+<<<<<<< HEAD
   <component name="masterDetails">
     <states>
       <state key="ArtifactsStructureConfigurable.UI">
@@ -823,4 +1073,6 @@
       </state>
     </states>
   </component>
+=======
+>>>>>>> origin/master
 </project>
