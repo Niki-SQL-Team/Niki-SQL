@@ -5,10 +5,9 @@ import java.util.concurrent.ConcurrentMap;
 
 import BufferManager.*;
 import CatalogManager.*;
-import Foundation.Block.BPlusTreeBlock;
-import Foundation.Enumeration.CompareCondition;
-import Foundation.Enumeration.DataType;
-import Foundation.MemoryStorage.BPlusTreePointer;
+import Foundation.Blocks.*;
+import Foundation.Enumeration.*;
+import Foundation.MemoryStorage.*;
 import RecordManager.*;
 import Foundation.*;
 
@@ -36,11 +35,31 @@ public class BPlusTree{
             //否则
                 //将返回的指针，和其所指向的块的第一个元素作为路标插入该节点
                     //如果节点储存信息已经饱和
-                    //生成新的右侧节点，将原节点内一般的信息转移至新的节点
+                    //生成新的右侧节点，将原节点内一半的信息转移至新的节点
                     //插入element
                     //返回新生成节点的指针
                     //如果还能插入
                     //插入，返回null
+		BPlusTreePointer res;
+		if(!node.isLeafNode){
+			BPlusTreeBlock next = node.searchFor(element).getTreeNode();
+			res = insertKeyForNode(element, elementPointer, next);
+			if(res == null)
+				return null;
+		}
+		//以下情况是搜做到叶节点，或者以非NULL递归返回到非叶节点
+		if(/*满了*/){
+
+		}
+		else{
+			if(node.isLeafNode){
+				node.insert(element, elementPointer);
+				return null;
+			}
+			else{
+
+			}
+		}
 
 	}
 	//精确查找
@@ -58,6 +77,7 @@ public class BPlusTree{
 	}
 
 	//范围查找
+	//默认返回结果为闭区间查找
 	public Vector<BPlusTreePointer> searchKeyInRange(byte[] startKey, byte[] endKey){//闭区间查找
 		if(startKey == null){//左侧无限制
 			BPlusTreeBlock currentNode = this.root.getTreeNode();
@@ -68,15 +88,15 @@ public class BPlusTree{
 			Vector<BPlusTreePointer> result = new Vector<BPlusTreePointer>();
 			while(currentNode != null) {//从最左侧的block向右侧遍历
 				for (int i = 0; i < currentNode.currentElements; i++) {
-					CompareCondition res = currentNode.compareAttributeAt(endKey, i)
-					if (res == CompareCondition.LessThan || res == CompareCondition.EqualTo)
+					CompareCondition res = currentNode.compareAttributeAt(endKey, i);
+					if (res == CompareCondition.LessThan || res == CompareCondition.EqualTo)//如果一个元素小于等于右边界，加入结果
 						result.addElement(currentNode.getAtrributePointer(i));
-					else
+					else//否则表明遇到边界，返回结果
 						return result;
 				}
-				currentNode = currentNode.getTailPointer().getTreeNode();
+				currentNode = currentNode.getTailPointer().getTreeNode();//指向下一个block
 			}
-			return result;
+			return result;//用来解决有边界比现有元素都大的情况
 		}else{//左侧有限制
 			BPlusTreeNode currentNode = root;
 			while(currentNode.isLeafNode != true){//根据startkey确定位置
