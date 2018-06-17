@@ -1,6 +1,6 @@
 package Foundation.Exception;
 
-public class NKInternalException extends Throwable {
+public class NKInternalException extends Exception {
 
     private String description;
 
