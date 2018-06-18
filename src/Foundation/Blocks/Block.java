@@ -3,20 +3,24 @@ package Foundation.Blocks;
 import Foundation.Exception.NKInternalException;
 import Top.NKSql;
 
-public class Block {
+import java.io.Serializable;
 
-    /**
-     ** Here's the storage property of class Blocks
-     ** fileIdentifier is the corresponding file name of the block
-     ** attribute length is the length of the attribute in the block, the unit is byte
-     ** isFullyOccupied indicates whether the block have extra space for another attribute
-     ** isDiscardable indicates whether the block is empty and could be discarded
-     ** firstAvailablePosition is the first empty place of the block, empty list are used
-     ** capacity is the maximum number of attributes that the block can store
-     ** storageData is used to store the data of the block
-     **/
+public class Block implements Serializable {
+
+    /*
+     * Here's the storage property of class Blocks
+     * fileIdentifier is the corresponding file name of the block
+     * index is the index of the block in its storage structure
+     * attribute length is the length of the attribute in the block, the unit is byte
+     * isFullyOccupied indicates whether the block have extra space for another attribute
+     * isDiscardable indicates whether the block is empty and could be discarded
+     * firstAvailablePosition is the first empty place of the block, empty list are used
+     * capacity is the maximum number of attributes that the block can store
+     * storageData is used to store the data of the block
+     */
     public final Integer blockSize = 4096;
     public String fileIdentifier;
+    public Integer index;
     public Integer attributeLength;
     public Boolean isFullyOccupied;
     public Boolean isDiscardable;
@@ -25,9 +29,10 @@ public class Block {
     public Integer capacity;
     public byte[] storageData = new byte[blockSize];
 
-    public Block(String fileIdentifier, Integer attributeLength) {
+    public Block(String fileIdentifier, Integer attributeLength, Integer index) {
         this.fileIdentifier = fileIdentifier;
         this.attributeLength = attributeLength;
+        this.index = index;
         this.isFullyOccupied = false;
         this.isDiscardable = true;
         this.firstAvailablePosition = 0;
@@ -36,11 +41,11 @@ public class Block {
         initializeEmptyList();
     }
 
-    /**
-     ** The following 3 methods are read methods of Blocks
-     ** These methods read the corresponding data type from position with offset blockOffset
-     ** blockOffset starts from 0, the unit is byte
-     **/
+    /*
+     * The following 3 methods are read methods of Blocks
+     * These methods read the corresponding data type from position with offset blockOffset
+     * blockOffset starts from 0, the unit is byte
+     */
     public Integer getInteger(int blockOffset) {
         Integer integerSize = Integer.SIZE / 8;
         byte[] integerBytes = readFromStorage(blockOffset, integerSize);
@@ -61,11 +66,11 @@ public class Block {
         return converter.convertToString(stringBytes);
     }
 
-    /**
-     ** The following 3 methods are write methods of block
-     ** These methods write the declared data (newValue) to the position with offset blockOffset
-     ** blockOffset starts from 0, the unit is byte
-     **/
+    /*
+     * The following 3 methods are write methods of block
+     * These methods write the declared data (newValue) to the position with offset blockOffset
+     * blockOffset starts from 0, the unit is byte
+     */
     public void writeInteger(int newValue, int blockOffset) {
         Converter converter = new Converter();
         byte[] bytes = converter.convertToBytes(newValue);
@@ -84,13 +89,13 @@ public class Block {
         writeToStorage(bytes, blockOffset);
     }
 
-    /**
-     ** The following 2 methods are used for finding or dropping an available position
-     ** for an attribute
-     ** The index's unit is attribute, not byte
-     ** When inserting or deleting an attribute from block
-     ** make sure that you've implemented the following methods first
-     **/
+    /*
+     * The following 2 methods are used for finding or dropping an available position
+     * for an attribute
+     * The index's unit is attribute, not byte
+     * When inserting or deleting an attribute from block
+     * make sure that you've implemented the following methods first
+     */
     public Integer decleareOccupancy() throws NKInternalException {
         if (this.isFullyOccupied) {
             throw new NKInternalException("Inserting into a fully occupied block.");
@@ -116,16 +121,16 @@ public class Block {
         this.firstAvailablePosition = index;
     }
 
-    /**
-     ** This method is used when writing the block back to the disk
-     **/
+    /*
+     * This method is used when writing the block back to the disk
+     */
     public byte[] getStorageData() {
         return this.storageData;
     }
 
-    /**
-     ** The following are some private supportive methods
-     **/
+    /*
+     * The following are some private supportive methods
+     */
     private void initializeEmptyList() {
         for (int i = 0; i < this.capacity - 1; i ++) {
             writeInteger(i + 1, i * attributeLength);

@@ -7,38 +7,39 @@ import Top.NKSql;
 
 public class BPlusTreeBlock extends Block {
 
-    /**
-     ** Here's the storage property of class BPlusTreeBlock
-     ** isLeafNode indicates that whether the node is a leaf node in a B+ tree
-     ** markerCapacity is the maximum capacity of markers in the node, it's one less than capacity
-     ** markerLength is the length of the marker, the attributeLength is markerLength + pointer length
-     ** dataType stores the data type of the node
-     ** The pointer field consists of two pointers, index and offset, the pointers are stored
-     ** in front of its corresponding marker
-     **/
+    /*
+     * Here's the storage property of class BPlusTreeBlock
+     * isLeafNode indicates that whether the node is a leaf node in a B+ tree
+     * markerCapacity is the maximum capacity of markers in the node, it's one less than capacity
+     * markerLength is the length of the marker, the attributeLength is markerLength + pointer length
+     * dataType stores the data type of the node
+     * The pointer field consists of two pointers, index and offset, the pointers are stored
+     * in front of its corresponding marker
+     */
     public Boolean isLeafNode;
     public Integer markerCapacity;
     private Integer markerLength;
     private DataType dataType;
     private static final Integer singlePointerSize = Integer.SIZE / 8;
 
-    public BPlusTreeBlock(String fileIdentifier, DataType dataType, Boolean isLeafNode) {
-        super(fileIdentifier, getAttributeLength(dataType));
+    public BPlusTreeBlock(String fileIdentifier, DataType dataType, Integer index, Boolean isLeafNode) {
+        super(fileIdentifier, getAttributeLength(dataType), index);
         this.dataType = dataType;
         this.isLeafNode = isLeafNode;
         this.markerCapacity = this.capacity - 1;
         this.markerLength = attributeLength - 2 * singlePointerSize;
+        this.isDiscardable = false;
     }
 
     public BPlusTreePointer getPointer(Integer index) {
         return this.isLeafNode ? getAttributePointer(index) : getInternalPointer(index);
     }
 
-    /**
-     ** Tail Pointer is the pointer that is used to point to the sibling of a node in a B+ tree
-     ** The tail pointer is only a integer, indicating the block index of the sibling
-     ** The caller of the BPlusTreeBlock is responsible for the maintenance of the Tail Pointer
-     **/
+    /*
+     * Tail Pointer is the pointer that is used to point to the sibling of a node in a B+ tree
+     * The tail pointer is only a integer, indicating the block index of the sibling
+     * The caller of the BPlusTreeBlock is responsible for the maintenance of the Tail Pointer
+     */
     public BPlusTreePointer getTailPointer() {
         Integer indexOffset = this.attributeLength * this.markerCapacity + 2 * singlePointerSize;
         return getPointerByOffset(indexOffset, -1);
@@ -49,28 +50,28 @@ public class BPlusTreeBlock extends Block {
         writeInteger(blockIndex, tailOffset);
     }
 
-    /**
-     ** The searchFor method is used to search an item in the BPlusTreeBlock
-     ** The return value is the pointer of the corresponding pointer
-     ** The method would automatically judge whether the node is a leaf node
-     ** If it's a leaf node, the method would return the pointer which corresponding dataItem is exactly
-     ** the search value, and returns null if the item not found
-     ** If it's not a leaf node, the method would return the pointer that points to the next node
-     ** The search methods are linear search currently, there might be some improvements
-     **/
+    /*
+     * The searchFor method is used to search an item in the BPlusTreeBlock
+     * The return value is the pointer of the corresponding pointer
+     * The method would automatically judge whether the node is a leaf node
+     * If it's a leaf node, the method would return the pointer which corresponding dataItem is exactly
+     * the search value, and returns null if the item not found
+     * If it's not a leaf node, the method would return the pointer that points to the next node
+     * The search methods are linear search currently, there might be some improvements
+     */
     public BPlusTreePointer searchFor(byte[] dataItem) {
         Integer index = searchIndexFor(dataItem, !this.isLeafNode);
         return index == null ? null : getPointer(index);
     }
 
-    /**
-     ** The method is used for finding the corresponding index of the dataItem
-     ** The parameter isMandatoryFound control the search condition
-     ** If isMandatoryFound is true, then the method would search for the dataItem that is exactly the
-     ** same with the provided dataItem, and returns null if not exist
-     ** If isMandatoryFound is false, then the method would search for the index of the pointer that
-     ** can be used to search for the next block in the B+ tree
-     **/
+    /*
+     * The method is used for finding the corresponding index of the dataItem
+     * The parameter isMandatoryFound control the search condition
+     * If isMandatoryFound is true, then the method would search for the dataItem that is exactly the
+     * same with the provided dataItem, and returns null if not exist
+     * If isMandatoryFound is false, then the method would search for the index of the pointer that
+     * can be used to search for the next block in the B+ tree
+     */
     public Integer searchIndexFor(byte[] dataItem, Boolean isMandatoryFound) {
         Converter converter = new Converter();
         Integer pointerIndex = -1;
@@ -91,14 +92,14 @@ public class BPlusTreeBlock extends Block {
         return pointerIndex;
     }
 
-    /**
-     ** The following two insert methods is used to insert data into the BPlusTreeBlock
-     ** The method would automatically maintain the order of the item in the block
-     ** The first method is used to insert into a internal node, you would have to provide the data and
-     ** the left and right pointers of the data
-     ** The second method is used to insert into a leaf node, you can only provide the data and its
-     ** corresponding pointer
-     **/
+    /*
+     * The following two insert methods is used to insert data into the BPlusTreeBlock
+     * The method would automatically maintain the order of the item in the block
+     * The first method is used to insert into a internal node, you would have to provide the data and
+     * the left and right pointers of the data
+     * The second method is used to insert into a leaf node, you can only provide the data and its
+     * corresponding pointer
+     */
     public void insert(BPlusTreePointer left, byte[] dataItem, BPlusTreePointer right) {
         Integer index = searchIndexFor(dataItem, true);
         index = index < 0 ? (- index - 1) : index;
@@ -120,12 +121,12 @@ public class BPlusTreeBlock extends Block {
         this.currentSize ++;
     }
 
-    /**
-     ** The remove method can be used to remove an item which value is exactly the same with dataItem
-     ** If the item is not found in the block, an exception would be thrown
-     ** The parameter isLeftPointerPreserved is used to tell the method whether the left pointer or
-     ** the right pointer of the target dataItem is to be removed
-     **/
+    /*
+     * The remove method can be used to remove an item which value is exactly the same with dataItem
+     * If the item is not found in the block, an exception would be thrown
+     * The parameter isLeftPointerPreserved is used to tell the method whether the left pointer or
+     * the right pointer of the target dataItem is to be removed
+     */
     public void remove(byte[] dataItem, Boolean isLeftPointerPreserved) throws NKInternalException {
         Integer index = searchIndexFor(dataItem, false);
         if (index == null) {
@@ -154,9 +155,9 @@ public class BPlusTreeBlock extends Block {
         outputPointerAttributes();
     }
 
-    /**
-     ** The following are some private supportive methods
-     **/
+    /*
+     * The following are some private supportive methods
+     */
     private void setPointer(Integer index, BPlusTreePointer pointer) {
         Integer indexOffset = attributeLength * index;
         Integer offsetOffset = indexOffset + singlePointerSize;
