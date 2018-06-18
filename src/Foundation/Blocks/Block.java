@@ -18,7 +18,7 @@ public class Block implements Serializable {
      * capacity is the maximum number of attributes that the block can store
      * storageData is used to store the data of the block
      */
-    public final Integer blockSize = 4096;
+    public static final Integer blockSize = 4096;
     public String fileIdentifier;
     public Integer index;
     public Integer attributeLength;
@@ -96,7 +96,7 @@ public class Block implements Serializable {
      * When inserting or deleting an attribute from block
      * make sure that you've implemented the following methods first
      */
-    public Integer decleareOccupancy() throws NKInternalException {
+    public Integer declareOccupancy() throws NKInternalException {
         if (this.isFullyOccupied) {
             throw new NKInternalException("Inserting into a fully occupied block.");
         }

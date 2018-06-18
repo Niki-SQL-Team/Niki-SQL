@@ -19,6 +19,7 @@ public class NKSql {
     public static final String metadataFilePostfix = ".nkmd";
 
     public static final Integer maxLengthOfString = 255;
+    public static final Integer maxAttributesPerTable = 32;
     public static final Integer bufferSize = 8;
 
     private BufferManager bufferManager;
