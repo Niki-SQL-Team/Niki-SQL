@@ -11,6 +11,9 @@ import Foundation.MemoryStorage.*;
 import RecordManager.*;
 import Foundation.*;
 
+//需要getElement method
+//需要getTreeBlock method
+//需要block info trans method
 //B+树
 public class BPlusTree{
 	private BPlusTreePointer root;
@@ -27,6 +30,11 @@ public class BPlusTree{
     public void insertKey(byte[] element, BPlusTreePointer elementPointer){
 	    //注意这里要考虑root节点此时满了的情况
     }
+    //插入只需要对右侧更新指针即可，这里对提供的双侧方法包装为单侧
+    private void rightInsert(byte[] marker, BPlusTreePointer right, BPlusTreeBlock node){
+		BPlusTreePointer left = node.searchFor(marker);
+		node.insert(left, marker, right);
+	}
 	private BPlusTreePointer insertKeyForNode(byte[] element, BPlusTreePointer elementPointer, BPlusTreeBlock node){
 		//在子节点递归
             //如果是叶节点，进入否则部分
@@ -40,7 +48,7 @@ public class BPlusTree{
                     //返回新生成节点的指针
                     //如果还能插入
                     //插入，返回null
-		BPlusTreePointer res;
+		BPlusTreePointer res = null;
 		if(!node.isLeafNode){
 			BPlusTreeBlock next = node.searchFor(element).getTreeNode();
 			res = insertKeyForNode(element, elementPointer, next);
@@ -48,19 +56,21 @@ public class BPlusTree{
 				return null;
 		}
 		//以下情况是搜做到叶节点，或者以非NULL递归返回到非叶节点
-		if(/*满了*/){
+		if(node.currentSize >= node.markerCapacity/*满了*/){
 
 		}
-		else{
-			if(node.isLeafNode){
+		else{/*没有满，插入*/
+			if(node.isLeafNode){//在没有满的叶节点插入
 				node.insert(element, elementPointer);
 				return null;
 			}
-			else{
-
+			else{//在没有满的非叶节点插入
+				//新插入的左指针不动，右指针为res
+				rightInsert(res.getTreeNode().getElement(), res, node);
+				return null;
 			}
 		}
-
+		return null;//no use
 	}
 	//精确查找
 	public BPlusTreePointer searchKey(byte[] target){
