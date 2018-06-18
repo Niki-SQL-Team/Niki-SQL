@@ -9,9 +9,10 @@ import Foundation.MemoryStorage.MetadataAttribute;
 import Foundation.MemoryStorage.Tuple;
 import Top.NKSql;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Table {
+public class Table implements Serializable {
 
     public String tableName;
     public Vector<MetadataAttribute> metadataAttributes;
@@ -34,6 +35,12 @@ public class Table {
             createBlockAndInsert(attributeTuple);
         } else {
             insertIntoAvailableBlock(attributeTuple);
+        }
+    }
+
+    public void drop() {
+        for (int i = 0; i < this.numberOfBlocks; i ++) {
+            BufferManager.sharedInstance.removeBlock(getFileIdentifier(), i);
         }
     }
 
@@ -95,11 +102,7 @@ public class Table {
     }
 
     private String getFileIdentifier() {
-        String identifier = "data_";
-        identifier += this.tableName;
-        identifier += "_";
-        identifier += String.valueOf(this.numberOfBlocks);
-        return identifier;
+        return "data_" + this.tableName;
     }
 
     private Integer getAttributeLength() {

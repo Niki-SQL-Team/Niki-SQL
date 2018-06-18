@@ -6,9 +6,9 @@ import java.io.*;
 
 public class FileManager<Type extends Serializable> {
 
-    public void storeObject(Type object, String identifier) {
+    public void storeObject(Type object, String path) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(identifier);
+            FileOutputStream fileOutputStream = new FileOutputStream(path);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(object);
             objectOutputStream.close();
@@ -19,9 +19,9 @@ public class FileManager<Type extends Serializable> {
     }
 
     @SuppressWarnings("unchecked")
-    public Type getObject(String identifier) {
+    public Type getObject(String path) {
         try {
-            FileInputStream fileInputStream = new FileInputStream(identifier);
+            FileInputStream fileInputStream = new FileInputStream(path);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
             return (Type)objectInputStream.readObject();
@@ -31,6 +31,7 @@ public class FileManager<Type extends Serializable> {
         return null;
     }
 
+    @SuppressWarnings("all")
     public void renameFile(String oldName, String newName) throws NKInternalException {
         File oldFile = new File(oldName);
         File newFile = new File(newName);
@@ -40,9 +41,15 @@ public class FileManager<Type extends Serializable> {
         oldFile.renameTo(newFile);
     }
 
-    public void dropFile(String identifier) {
-        File file = new File(identifier);
+    @SuppressWarnings("all")
+    public void dropFile(String path) {
+        File file = new File(path);
         file.delete();
+    }
+
+    public Boolean isFileExist(String path) {
+        File file = new File(path);
+        return file.exists();
     }
 
     private void handleInternalException(Exception exception, String methodName) {
