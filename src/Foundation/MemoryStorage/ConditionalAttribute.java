@@ -2,14 +2,15 @@ package Foundation.MemoryStorage;
 
 import Foundation.Enumeration.CompareCondition;
 import Foundation.Enumeration.DataType;
+import Foundation.Exception.NKInterfaceException;
 import Foundation.Exception.NKInternalException;
 
 public class ConditionalAttribute {
 
-    String tableName;
-    String attributeName;
-    String comparedConstant;
-    CompareCondition compareCondition;
+    public String tableName;
+    public String attributeName;
+    public String comparedConstant;
+    public CompareCondition compareCondition;
 
     private DataType dataType;
 
@@ -24,7 +25,7 @@ public class ConditionalAttribute {
         this.dataType = DataType.IntegerType;
     }
 
-    public Boolean satisfies(String dataItem) throws NKInternalException {
+    public Boolean satisfies(String dataItem) throws NKInterfaceException {
         if (this.dataType == DataType.IntegerType) {
             Integer data;
             Integer constant;
@@ -32,7 +33,7 @@ public class ConditionalAttribute {
                 data = Integer.parseInt(dataItem);
                 constant = Integer.parseInt(comparedConstant);
             } catch (Exception exception) {
-                throw new NKInternalException("Data type transformation failed.");
+                throw new NKInterfaceException(dataItem + " isn't it's defined type");
             }
             return compare(data, constant);
         } else if (this.dataType == DataType.FloatType) {
@@ -42,7 +43,7 @@ public class ConditionalAttribute {
                 data = Float.parseFloat(dataItem);
                 constant = Float.parseFloat(comparedConstant);
             } catch (Exception exception) {
-                throw new NKInternalException("Data type transformation failed.");
+                throw new NKInterfaceException(dataItem + " isn't it's defined type");
             }
             return compare(data, constant);
         } else {

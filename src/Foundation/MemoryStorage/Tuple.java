@@ -10,4 +10,12 @@ public class Tuple {
         this.dataItems = dataItems;
     }
 
+    public String get(Integer index) {
+        return this.dataItems.get(index);
+    }
+
+    public Integer size() {
+        return this.dataItems.size();
+    }
+
 }

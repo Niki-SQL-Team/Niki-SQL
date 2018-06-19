@@ -35,6 +35,17 @@ public class BPlusTreeBlock extends Block {
         return this.isLeafNode ? getAttributePointer(index) : getInternalPointer(index);
     }
 
+    public byte[] getAttribute(Integer index) {
+        Converter converter = new Converter();
+        Integer offset = this.attributeLength * index + 2 * singlePointerSize;
+        switch (this.dataType) {
+            case IntegerType: return converter.convertToBytes(getInteger(offset));
+            case FloatType: return converter.convertToBytes(getFloat(offset));
+            case StringType: return converter.convertToBytes(getString(offset));
+        }
+        return null;
+    }
+
     /*
      * Tail Pointer is the pointer that is used to point to the sibling of a node in a B+ tree
      * The tail pointer is only a integer, indicating the block index of the sibling

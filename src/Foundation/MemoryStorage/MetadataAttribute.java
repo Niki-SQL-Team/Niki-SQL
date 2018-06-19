@@ -3,25 +3,29 @@ package Foundation.MemoryStorage;
 import Foundation.Enumeration.*;
 import Foundation.Exception.*;
 
-public class MetadataAttribute {
+import java.io.Serializable;
+
+public class MetadataAttribute implements Serializable {
 
     public String attributeName;
     public DataType dataType;
     public Integer length;     // This attribute is only for StringType
     public Boolean isPrimaryKey;
     public Boolean isUnique;
+    public Boolean isIndexed;
 
     public MetadataAttribute(String attributeName, DataType dataType, Integer length,
-                             Boolean isPrimaryKey, Boolean isUnique) {
+                             Boolean isPrimaryKey, Boolean isUnique, Boolean isIndexed) {
         this.attributeName = attributeName;
         this.dataType = dataType;
         this.length = length;
         this.isPrimaryKey = isPrimaryKey;
         this.isUnique = isUnique;
+        this.isIndexed = isIndexed;
     }
 
     public MetadataAttribute(String attributeName, DataType dataType, Boolean isPrimaryKey,
-                             Boolean isUnique) throws NKInternalException {
+                             Boolean isUnique, Boolean isIndexed) throws NKInternalException {
         if (dataType == DataType.StringType) {
             throw new NKInternalException("StringType requires length.");
         }
@@ -30,6 +34,7 @@ public class MetadataAttribute {
         this.length = 0;
         this.isPrimaryKey = isPrimaryKey;
         this.isUnique = isUnique;
+        this.isIndexed = isIndexed;
     }
 
 }
