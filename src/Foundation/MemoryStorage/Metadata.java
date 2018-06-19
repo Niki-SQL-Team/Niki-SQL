@@ -1,5 +1,7 @@
 package Foundation.MemoryStorage;
 
+import Foundation.Exception.NKInterfaceException;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -7,9 +9,9 @@ import java.util.Vector;
 public class Metadata {
 
     public Integer numberOfAttributes;
-    public Vector<Integer> attributeOffsetArray;
-    private Map<Integer, String> attributeName;
-    private Map<String, MetadataAttribute> metadataAttributes;
+    private Vector<Integer> attributeOffsetArray;
+    protected Vector<String> attributeName;
+    protected Map<String, MetadataAttribute> metadataAttributes;
 
     public Metadata(Vector<MetadataAttribute> metadataAttributes) {
         this.numberOfAttributes = metadataAttributes.size();
@@ -27,6 +29,15 @@ public class Metadata {
         return this.metadataAttributes.get(attributeName);
     }
 
+    public Integer getAttributeIndexNamed(String attributeName) throws NKInterfaceException {
+        for (int i = 0; i < this.attributeName.size(); i ++) {
+            if (this.attributeName.get(i).equals(attributeName)) {
+                return i;
+            }
+        }
+        throw new NKInterfaceException("No attribute named " + attributeName + " in the table.");
+    }
+
     public Integer getTupleLength() {
         Integer length = 0;
         for (MetadataAttribute attribute : this.metadataAttributes.values()) {
@@ -40,9 +51,9 @@ public class Metadata {
     }
 
     private void setAttributeName(Vector<MetadataAttribute> attributes) {
-        this.attributeName = new LinkedHashMap<>();
-        for (int i = 0; i < attributes.size(); i ++) {
-            this.attributeName.put(i, attributes.get(i).attributeName);
+        this.attributeName = new Vector<>();
+        for (MetadataAttribute attribute : attributes) {
+            this.attributeName.add(attribute.attributeName);
         }
     }
 

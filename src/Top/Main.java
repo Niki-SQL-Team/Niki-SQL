@@ -9,9 +9,12 @@ import Foundation.Blocks.Converter;
 import Foundation.Enumeration.DataType;
 import Foundation.Exception.NKInterfaceException;
 import Foundation.MemoryStorage.BPlusTreePointer;
+import Foundation.MemoryStorage.Metadata;
 import Foundation.MemoryStorage.MetadataAttribute;
 import Foundation.MemoryStorage.Tuple;
+import javafx.scene.control.Tab;
 
+import java.util.Collections;
 import java.util.Vector;
 
 public class Main {
@@ -41,26 +44,33 @@ public class Main {
 //    }
 
     public static void main(String args[]) {
-        MetadataAttribute metadataAttribute;
         try {
-            NKSql nkSql = new NKSql();
-            CatalogManager catalogManager = new CatalogManager();
-            metadataAttribute = new MetadataAttribute("test attribute", DataType.IntegerType, true, true, false);
+            MetadataAttribute attribute_1 = new MetadataAttribute("test_integer",
+                    DataType.IntegerType, true, true, true);
+            MetadataAttribute attribute_2 = new MetadataAttribute("test_float",
+                    DataType.FloatType, false, false, false);
+            MetadataAttribute attribute_3 = new MetadataAttribute("test_string",
+                    DataType.StringType, 29, false, false, false);
             Vector<MetadataAttribute> attributes = new Vector<>();
-            Vector<String> itemsToBeInserted = new Vector<>();
-            itemsToBeInserted.add(String.valueOf(429));
-            attributes.add(metadataAttribute);
-            catalogManager.createTable("testTable", attributes);
-            Table table = catalogManager.getTable("testTable");
-            table.insertAttributes(new Tuple(itemsToBeInserted));
+            attributes.add(attribute_1);
+            attributes.add(attribute_2);
+            attributes.add(attribute_3);
+            Metadata metadata = new Metadata(attributes);
+
+            NKSql nkSql = new NKSql();
+
+            Table testTable = new Table("test_table", metadata);
+            String[] items = {"429", "3.1415926", "Apple Inc."};
+            Vector<String> dataItems = new Vector<>();
+            Collections.addAll(dataItems, items);
+            testTable.insertAttributes(new Tuple(dataItems));
+            System.out.println("Done.");
+
             nkSql.close();
-        } catch (NKInterfaceException exception) {
-            exception.describe();
         } catch (Exception exception) {
-            System.out.println("Fuck the world.");
+            System.out.println("Fuck the world");
             exception.printStackTrace();
         }
-
     }
 
 }

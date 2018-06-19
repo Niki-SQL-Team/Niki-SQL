@@ -2,6 +2,7 @@ package CatalogManager;
 
 import BufferManager.FileManager;
 import Foundation.Exception.NKInterfaceException;
+import Foundation.MemoryStorage.Metadata;
 import Foundation.MemoryStorage.MetadataAttribute;
 import Top.NKSql;
 
@@ -26,7 +27,8 @@ public class CatalogManager {
         if (isTableExists(tableName)) {
             throw new NKInterfaceException("Table named " + tableName + " has already existed.");
         }
-        Table newTable = new Table(tableName, metadataAttributes);
+        Metadata metadata = new Metadata(metadataAttributes);
+        Table newTable = new Table(tableName, metadata);
         flushInBuffer(newTable);
         storeTable(newTable);
     }

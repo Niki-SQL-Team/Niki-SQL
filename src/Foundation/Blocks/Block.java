@@ -1,9 +1,13 @@
 package Foundation.Blocks;
 
+import Foundation.Exception.NKInterfaceException;
 import Foundation.Exception.NKInternalException;
-import Top.NKSql;
+import Foundation.MemoryStorage.Metadata;
+import Foundation.MemoryStorage.MetadataAttribute;
+import Foundation.MemoryStorage.Tuple;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 public class Block implements Serializable {
 
@@ -29,16 +33,53 @@ public class Block implements Serializable {
     public Integer capacity;
     public byte[] storageData = new byte[blockSize];
 
-    public Block(String fileIdentifier, Integer attributeLength, Integer index) {
+    public Block(String fileIdentifier, Integer index, Metadata metadata) {
         this.fileIdentifier = fileIdentifier;
-        this.attributeLength = attributeLength;
         this.index = index;
         this.isFullyOccupied = false;
         this.isDiscardable = true;
+        this.attributeLength = metadata.getTupleLength();
         this.firstAvailablePosition = 0;
         this.currentSize = 0;
         this.capacity = blockSize / attributeLength;
         initializeEmptyList();
+    }
+
+    public Tuple getTupleAt(Integer index, Metadata metadata) {
+        Vector<String> dataItems = new Vector<>();
+        Integer offset;
+        for (int i = 0; i < metadata.numberOfAttributes; i ++) {
+            offset = metadata.getTupleOffsetAt(i);
+            dataItems.add(getAttributeAt(offset, metadata.getMetadataAttributeAt(i)));
+        }
+        return new Tuple(dataItems);
+    }
+
+    public void writeTuple(Tuple tuple, Metadata metadata) throws NKInterfaceException {
+        try {
+            Integer initialOffset = declareOccupancy();
+            for (int i = 0; i < metadata.numberOfAttributes; i ++) {
+                MetadataAttribute attribute = metadata.getMetadataAttributeAt(i);
+                Integer offset = initialOffset + metadata.getTupleOffsetAt(i);
+                String item = tuple.get(i);
+                writeAttributeToBlock(item, attribute, offset);
+            }
+        } catch (NKInternalException exception) {
+            handleInternalException(exception, "writeTuple");
+        }
+    }
+
+    private void writeAttributeToBlock(String item, MetadataAttribute attribute, Integer offset)
+            throws NKInterfaceException {
+        try {
+            switch (attribute.dataType) {
+                case IntegerType: writeInteger(Integer.valueOf(item), offset);
+                case FloatType: writeFloat(Float.valueOf(item), offset);
+                case StringType: writeString(item, offset, attribute.length);
+            }
+        } catch (Exception exception) {
+            throw new NKInterfaceException(item + " is not the data type expected.");
+        }
     }
 
     /*
@@ -46,22 +87,22 @@ public class Block implements Serializable {
      * These methods read the corresponding data type from position with offset blockOffset
      * blockOffset starts from 0, the unit is byte
      */
-    public Integer getInteger(int blockOffset) {
+    public Integer getInteger(Integer blockOffset) {
         Integer integerSize = Integer.SIZE / 8;
         byte[] integerBytes = readFromStorage(blockOffset, integerSize);
         Converter converter = new Converter();
         return converter.convertToInteger(integerBytes);
     }
 
-    public Float getFloat(int blockOffset) {
+    public Float getFloat(Integer blockOffset) {
         Integer floatSize = Float.SIZE / 8;
         byte[] floatBytes = readFromStorage(blockOffset, floatSize);
         Converter converter = new Converter();
         return converter.convertToFloat(floatBytes);
     }
 
-    public String getString(int blockOffset) {
-        byte[] stringBytes = readFromStorage(blockOffset, NKSql.maxLengthOfString);
+    public String getString(Integer blockOffset, Integer length) {
+        byte[] stringBytes = readFromStorage(blockOffset, length);
         Converter converter = new Converter();
         return converter.convertToString(stringBytes);
     }
@@ -71,21 +112,21 @@ public class Block implements Serializable {
      * These methods write the declared data (newValue) to the position with offset blockOffset
      * blockOffset starts from 0, the unit is byte
      */
-    public void writeInteger(int newValue, int blockOffset) {
+    public void writeInteger(Integer newValue, Integer blockOffset) {
         Converter converter = new Converter();
         byte[] bytes = converter.convertToBytes(newValue);
         writeToStorage(bytes, blockOffset);
     }
 
-    public void writeFloat(Float newValue, int blockOffset) {
+    public void writeFloat(Float newValue, Integer blockOffset) {
         Converter converter = new Converter();
         byte[] bytes = converter.convertToBytes(newValue);
         writeToStorage(bytes, blockOffset);
     }
 
-    public void writeString(String newValue, int blockOffset) {
+    public void writeString(String newValue, Integer blockOffset, Integer length) {
         Converter converter = new Converter();
-        byte[] bytes = converter.convertToBytes(newValue);
+        byte[] bytes = converter.convertToBytes(newValue, length);
         writeToStorage(bytes, blockOffset);
     }
 
@@ -131,6 +172,15 @@ public class Block implements Serializable {
     /*
      * The following are some private supportive methods
      */
+    private String getAttributeAt(Integer offset, MetadataAttribute attribute) {
+        switch (attribute.dataType) {
+            case IntegerType: return String.valueOf(getInteger(offset));
+            case FloatType: return String.valueOf(getFloat(offset));
+            case StringType: return getString(offset, attribute.length);
+        }
+        return null;
+    }
+
     private void initializeEmptyList() {
         for (int i = 0; i < this.capacity - 1; i ++) {
             writeInteger(i + 1, i * attributeLength);

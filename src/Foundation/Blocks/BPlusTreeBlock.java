@@ -2,7 +2,10 @@ package Foundation.Blocks;
 
 import Foundation.Enumeration.DataType;
 import Foundation.Exception.NKInternalException;
+import Foundation.MemoryStorage.BPlusTreeMetadata;
 import Foundation.MemoryStorage.BPlusTreePointer;
+import Foundation.MemoryStorage.MetadataAttribute;
+import Foundation.MemoryStorage.Tuple;
 import Top.NKSql;
 
 public class BPlusTreeBlock extends Block {
@@ -23,7 +26,7 @@ public class BPlusTreeBlock extends Block {
     private static final Integer singlePointerSize = Integer.SIZE / 8;
 
     public BPlusTreeBlock(String fileIdentifier, DataType dataType, Integer index, Boolean isLeafNode) {
-        super(fileIdentifier, getAttributeLength(dataType), index);
+        super(fileIdentifier, index, new BPlusTreeMetadata(dataType));
         this.dataType = dataType;
         if (dataType.equals(DataType.StringType)) {
             System.out.println("String type should specify its length when constructing B+ tree.");
@@ -36,7 +39,7 @@ public class BPlusTreeBlock extends Block {
 
     public BPlusTreeBlock(String fileIdentifier, DataType dataType, Integer length,
                           Integer index, Boolean isLeafNode) {
-        super(fileIdentifier, getAttributeLength(dataType), index);
+        super(fileIdentifier, index, new BPlusTreeMetadata(dataType, length));
         this.dataType = dataType;
         if (!dataType.equals(DataType.StringType)) {
             System.out.println("Non-String type don't need to specify its length when constructing B+ tree.");
@@ -52,14 +55,8 @@ public class BPlusTreeBlock extends Block {
     }
 
     public byte[] getAttribute(Integer index) {
-        Converter converter = new Converter();
-        Integer offset = this.attributeLength * index + 2 * singlePointerSize;
-        switch (this.dataType) {
-            case IntegerType: return converter.convertToBytes(getInteger(offset));
-            case FloatType: return converter.convertToBytes(getFloat(offset));
-            case StringType: return converter.convertToBytes(getString(offset));
-        }
-        return null;
+        Integer offset = index * this.attributeLength + 2 * singlePointerSize;
+        return readFromStorage(offset, this.markerLength);
     }
 
     /*
@@ -113,7 +110,7 @@ public class BPlusTreeBlock extends Block {
                 break;
             case StringType:
                 String stringItem = converter.convertToString(dataItem);
-                pointerIndex = searchStringFor(stringItem, isMandatoryFound);
+                pointerIndex = searchStringFor(stringItem, isMandatoryFound, this.markerLength);
                 break;
         }
         return pointerIndex;
@@ -176,7 +173,7 @@ public class BPlusTreeBlock extends Block {
             switch (this.dataType) {
                 case IntegerType: System.out.println(getInteger(offset)); break;
                 case FloatType: System.out.println(getFloat(offset)); break;
-                case StringType: System.out.println(getString(offset)); break;
+                case StringType: System.out.println(getString(offset, this.markerLength)); break;
             }
         }
         outputPointerAttributes();
@@ -259,10 +256,10 @@ public class BPlusTreeBlock extends Block {
         return isMandatoryFound ? currentSize : null;
     }
 
-    private Integer searchStringFor(String dataItem, Boolean isMandatoryFound) {
+    private Integer searchStringFor(String dataItem, Boolean isMandatoryFound, Integer length) {
         for (int i = 0; i < currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
-            String content = getString(offset);
+            String content = getString(offset, length);
             if (content.equals(dataItem) || content.compareTo(dataItem) > 0 && isMandatoryFound) {
                 return i;
             }
@@ -287,15 +284,6 @@ public class BPlusTreeBlock extends Block {
         } else {
             return new BPlusTreePointer(getInteger(indexOffset), getInteger(offsetOffset));
         }
-    }
-
-    private static Integer getAttributeLength(DataType dataType) {
-        switch (dataType) {
-            case IntegerType: return Integer.SIZE / 8 + 2 * singlePointerSize;
-            case FloatType: return Float.SIZE / 8 + 2 * singlePointerSize;
-            case StringType: return NKSql.maxLengthOfString + 2 * singlePointerSize;
-        }
-        return -1;
     }
 
     private void outputPointerAttributes() {

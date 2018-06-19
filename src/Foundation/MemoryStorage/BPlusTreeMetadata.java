@@ -15,6 +15,10 @@ public class BPlusTreeMetadata extends Metadata {
         super(Objects.requireNonNull(getAttributes(dataType)));
     }
 
+    public MetadataAttribute getAttributeMetadata() {
+        return metadataAttributes.get(attributeName.get(2));
+    }
+
     private static Vector<MetadataAttribute> getAttributes(DataType dataType, Integer length) {
         try {
             MetadataAttribute indexPointer = new MetadataAttribute("Index Pointer",
