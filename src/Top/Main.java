@@ -45,7 +45,7 @@ public class Main {
         try {
             NKSql nkSql = new NKSql();
             CatalogManager catalogManager = new CatalogManager();
-            metadataAttribute = new MetadataAttribute("test attribute", DataType.IntegerType, true, true);
+            metadataAttribute = new MetadataAttribute("test attribute", DataType.IntegerType, true, true, false);
             Vector<MetadataAttribute> attributes = new Vector<>();
             Vector<String> itemsToBeInserted = new Vector<>();
             itemsToBeInserted.add(String.valueOf(429));

@@ -25,6 +25,22 @@ public class BPlusTreeBlock extends Block {
     public BPlusTreeBlock(String fileIdentifier, DataType dataType, Integer index, Boolean isLeafNode) {
         super(fileIdentifier, getAttributeLength(dataType), index);
         this.dataType = dataType;
+        if (dataType.equals(DataType.StringType)) {
+            System.out.println("String type should specify its length when constructing B+ tree.");
+        }
+        this.isLeafNode = isLeafNode;
+        this.markerCapacity = this.capacity - 1;
+        this.markerLength = attributeLength - 2 * singlePointerSize;
+        this.isDiscardable = false;
+    }
+
+    public BPlusTreeBlock(String fileIdentifier, DataType dataType, Integer length,
+                          Integer index, Boolean isLeafNode) {
+        super(fileIdentifier, getAttributeLength(dataType), index);
+        this.dataType = dataType;
+        if (!dataType.equals(DataType.StringType)) {
+            System.out.println("Non-String type don't need to specify its length when constructing B+ tree.");
+        }
         this.isLeafNode = isLeafNode;
         this.markerCapacity = this.capacity - 1;
         this.markerLength = attributeLength - 2 * singlePointerSize;

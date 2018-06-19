@@ -37,4 +37,13 @@ public class MetadataAttribute implements Serializable {
         this.isIndexed = isIndexed;
     }
 
+    public Integer getAttributeLength() {
+        switch (this.dataType) {
+            case IntegerType: return Integer.SIZE / 8;
+            case FloatType: return Float.SIZE / 8;
+            case StringType: return this.length;
+        }
+        return -1;
+    }
+
 }
