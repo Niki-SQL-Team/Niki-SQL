@@ -1,11 +1,13 @@
 package Top;
 
 import BufferManager.BufferManager;
+import CatalogManager.CatalogManager;
 import CatalogManager.Table;
 import Foundation.Blocks.BPlusTreeBlock;
 import Foundation.Blocks.Block;
 import Foundation.Blocks.Converter;
 import Foundation.Enumeration.DataType;
+import Foundation.Exception.NKInterfaceException;
 import Foundation.MemoryStorage.BPlusTreePointer;
 import Foundation.MemoryStorage.MetadataAttribute;
 import Foundation.MemoryStorage.Tuple;
@@ -42,14 +44,18 @@ public class Main {
         MetadataAttribute metadataAttribute;
         try {
             NKSql nkSql = new NKSql();
+            CatalogManager catalogManager = new CatalogManager();
             metadataAttribute = new MetadataAttribute("test attribute", DataType.IntegerType, true, true);
             Vector<MetadataAttribute> attributes = new Vector<>();
             Vector<String> itemsToBeInserted = new Vector<>();
             itemsToBeInserted.add(String.valueOf(429));
             attributes.add(metadataAttribute);
-            Table table = new Table("testTable", attributes);
+            catalogManager.createTable("testTable", attributes);
+            Table table = catalogManager.getTable("testTable");
             table.insertAttributes(new Tuple(itemsToBeInserted));
             nkSql.close();
+        } catch (NKInterfaceException exception) {
+            exception.describe();
         } catch (Exception exception) {
             System.out.println("Fuck the world.");
             exception.printStackTrace();

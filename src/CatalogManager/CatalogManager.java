@@ -15,7 +15,7 @@ public class CatalogManager {
     Vector<String> tableNameInBuffer;
     FileManager<Table> fileManager;
 
-    public void CatalogManager() {
+    public CatalogManager() {
         this.tableMetadataBuffer = new HashMap<String, Table>();
         this.fileManager = new FileManager<Table>();
         this.tableNameInBuffer = new Vector<>(NKSql.bufferSize);
@@ -59,9 +59,19 @@ public class CatalogManager {
     }
 
     private void flushInBuffer(Table table) {
-        String firstTableName = tableNameInBuffer.firstElement();
-        tableNameInBuffer.remove(firstTableName);
-        tableMetadataBuffer.remove(firstTableName);
+        if (tableMetadataBuffer.size() < NKSql.bufferSize) {
+            addTableToBuffer(table);
+        } else {
+            removeTableFromBuffer(tableNameInBuffer.firstElement());
+        }
+    }
+
+    private void removeTableFromBuffer(String tableName) {
+        tableNameInBuffer.remove(tableName);
+        tableMetadataBuffer.remove(tableName);
+    }
+
+    private void addTableToBuffer(Table table) {
         tableNameInBuffer.add(table.tableName);
         tableMetadataBuffer.put(table.tableName, table);
     }
