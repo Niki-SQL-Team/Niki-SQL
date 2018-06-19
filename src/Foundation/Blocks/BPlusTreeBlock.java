@@ -14,7 +14,7 @@ public class BPlusTreeBlock extends Block {
      * Here's the storage property of class BPlusTreeBlock
      * isLeafNode indicates that whether the node is a leaf node in a B+ tree
      * markerCapacity is the maximum capacity of markers in the node, it's one less than capacity
-     * markerLength is the length of the marker, the attributeLength is markerLength + pointer length
+     * markerLength is the length of the marker, the tupleLength is markerLength + pointer length
      * dataType stores the data type of the node
      * The pointer field consists of two pointers, index and offset, the pointers are stored
      * in front of its corresponding marker
@@ -33,7 +33,7 @@ public class BPlusTreeBlock extends Block {
         }
         this.isLeafNode = isLeafNode;
         this.markerCapacity = this.capacity - 1;
-        this.markerLength = attributeLength - 2 * singlePointerSize;
+        this.markerLength = tupleLength - 2 * singlePointerSize;
         this.isDiscardable = false;
     }
 
@@ -46,7 +46,7 @@ public class BPlusTreeBlock extends Block {
         }
         this.isLeafNode = isLeafNode;
         this.markerCapacity = this.capacity - 1;
-        this.markerLength = attributeLength - 2 * singlePointerSize;
+        this.markerLength = tupleLength - 2 * singlePointerSize;
         this.isDiscardable = false;
     }
 
@@ -55,7 +55,7 @@ public class BPlusTreeBlock extends Block {
     }
 
     public byte[] getAttribute(Integer index) {
-        Integer offset = index * this.attributeLength + 2 * singlePointerSize;
+        Integer offset = index * this.tupleLength + 2 * singlePointerSize;
         return readFromStorage(offset, this.markerLength);
     }
 
@@ -65,12 +65,12 @@ public class BPlusTreeBlock extends Block {
      * The caller of the BPlusTreeBlock is responsible for the maintenance of the Tail Pointer
      */
     public BPlusTreePointer getTailPointer() {
-        Integer indexOffset = this.attributeLength * this.markerCapacity + 2 * singlePointerSize;
+        Integer indexOffset = this.tupleLength * this.markerCapacity + 2 * singlePointerSize;
         return getPointerByOffset(indexOffset, -1);
     }
 
     public void setTailPointer(Integer blockIndex) {
-        Integer tailOffset = this.attributeLength * markerCapacity;
+        Integer tailOffset = this.tupleLength * markerCapacity;
         writeInteger(blockIndex, tailOffset);
     }
 
@@ -140,7 +140,7 @@ public class BPlusTreeBlock extends Block {
             handleInternalException(exception, "insert");
         }
         setPointer(index, relatedPointer);
-        Integer attributeOffset = index * attributeLength + 2 * singlePointerSize;
+        Integer attributeOffset = index * tupleLength + 2 * singlePointerSize;
         writeToStorage(dataItem, attributeOffset);
         this.currentSize ++;
     }
@@ -169,7 +169,7 @@ public class BPlusTreeBlock extends Block {
 
     public void outputAttributes() {
         for (int i = 0; i < this.currentSize; i ++) {
-            Integer offset = attributeLength * i + 2 * singlePointerSize;
+            Integer offset = tupleLength * i + 2 * singlePointerSize;
             switch (this.dataType) {
                 case IntegerType: System.out.println(getInteger(offset)); break;
                 case FloatType: System.out.println(getFloat(offset)); break;
@@ -183,7 +183,7 @@ public class BPlusTreeBlock extends Block {
      * The following are some private supportive methods
      */
     private void setPointer(Integer index, BPlusTreePointer pointer) {
-        Integer indexOffset = attributeLength * index;
+        Integer indexOffset = tupleLength * index;
         Integer offsetOffset = indexOffset + singlePointerSize;
         writeInteger(pointer.blockIndex, indexOffset);
         writeInteger(pointer.blockOffset, offsetOffset);
@@ -199,32 +199,32 @@ public class BPlusTreeBlock extends Block {
 
     private void shiftAttributesRight(Integer fromIndex) {
         for (int i = this.currentSize - 1; i >= fromIndex; i --) {
-            Integer fromOffset = attributeLength * i + 2 * singlePointerSize;
-            Integer toOffset = fromOffset + attributeLength;
+            Integer fromOffset = tupleLength * i + 2 * singlePointerSize;
+            Integer toOffset = fromOffset + tupleLength;
             copyStorage(fromOffset, toOffset, markerLength);
         }
     }
 
     private void shiftPointerRight(Integer fromIndex) {
         for (int i = this.currentSize; i >= fromIndex; i --) {
-            Integer fromOffset = attributeLength * i;
-            Integer toOffset = fromOffset + attributeLength;
+            Integer fromOffset = tupleLength * i;
+            Integer toOffset = fromOffset + tupleLength;
             copyStorage(fromOffset, toOffset, 2 * singlePointerSize);
         }
     }
 
     private void shiftAttributeLeft(Integer fromIndex) {
         for (int i = fromIndex; i < this.currentSize; i ++) {
-            Integer fromOffset = attributeLength * i + 2 * singlePointerSize;
-            Integer toOffset = fromOffset - attributeLength;
+            Integer fromOffset = tupleLength * i + 2 * singlePointerSize;
+            Integer toOffset = fromOffset - tupleLength;
             copyStorage(fromOffset, toOffset, markerLength);
         }
     }
 
     private void shiftPointerLeft(Integer fromIndex) {
         for (int i = fromIndex; i <= this.currentSize; i ++) {
-            Integer fromOffset = attributeLength * i;
-            Integer toOffset = fromOffset - attributeLength;
+            Integer fromOffset = tupleLength * i;
+            Integer toOffset = fromOffset - tupleLength;
             copyStorage(fromOffset, toOffset, 2 * singlePointerSize);
         }
     }
@@ -236,7 +236,7 @@ public class BPlusTreeBlock extends Block {
 
     private Integer searchIntegerFor(Integer dataItem, Boolean isMandatoryFound) {
         for (int i = 0; i < this.currentSize; i ++) {
-            Integer offset = attributeLength * i + 2 * singlePointerSize;
+            Integer offset = tupleLength * i + 2 * singlePointerSize;
             Integer content = getInteger(offset);
             if (content.equals(dataItem) || (content >= dataItem && isMandatoryFound)) {
                 return i;
@@ -247,7 +247,7 @@ public class BPlusTreeBlock extends Block {
 
     private Integer searchFloatFor(Float dataItem, Boolean isMandatoryFound) {
         for (int i = 0; i < this.currentSize; i ++) {
-            Integer offset = attributeLength * i + 2 * singlePointerSize;
+            Integer offset = tupleLength * i + 2 * singlePointerSize;
             Float content = getFloat(offset);
             if (content.equals(dataItem) || (content >= dataItem && isMandatoryFound)) {
                 return i;
@@ -258,7 +258,7 @@ public class BPlusTreeBlock extends Block {
 
     private Integer searchStringFor(String dataItem, Boolean isMandatoryFound, Integer length) {
         for (int i = 0; i < currentSize; i ++) {
-            Integer offset = attributeLength * i + 2 * singlePointerSize;
+            Integer offset = tupleLength * i + 2 * singlePointerSize;
             String content = getString(offset, length);
             if (content.equals(dataItem) || content.compareTo(dataItem) > 0 && isMandatoryFound) {
                 return i;
@@ -268,13 +268,13 @@ public class BPlusTreeBlock extends Block {
     }
 
     private BPlusTreePointer getAttributePointer(Integer index) {
-        Integer indexOffset = this.attributeLength * index;
-        Integer offsetOffset = this.attributeLength * index + singlePointerSize;
+        Integer indexOffset = this.tupleLength * index;
+        Integer offsetOffset = this.tupleLength * index + singlePointerSize;
         return getPointerByOffset(indexOffset, offsetOffset);
     }
 
     private BPlusTreePointer getInternalPointer(Integer index) {
-        Integer indexOffset = this.attributeLength * index;
+        Integer indexOffset = this.tupleLength * index;
         return getPointerByOffset(indexOffset, -1);
     }
 
@@ -288,7 +288,7 @@ public class BPlusTreeBlock extends Block {
 
     private void outputPointerAttributes() {
         for (int i = 0; i <= this.currentSize; i ++) {
-            Integer indexOffset = attributeLength * i;
+            Integer indexOffset = tupleLength * i;
             Integer offsetOffset = indexOffset + singlePointerSize;
             System.out.println(getInteger(indexOffset) + ", " + getInteger(offsetOffset));
         }

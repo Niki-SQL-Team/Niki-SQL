@@ -3,7 +3,6 @@ package CatalogManager;
 import BufferManager.FileManager;
 import Foundation.Exception.NKInterfaceException;
 import Foundation.MemoryStorage.Metadata;
-import Foundation.MemoryStorage.MetadataAttribute;
 import Top.NKSql;
 
 import java.util.HashMap;
@@ -22,12 +21,11 @@ public class CatalogManager {
         this.tableNameInBuffer = new Vector<>(NKSql.bufferSize);
     }
 
-    public void createTable(String tableName, Vector<MetadataAttribute> metadataAttributes)
+    public void createTable(String tableName, Metadata metadata)
             throws NKInterfaceException {
         if (isTableExists(tableName)) {
             throw new NKInterfaceException("Table named " + tableName + " has already existed.");
         }
-        Metadata metadata = new Metadata(metadataAttributes);
         Table newTable = new Table(tableName, metadata);
         flushInBuffer(newTable);
         storeTable(newTable);

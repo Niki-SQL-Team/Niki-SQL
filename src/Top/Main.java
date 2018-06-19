@@ -56,19 +56,15 @@ public class Main {
             attributes.add(attribute_2);
             attributes.add(attribute_3);
             Metadata metadata = new Metadata(attributes);
+            Block block = new Block("test_block", 0, metadata);
 
-            NKSql nkSql = new NKSql();
-
-            Table testTable = new Table("test_table", metadata);
             String[] items = {"429", "3.1415926", "Apple Inc."};
             Vector<String> dataItems = new Vector<>();
             Collections.addAll(dataItems, items);
-            testTable.insertAttributes(new Tuple(dataItems));
-            System.out.println("Done.");
-
-            nkSql.close();
+            Tuple tuple = new Tuple(dataItems);
+            block.writeTuple(tuple, metadata);
         } catch (Exception exception) {
-            System.out.println("Fuck the world");
+            System.out.println("Fuck the world.");
             exception.printStackTrace();
         }
     }

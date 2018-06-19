@@ -25,7 +25,7 @@ public class Block implements Serializable {
     public static final Integer blockSize = 4096;
     public String fileIdentifier;
     public Integer index;
-    public Integer attributeLength;
+    public Integer tupleLength;
     public Boolean isFullyOccupied;
     public Boolean isDiscardable;
     public Integer firstAvailablePosition;
@@ -38,21 +38,26 @@ public class Block implements Serializable {
         this.index = index;
         this.isFullyOccupied = false;
         this.isDiscardable = true;
-        this.attributeLength = metadata.getTupleLength();
+        this.tupleLength = metadata.getTupleLength();
         this.firstAvailablePosition = 0;
         this.currentSize = 0;
-        this.capacity = blockSize / attributeLength;
+        this.capacity = blockSize / tupleLength;
         initializeEmptyList();
     }
 
-    public Tuple getTupleAt(Integer index, Metadata metadata) {
-        Vector<String> dataItems = new Vector<>();
-        Integer offset;
-        for (int i = 0; i < metadata.numberOfAttributes; i ++) {
-            offset = metadata.getTupleOffsetAt(i);
-            dataItems.add(getAttributeAt(offset, metadata.getMetadataAttributeAt(i)));
+    /*
+     * The following 2 methods are used for metadata related operations
+     * Ordinarily speaking, these methods are recommended to use
+     */
+    public Vector<Tuple> getAllTuples(Metadata metadata) {
+        Vector<Tuple> allTuples = new Vector<>();
+        Vector<Integer> emptyIndices = getAllEmptyIndices();
+        for (int index = 0; index < this.currentSize; index ++) {
+            if (!emptyIndices.contains(index)) {
+                allTuples.add(getTupleAt(index, metadata));
+            }
         }
-        return new Tuple(dataItems);
+        return allTuples;
     }
 
     public void writeTuple(Tuple tuple, Metadata metadata) throws NKInterfaceException {
@@ -66,19 +71,6 @@ public class Block implements Serializable {
             }
         } catch (NKInternalException exception) {
             handleInternalException(exception, "writeTuple");
-        }
-    }
-
-    private void writeAttributeToBlock(String item, MetadataAttribute attribute, Integer offset)
-            throws NKInterfaceException {
-        try {
-            switch (attribute.dataType) {
-                case IntegerType: writeInteger(Integer.valueOf(item), offset);
-                case FloatType: writeFloat(Float.valueOf(item), offset);
-                case StringType: writeString(item, offset, attribute.length);
-            }
-        } catch (Exception exception) {
-            throw new NKInterfaceException(item + " is not the data type expected.");
         }
     }
 
@@ -142,7 +134,7 @@ public class Block implements Serializable {
             throw new NKInternalException("Inserting into a fully occupied block.");
         }
         Integer available = this.firstAvailablePosition;
-        Integer nextAvailable = getInteger(firstAvailablePosition * attributeLength);
+        Integer nextAvailable = getInteger(firstAvailablePosition * tupleLength);
         this.firstAvailablePosition = nextAvailable;
         this.currentSize ++;
         this.isFullyOccupied = (nextAvailable < 0);
@@ -158,15 +150,8 @@ public class Block implements Serializable {
         this.currentSize --;
         this.isDiscardable = (this.currentSize == 0);
         Integer nextAvailable = this.firstAvailablePosition;
-        writeInteger(nextAvailable, index * attributeLength);
+        writeInteger(nextAvailable, index * tupleLength);
         this.firstAvailablePosition = index;
-    }
-
-    /*
-     * This method is used when writing the block back to the disk
-     */
-    public byte[] getStorageData() {
-        return this.storageData;
     }
 
     /*
@@ -183,9 +168,9 @@ public class Block implements Serializable {
 
     private void initializeEmptyList() {
         for (int i = 0; i < this.capacity - 1; i ++) {
-            writeInteger(i + 1, i * attributeLength);
+            writeInteger(i + 1, i * tupleLength);
         }
-        writeInteger(-1, (this.capacity - 1) * attributeLength);
+        writeInteger(-1, (this.capacity - 1) * tupleLength);
     }
 
     protected byte[] readFromStorage(int blockOffset, int length) {
@@ -196,6 +181,39 @@ public class Block implements Serializable {
 
     protected void writeToStorage(byte[] bytes, int blockOffset) {
         System.arraycopy(bytes, 0, storageData, blockOffset, bytes.length);
+    }
+
+    private void writeAttributeToBlock(String item, MetadataAttribute attribute, Integer offset)
+            throws NKInterfaceException {
+        try {
+            switch (attribute.dataType) {
+                case IntegerType: writeInteger(Integer.valueOf(item), offset);
+                case FloatType: writeFloat(Float.valueOf(item), offset);
+                case StringType: writeString(item, offset, attribute.length);
+            }
+        } catch (Exception exception) {
+            throw new NKInterfaceException(item + " is not the data type expected.");
+        }
+    }
+
+    public Tuple getTupleAt(Integer index, Metadata metadata) {
+        Vector<String> dataItems = new Vector<>();
+        Integer initialOffset = this.tupleLength * index;
+        for (int i = 0; i < metadata.numberOfAttributes; i ++) {
+            Integer offset = initialOffset + metadata.getTupleOffsetAt(i);
+            dataItems.add(getAttributeAt(offset, metadata.getMetadataAttributeAt(i)));
+        }
+        return new Tuple(dataItems);
+    }
+
+    private Vector<Integer> getAllEmptyIndices() {
+        Vector<Integer> emptyIndices = new Vector<>();
+        Integer nextPosition = this.firstAvailablePosition;
+        while (!nextPosition.equals(-1)) {
+            emptyIndices.add(nextPosition);
+            nextPosition = getInteger(this.tupleLength * nextPosition);
+        }
+        return emptyIndices;
     }
 
     protected void handleInternalException(Exception exception, String methodName) {
