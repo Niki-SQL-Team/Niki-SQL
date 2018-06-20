@@ -14,6 +14,7 @@ import Foundation.MemoryStorage.MetadataAttribute;
 import Foundation.MemoryStorage.Tuple;
 import javafx.scene.control.Tab;
 
+import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.Vector;
 
@@ -63,6 +64,8 @@ public class Main {
             Collections.addAll(dataItems, items);
             Tuple tuple = new Tuple(dataItems);
             block.writeTuple(tuple, metadata);
+            Vector<Tuple> tuples = block.getAllTuples(metadata);
+            System.out.println("Done.");
         } catch (Exception exception) {
             System.out.println("Fuck the world.");
             exception.printStackTrace();

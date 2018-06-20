@@ -187,9 +187,9 @@ public class Block implements Serializable {
             throws NKInterfaceException {
         try {
             switch (attribute.dataType) {
-                case IntegerType: writeInteger(Integer.valueOf(item), offset);
-                case FloatType: writeFloat(Float.valueOf(item), offset);
-                case StringType: writeString(item, offset, attribute.length);
+                case IntegerType: writeInteger(Integer.valueOf(item), offset); break;
+                case FloatType: writeFloat(Float.valueOf(item), offset); break;
+                case StringType: writeString(item, offset, attribute.length); break;
             }
         } catch (Exception exception) {
             throw new NKInterfaceException(item + " is not the data type expected.");
