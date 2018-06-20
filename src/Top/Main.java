@@ -12,6 +12,8 @@ import Foundation.MemoryStorage.BPlusTreePointer;
 import Foundation.MemoryStorage.MetadataAttribute;
 import Foundation.MemoryStorage.Tuple;
 
+import IndexManager.*;
+
 import java.util.Vector;
 
 public class Main {
@@ -40,7 +42,7 @@ public class Main {
 //        bPlusTreeBlock.outputAttributes();
 //    }
 
-    public static void main(String args[]) {
+ /*   public static void main(String args[]) {
         MetadataAttribute metadataAttribute;
         try {
             NKSql nkSql = new NKSql();
@@ -61,6 +63,12 @@ public class Main {
             exception.printStackTrace();
         }
 
+    }*/
+
+    public static void main(String args[]){
+
+        return;
     }
+
 
 }
