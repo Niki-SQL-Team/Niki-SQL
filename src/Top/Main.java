@@ -59,12 +59,31 @@ public class Main {
             Metadata metadata = new Metadata(attributes);
             Block block = new Block("test_block", 0, metadata);
 
-            String[] items = {"429", "3.1415926", "Apple Inc."};
-            Vector<String> dataItems = new Vector<>();
-            Collections.addAll(dataItems, items);
-            Tuple tuple = new Tuple(dataItems);
+            String[] items_1 = {"1", "3.1415926", "Apple Inc."};
+            Vector<String> dataItems_1 = new Vector<>();
+            Collections.addAll(dataItems_1, items_1);
+            Tuple tuple = new Tuple(dataItems_1);
             block.writeTuple(tuple, metadata);
-            Vector<Tuple> tuples = block.getAllTuples(metadata);
+
+            String[] items_2 = {"2", "2.71818", "Alphabet Inc."};
+            Vector<String> dataItems_2 = new Vector<>();
+            Collections.addAll(dataItems_2, items_2);
+            tuple = new Tuple(dataItems_2);
+            block.writeTuple(tuple, metadata);
+
+            String[] item_3 = {"3", "6.67408", "Tesla Inc."};
+            Vector<String> dataItems_3 = new Vector<>();
+            Collections.addAll(dataItems_3, item_3);
+            tuple = new Tuple(dataItems_3);
+            block.writeTuple(tuple, metadata);
+
+            block.removeTupleAt(2);
+            block.removeTupleAt(0);
+            Vector<Integer> attributeIndices = block.getAllTupleIndices(metadata);
+            tuple = new Tuple(dataItems_1);
+            block.writeTuple(tuple, metadata);
+            attributeIndices = block.getAllTupleIndices(metadata);
+
             System.out.println("Done.");
         } catch (Exception exception) {
             System.out.println("Fuck the world.");

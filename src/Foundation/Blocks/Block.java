@@ -51,13 +51,40 @@ public class Block implements Serializable {
      */
     public Vector<Tuple> getAllTuples(Metadata metadata) {
         Vector<Tuple> allTuples = new Vector<>();
-        Vector<Integer> emptyIndices = getAllEmptyIndices();
-        for (int index = 0; index < this.currentSize; index ++) {
-            if (!emptyIndices.contains(index)) {
-                allTuples.add(getTupleAt(index, metadata));
-            }
+        Vector<Integer> allTupleIndices = getAllTupleIndices(metadata);
+        for (Integer index : allTupleIndices) {
+            allTuples.add(getTupleAt(index, metadata));
         }
         return allTuples;
+    }
+
+    public Vector<Integer> getAllTupleIndices(Metadata metadata) {
+        Vector<Integer> allTupleIndices = new Vector<>();
+        Vector<Integer> emptyIndices = getAllEmptyIndices();
+        for (int index = 0; index < this.capacity; index ++) {
+            if (!emptyIndices.contains(index)) {
+                allTupleIndices.add(index);
+            }
+        }
+        return allTupleIndices;
+    }
+
+    public Tuple getTupleAt(Integer index, Metadata metadata) {
+        Vector<String> dataItems = new Vector<>();
+        Integer initialOffset = this.tupleLength * index;
+        for (int i = 0; i < metadata.numberOfAttributes; i ++) {
+            Integer offset = initialOffset + metadata.getTupleOffsetAt(i);
+            dataItems.add(getAttributeAt(offset, metadata.getMetadataAttributeAt(i)));
+        }
+        return new Tuple(dataItems);
+    }
+
+    public void removeTupleAt(Integer index) {
+        try {
+            releaseOccupancy(index);
+        } catch (Exception exception) {
+            handleInternalException(exception, "removeTupleAt");
+        }
     }
 
     public void writeTuple(Tuple tuple, Metadata metadata) throws NKInterfaceException {
@@ -194,16 +221,6 @@ public class Block implements Serializable {
         } catch (Exception exception) {
             throw new NKInterfaceException(item + " is not the data type expected.");
         }
-    }
-
-    public Tuple getTupleAt(Integer index, Metadata metadata) {
-        Vector<String> dataItems = new Vector<>();
-        Integer initialOffset = this.tupleLength * index;
-        for (int i = 0; i < metadata.numberOfAttributes; i ++) {
-            Integer offset = initialOffset + metadata.getTupleOffsetAt(i);
-            dataItems.add(getAttributeAt(offset, metadata.getMetadataAttributeAt(i)));
-        }
-        return new Tuple(dataItems);
     }
 
     private Vector<Integer> getAllEmptyIndices() {
