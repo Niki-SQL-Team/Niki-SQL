@@ -2,6 +2,7 @@ package Foundation.MemoryStorage;
 
 import Foundation.Exception.NKInterfaceException;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -14,10 +15,12 @@ public class Metadata {
     protected Map<String, MetadataAttribute> metadataAttributes;
 
     public Metadata(Vector<MetadataAttribute> metadataAttributes) {
-        this.numberOfAttributes = metadataAttributes.size();
-        setMetadataAttributes(metadataAttributes);
-        setAttributeName(metadataAttributes);
-        setAttributeOffsetArray();
+        initialize(metadataAttributes);
+    }
+
+    public Metadata(ArrayList<MetadataAttribute> metadataAttributes) {
+        Vector<MetadataAttribute> attributes = new Vector<>(metadataAttributes);
+        initialize(attributes);
     }
 
     public MetadataAttribute getMetadataAttributeNamed(String attributeName) {
@@ -48,6 +51,13 @@ public class Metadata {
 
     public Integer getTupleOffsetAt(Integer index) {
         return this.attributeOffsetArray.get(index);
+    }
+
+    private void initialize(Vector<MetadataAttribute> attributes) {
+        this.numberOfAttributes = attributes.size();
+        setMetadataAttributes(attributes);
+        setAttributeName(attributes);
+        setAttributeOffsetArray();
     }
 
     private void setAttributeName(Vector<MetadataAttribute> attributes) {

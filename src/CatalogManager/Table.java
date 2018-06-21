@@ -3,14 +3,11 @@ package CatalogManager;
 import BufferManager.BufferManager;
 import Foundation.Blocks.Block;
 import Foundation.Enumeration.CompareCondition;
-import Foundation.Enumeration.DataType;
 import Foundation.Exception.NKInterfaceException;
-import Foundation.Exception.NKInternalException;
 import Foundation.MemoryStorage.ConditionalAttribute;
 import Foundation.MemoryStorage.Metadata;
 import Foundation.MemoryStorage.MetadataAttribute;
 import Foundation.MemoryStorage.Tuple;
-import Top.NKSql;
 
 import java.io.Serializable;
 import java.util.ArrayList;

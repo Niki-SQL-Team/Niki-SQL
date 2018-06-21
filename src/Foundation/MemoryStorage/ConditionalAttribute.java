@@ -27,25 +27,21 @@ public class ConditionalAttribute {
 
     public Boolean satisfies(String dataItem) throws NKInterfaceException {
         if (this.dataType == DataType.IntegerType) {
-            Integer data;
-            Integer constant;
             try {
-                data = Integer.parseInt(dataItem);
-                constant = Integer.parseInt(comparedConstant);
+                Integer data = Integer.parseInt(dataItem);
+                Integer constant = Integer.parseInt(comparedConstant);
+                return compare(data, constant);
             } catch (Exception exception) {
                 throw new NKInterfaceException(dataItem + " isn't it's defined type");
             }
-            return compare(data, constant);
         } else if (this.dataType == DataType.FloatType) {
-            Float data;
-            Float constant;
             try {
-                data = Float.parseFloat(dataItem);
-                constant = Float.parseFloat(comparedConstant);
+                Float data = Float.parseFloat(dataItem);
+                Float constant = Float.parseFloat(comparedConstant);
+                return compare(data, constant);
             } catch (Exception exception) {
                 throw new NKInterfaceException(dataItem + " isn't it's defined type");
             }
-            return compare(data, constant);
         } else {
             return compare(dataItem, comparedConstant);
         }

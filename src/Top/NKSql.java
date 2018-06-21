@@ -1,8 +1,10 @@
 package Top;
 
 import BufferManager.BufferManager;
+import CatalogManager.CatalogManager;
 import Foundation.Exception.*;
 import Foundation.MemoryStorage.*;
+import RecordManager.RecordManager;
 
 import java.util.ArrayList;
 
@@ -23,9 +25,13 @@ public class NKSql {
     public static final Integer bufferSize = 8;
 
     private BufferManager bufferManager;
+    private CatalogManager catalogManager;
+    private RecordManager recordManager;
 
     public NKSql() throws NKInternalException {
         bufferManager = new BufferManager();
+        catalogManager = new CatalogManager();
+        recordManager = new RecordManager();
         System.out.println("Top.NKSql initialized.");
     }
 
@@ -36,10 +42,13 @@ public class NKSql {
 
     public void createTable(String tableName, ArrayList<MetadataAttribute> attributes)
             throws NKInterfaceException {
+        Metadata metadata = new Metadata(attributes);
+        CatalogManager.sharedInstance.createTable(tableName, metadata);
         System.out.println("Table named " + tableName + " created.");
     }
 
     public void dropTable(String tableName) throws NKInterfaceException {
+        CatalogManager.sharedInstance.dropTable(tableName);
         System.out.println("Table named " + tableName + " dropped.");
     }
 
@@ -53,6 +62,7 @@ public class NKSql {
     }
 
     public void insertTuple(Tuple newItem, String tableName) throws NKInterfaceException {
+        RecordManager.sharedInstance.insertIntoTable(tableName, newItem);
         System.out.println("Item inserted.");
     }
 

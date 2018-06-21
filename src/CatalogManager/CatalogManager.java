@@ -11,9 +11,10 @@ import java.util.Vector;
 
 public class CatalogManager {
 
-    Map<String, Table> tableMetadataBuffer;
-    Vector<String> tableNameInBuffer;
-    FileManager<Table> fileManager;
+    public static CatalogManager sharedInstance;
+    private Map<String, Table> tableMetadataBuffer;
+    private Vector<String> tableNameInBuffer;
+    private FileManager<Table> fileManager;
 
     public CatalogManager() {
         this.tableMetadataBuffer = new HashMap<String, Table>();
@@ -26,6 +27,7 @@ public class CatalogManager {
         if (isTableExists(tableName)) {
             throw new NKInterfaceException("Table named " + tableName + " has already existed.");
         }
+        setSharedInstance();
         Table newTable = new Table(tableName, metadata);
         flushInBuffer(newTable);
         storeTable(newTable);
@@ -46,9 +48,16 @@ public class CatalogManager {
             return tableMetadataBuffer.get(tableName);
         } else {
             Table table = loadTable(tableName);
-            flushInBuffer(table);
-            return table;
+            if (table != null) {
+                flushInBuffer(table);
+                return table;
+            }
+            return null;
         }
+    }
+
+    private void setSharedInstance() {
+        sharedInstance = this;
     }
 
     private Boolean isTableExists(String tableName) {
@@ -77,7 +86,11 @@ public class CatalogManager {
     }
 
     private Table loadTable(String path) {
-        return fileManager.getObject(path);
+        if (fileManager.isFileExist(path)) {
+            return fileManager.getObject(path);
+        } else {
+            return null;
+        }
     }
 
     private void storeTable(Table table) {

@@ -46,7 +46,6 @@ public class Main {
     public static void main(String args[]) {
         try {
             NKSql nkSql = new NKSql();
-            BufferManager bufferManager = new BufferManager();
 
             MetadataAttribute attribute_1 = new MetadataAttribute("test_integer",
                     DataType.IntegerType, false, false, false);
@@ -84,6 +83,8 @@ public class Main {
             ArrayList<ConditionalAttribute> conditions = new ArrayList<>();
             conditions.add(condition);
             Vector<Tuple> result = table.searchFor(conditions);
+
+            nkSql.close();
 
             System.out.println("Done.");
         } catch (Exception exception) {
