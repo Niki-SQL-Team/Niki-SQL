@@ -225,7 +225,7 @@ public class BPlusTreeBlock extends Block {
         for (int i = 0; i < this.currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             Integer content = getInteger(offset);
-            if (content.equals(dataItem) || (content >= dataItem && isMandatoryFound)) {
+            if (content.equals(dataItem) || (content > dataItem && isMandatoryFound)) {
                 return i;
             }
         }
@@ -236,7 +236,7 @@ public class BPlusTreeBlock extends Block {
         for (int i = 0; i < this.currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             Float content = getFloat(offset);
-            if (content.equals(dataItem) || (content >= dataItem && isMandatoryFound)) {
+            if (content.equals(dataItem) || (content > dataItem && isMandatoryFound)) {
                 return i;
             }
         }

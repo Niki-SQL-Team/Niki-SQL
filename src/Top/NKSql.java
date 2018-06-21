@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class NKSql {
 
-    public static final String homeDirectory = "/Users/licanchen/Desktop/Niki SQL/DB Files/";
+    public static final String homeDirectory = "C:\\Users\\orthogonalize\\Desktop\\NikiSQL\\DB Files\\";
     public static final String dataHomeDirectory = homeDirectory + "Data/";
     public static final String indexHomeDirectory = homeDirectory + "Index/";
     public static final String metadataHomeDirectory = homeDirectory + "Metadata/";

@@ -8,9 +8,11 @@ import Foundation.Blocks.Block;
 import Foundation.Blocks.Converter;
 import Foundation.Enumeration.DataType;
 import Foundation.Exception.NKInterfaceException;
+import Foundation.Exception.NKInternalException;
 import Foundation.MemoryStorage.BPlusTreePointer;
 import Foundation.MemoryStorage.MetadataAttribute;
 import Foundation.MemoryStorage.Tuple;
+import IndexManager.*;
 
 import IndexManager.*;
 
@@ -66,7 +68,22 @@ public class Main {
     }*/
 
     public static void main(String args[]){
+        BufferManager bufferManager = new BufferManager();
+        BPlusTreeBlock myRoot = new BPlusTreeBlock("index_T1_A1", DataType.IntegerType, 0, true);
+        bufferManager.storeBlock(myRoot);
+        BPlusTreePointer p = new BPlusTreePointer(0);
+        BPlusTree bTree = new BPlusTree(DataType.IntegerType, p,"T1","A1",0);
+        Converter convert = new Converter();
 
+
+       /* for(int i = 0; i < 30000; i++){
+            byte[] key = convert.convertToBytes(i);
+            BPlusTreePointer p1 = new BPlusTreePointer(i, i);
+            bTree.insertKey(key,p1);
+        }*/
+
+        BPlusTreeBlock brb = (BPlusTreeBlock)bufferManager.getBlock("index_T1_A1", 176);
+        brb.outputAttributes();
         return;
     }
 
