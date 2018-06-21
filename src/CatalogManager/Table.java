@@ -43,21 +43,26 @@ public class Table implements Serializable {
         }
     }
 
-    public Vector<Tuple> searchFor(ArrayList<ConditionalAttribute> conditionalAttributes)
+    public Vector<Tuple> searchFor(ArrayList<ConditionalAttribute> conditions)
             throws NKInterfaceException {
-        this.intermediateResults.clear();
-        conditionalAttributes = makeIndexedSearchFirst(conditionalAttributes);
-        ConditionalAttribute firstCondition = conditionalAttributes.get(0);
+        conditions = makeIndexedSearchFirst(conditions);
+        ConditionalAttribute firstCondition = conditions.get(0);
         if (this.metadata.getMetadataAttributeNamed(firstCondition.attributeName).isIndexed) {
             firstSearchWithIndex(firstCondition);
         } else {
             firstSearchWithoutIndex(firstCondition);
         }
-        conditionalAttributes.remove(0);
-        if (!conditionalAttributes.isEmpty()) {
-            subsequentSearch(conditionalAttributes);
+        conditions.remove(0);
+        if (!conditions.isEmpty()) {
+            subsequentSearch(conditions);
         }
-        return this.intermediateResults;
+        Vector<Tuple> returnValue = new Vector<>(this.intermediateResults);
+        intermediateResults.clear();
+        return returnValue;
+    }
+
+    public void deleteItem(ArrayList<ConditionalAttribute> conditions) throws NKInterfaceException {
+
     }
 
     public void drop() {

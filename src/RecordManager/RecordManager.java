@@ -56,8 +56,8 @@ public class RecordManager {
         ArrayList<Tuple> finalResults = new ArrayList<>();
         for (Tuple rawResult : rawResults) {
             Vector<String> dataItems = new Vector<>();
-            for (int j = 0; j < indices.size(); j++) {
-                dataItems.add(rawResult.get(j));
+            for (Integer index : indices) {
+                dataItems.add(rawResult.get(index));
             }
             finalResults.add(new Tuple(dataItems));
         }

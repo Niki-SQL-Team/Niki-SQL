@@ -2,12 +2,13 @@ package Foundation.MemoryStorage;
 
 import Foundation.Exception.NKInterfaceException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Vector;
 
-public class Metadata {
+public class Metadata implements Serializable {
 
     public Integer numberOfAttributes;
     private Vector<Integer> attributeOffsetArray;

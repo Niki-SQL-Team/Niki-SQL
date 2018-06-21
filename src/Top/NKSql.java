@@ -37,6 +37,7 @@ public class NKSql {
 
     public void close() throws NKInternalException {
         bufferManager.close();
+        catalogManager.close();
         System.out.println("Top.NKSql closed.");
     }
 
@@ -75,8 +76,10 @@ public class NKSql {
     public ArrayList<Tuple> select(String tableName, ArrayList<String> attributeNames,
                                    ArrayList<ConditionalAttribute> conditionalAttributes)
             throws NKInterfaceException {
+        ArrayList<Tuple> result = RecordManager.sharedInstance.selectInTable(tableName,
+                attributeNames, conditionalAttributes);
         System.out.println("Select complete.");
-        return null;
+        return result;
     }
 
 }

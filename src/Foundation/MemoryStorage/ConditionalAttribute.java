@@ -55,6 +55,7 @@ public class ConditionalAttribute {
             case NoLessThan: return a.compareTo(b) >= 0;
             case NoGreaterThan: return a.compareTo(b) <= 0;
             case NotEqualTo: return a.compareTo(b) != 0;
+            case All: return true;
         }
         return false;
     }

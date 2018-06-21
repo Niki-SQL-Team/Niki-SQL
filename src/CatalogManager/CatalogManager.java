@@ -17,6 +17,7 @@ public class CatalogManager {
     private FileManager<Table> fileManager;
 
     public CatalogManager() {
+        setSharedInstance();
         this.tableMetadataBuffer = new HashMap<String, Table>();
         this.fileManager = new FileManager<Table>();
         this.tableNameInBuffer = new Vector<>(NKSql.bufferSize);
@@ -27,7 +28,6 @@ public class CatalogManager {
         if (isTableExists(tableName)) {
             throw new NKInterfaceException("Table named " + tableName + " has already existed.");
         }
-        setSharedInstance();
         Table newTable = new Table(tableName, metadata);
         flushInBuffer(newTable);
         storeTable(newTable);
@@ -56,6 +56,12 @@ public class CatalogManager {
         }
     }
 
+    public void close() {
+        for (Table table : tableMetadataBuffer.values()) {
+            storeTable(table);
+        }
+    }
+
     private void setSharedInstance() {
         sharedInstance = this;
     }
@@ -76,6 +82,7 @@ public class CatalogManager {
     }
 
     private void removeTableFromBuffer(String tableName) {
+        storeTable(tableMetadataBuffer.get(tableName));
         tableNameInBuffer.remove(tableName);
         tableMetadataBuffer.remove(tableName);
     }
@@ -85,9 +92,9 @@ public class CatalogManager {
         tableMetadataBuffer.put(table.tableName, table);
     }
 
-    private Table loadTable(String path) {
-        if (fileManager.isFileExist(path)) {
-            return fileManager.getObject(path);
+    private Table loadTable(String tableName) {
+        if (fileManager.isFileExist(createTablePath(tableName))) {
+            return fileManager.getObject(createTablePath(tableName));
         } else {
             return null;
         }
