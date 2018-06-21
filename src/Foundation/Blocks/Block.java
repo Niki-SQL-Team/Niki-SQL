@@ -89,7 +89,7 @@ public class Block implements Serializable {
 
     public void writeTuple(Tuple tuple, Metadata metadata) throws NKInterfaceException {
         try {
-            Integer initialOffset = declareOccupancy();
+            Integer initialOffset = declareOccupancy() * this.tupleLength;
             for (int i = 0; i < metadata.numberOfAttributes; i ++) {
                 MetadataAttribute attribute = metadata.getMetadataAttributeAt(i);
                 Integer offset = initialOffset + metadata.getTupleOffsetAt(i);

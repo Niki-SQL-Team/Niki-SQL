@@ -48,6 +48,7 @@ public class Table implements Serializable {
 
     public Vector<Tuple> searchFor(ArrayList<ConditionalAttribute> conditionalAttributes)
             throws NKInterfaceException {
+        this.intermediateResults.clear();
         conditionalAttributes = makeIndexedSearchFirst(conditionalAttributes);
         ConditionalAttribute firstCondition = conditionalAttributes.get(0);
         if (this.metadata.getMetadataAttributeNamed(firstCondition.attributeName).isIndexed) {
@@ -59,9 +60,7 @@ public class Table implements Serializable {
         if (!conditionalAttributes.isEmpty()) {
             subsequentSearch(conditionalAttributes);
         }
-        Vector<Tuple> returnValue = this.intermediateResults;
-        this.intermediateResults.clear();
-        return returnValue;
+        return this.intermediateResults;
     }
 
     public void drop() {
@@ -100,16 +99,16 @@ public class Table implements Serializable {
     }
 
     private void firstSearchWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
+        // Lv Lei's Job
+    }
+
+    private void firstSearchWithoutIndex(ConditionalAttribute condition) throws NKInterfaceException {
         Vector<Tuple> result = new Vector<>();
         for (int i = 0; i < this.numberOfBlocks; i ++) {
             Block block = BufferManager.sharedInstance.getBlock(this.getFileIdentifier(), i);
             result.addAll(searchInBlock(condition, block));
         }
         this.intermediateResults = result;
-    }
-
-    private void firstSearchWithoutIndex(ConditionalAttribute condition) {
-
     }
 
     private void subsequentSearch(ArrayList<ConditionalAttribute> conditions)
@@ -132,14 +131,14 @@ public class Table implements Serializable {
 
     private Vector<Tuple> searchInBlock(ConditionalAttribute condition, Block block)
             throws NKInterfaceException {
-        Vector<Tuple> result = new Vector<>();
-        for (int index = 0; index < block.currentSize; index ++) {
-            Tuple tuple = getTuple(block, index);
+        Vector<Tuple> blockContent = block.getAllTuples(this.metadata);
+        Vector<Tuple> searchResult = new Vector<>();
+        for (Tuple tuple : blockContent) {
             if (matches(condition, tuple)) {
-                result.add(tuple);
+                searchResult.add(tuple);
             }
         }
-        return result;
+        return searchResult;
     }
 
     private Boolean matches(ConditionalAttribute condition, Tuple tuple)
@@ -147,16 +146,6 @@ public class Table implements Serializable {
         Integer index = this.metadata.getAttributeIndexNamed(condition.attributeName);
         String dataItem = tuple.get(index);
         return condition.satisfies(dataItem);
-    }
-
-    private Boolean matchesAll(ArrayList<ConditionalAttribute> conditions, Tuple tuple)
-            throws NKInterfaceException {
-        for (ConditionalAttribute condition : conditions) {
-            if (!matches(condition, tuple)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private ArrayList<ConditionalAttribute> makeIndexedSearchFirst

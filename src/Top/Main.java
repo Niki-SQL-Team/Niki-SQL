@@ -6,15 +6,14 @@ import CatalogManager.Table;
 import Foundation.Blocks.BPlusTreeBlock;
 import Foundation.Blocks.Block;
 import Foundation.Blocks.Converter;
+import Foundation.Enumeration.CompareCondition;
 import Foundation.Enumeration.DataType;
 import Foundation.Exception.NKInterfaceException;
-import Foundation.MemoryStorage.BPlusTreePointer;
-import Foundation.MemoryStorage.Metadata;
-import Foundation.MemoryStorage.MetadataAttribute;
-import Foundation.MemoryStorage.Tuple;
+import Foundation.MemoryStorage.*;
 import javafx.scene.control.Tab;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Vector;
 
@@ -46,8 +45,11 @@ public class Main {
 
     public static void main(String args[]) {
         try {
+            NKSql nkSql = new NKSql();
+            BufferManager bufferManager = new BufferManager();
+
             MetadataAttribute attribute_1 = new MetadataAttribute("test_integer",
-                    DataType.IntegerType, true, true, true);
+                    DataType.IntegerType, false, false, false);
             MetadataAttribute attribute_2 = new MetadataAttribute("test_float",
                     DataType.FloatType, false, false, false);
             MetadataAttribute attribute_3 = new MetadataAttribute("test_string",
@@ -57,32 +59,31 @@ public class Main {
             attributes.add(attribute_2);
             attributes.add(attribute_3);
             Metadata metadata = new Metadata(attributes);
-            Block block = new Block("test_block", 0, metadata);
+            Table table = new Table("test_table", metadata);
 
             String[] items_1 = {"1", "3.1415926", "Apple Inc."};
             Vector<String> dataItems_1 = new Vector<>();
             Collections.addAll(dataItems_1, items_1);
             Tuple tuple = new Tuple(dataItems_1);
-            block.writeTuple(tuple, metadata);
+            table.insertAttributes(tuple);
 
             String[] items_2 = {"2", "2.71818", "Alphabet Inc."};
             Vector<String> dataItems_2 = new Vector<>();
             Collections.addAll(dataItems_2, items_2);
             tuple = new Tuple(dataItems_2);
-            block.writeTuple(tuple, metadata);
+            table.insertAttributes(tuple);
 
             String[] item_3 = {"3", "6.67408", "Tesla Inc."};
             Vector<String> dataItems_3 = new Vector<>();
             Collections.addAll(dataItems_3, item_3);
             tuple = new Tuple(dataItems_3);
-            block.writeTuple(tuple, metadata);
+            table.insertAttributes(tuple);
 
-            block.removeTupleAt(2);
-            block.removeTupleAt(0);
-            Vector<Integer> attributeIndices = block.getAllTupleIndices(metadata);
-            tuple = new Tuple(dataItems_1);
-            block.writeTuple(tuple, metadata);
-            attributeIndices = block.getAllTupleIndices(metadata);
+            ConditionalAttribute condition = new ConditionalAttribute("test_search",
+                    "test_integer", "2", CompareCondition.EqualTo);
+            ArrayList<ConditionalAttribute> conditions = new ArrayList<>();
+            conditions.add(condition);
+            Vector<Tuple> result = table.searchFor(conditions);
 
             System.out.println("Done.");
         } catch (Exception exception) {
