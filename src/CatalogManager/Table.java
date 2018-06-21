@@ -4,13 +4,12 @@ import BufferManager.BufferManager;
 import Foundation.Blocks.Block;
 import Foundation.Enumeration.CompareCondition;
 import Foundation.Exception.NKInterfaceException;
-import Foundation.MemoryStorage.ConditionalAttribute;
-import Foundation.MemoryStorage.Metadata;
-import Foundation.MemoryStorage.MetadataAttribute;
-import Foundation.MemoryStorage.Tuple;
+import Foundation.MemoryStorage.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Vector;
 
 public class Table implements Serializable {
@@ -20,7 +19,8 @@ public class Table implements Serializable {
     public Integer numberOfBlocks;
     public Vector<Integer> availableBlocks;
     public Vector<Integer> emptyBlocks;
-    private Vector<Tuple> intermediateResults;
+    private Vector<Tuple> insertIntermediateResults;
+    private Map<Tuple, BPlusTreePointer> deleteIntermediateResults;
 
     public Table(String tableName, Metadata metadata)
             throws NKInterfaceException {
@@ -29,7 +29,8 @@ public class Table implements Serializable {
         this.numberOfBlocks = 0;
         this.availableBlocks = new Vector<>();
         this.emptyBlocks = new Vector<>();
-        this.intermediateResults = new Vector<>();
+        this.insertIntermediateResults = new Vector<>();
+        this.deleteIntermediateResults = new LinkedHashMap<>();
         if (metadata.getTupleLength() > Block.blockSize) {
             throw new NKInterfaceException("Content in definition has exceeded block capacity.");
         }
@@ -56,13 +57,24 @@ public class Table implements Serializable {
         if (!conditions.isEmpty()) {
             subsequentSearch(conditions);
         }
-        Vector<Tuple> returnValue = new Vector<>(this.intermediateResults);
-        intermediateResults.clear();
+        Vector<Tuple> returnValue = new Vector<>(this.insertIntermediateResults);
+        insertIntermediateResults.clear();
         return returnValue;
     }
 
     public void deleteItem(ArrayList<ConditionalAttribute> conditions) throws NKInterfaceException {
-
+        conditions = makeIndexedSearchFirst(conditions);
+        ConditionalAttribute firstCondition = conditions.get(0);
+        if (this.metadata.getMetadataAttributeNamed(firstCondition.attributeName).isIndexed) {
+            firstDeleteWithIndex(firstCondition);
+        } else {
+            firstDeleteWithoutIndex(firstCondition);
+        }
+        conditions.remove(0);
+        if (!conditions.isEmpty()) {
+            subsequentDelete(conditions);
+        }
+        executeDeletion();
     }
 
     public void drop() {
@@ -110,7 +122,23 @@ public class Table implements Serializable {
             Block block = BufferManager.sharedInstance.getBlock(this.getFileIdentifier(), i);
             result.addAll(searchInBlock(condition, block));
         }
-        this.intermediateResults = result;
+        this.insertIntermediateResults = result;
+    }
+
+    private void firstDeleteWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
+
+    }
+
+    private void firstDeleteWithoutIndex(ConditionalAttribute condition) throws NKInterfaceException {
+        for (int i = 0; i < this.numberOfBlocks; i ++) {
+            Block block = BufferManager.sharedInstance.getBlock(this.getFileIdentifier(), i);
+            Vector<Integer> indices = block.getAllTupleIndices(this.metadata);
+            for (Integer index : indices) {
+                Tuple tuple = block.getTupleAt(index, this.metadata);
+                BPlusTreePointer pointer = new BPlusTreePointer(i, index);
+                this.deleteIntermediateResults.put(tuple, pointer);
+            }
+        }
     }
 
     private void subsequentSearch(ArrayList<ConditionalAttribute> conditions)
@@ -120,15 +148,39 @@ public class Table implements Serializable {
         }
     }
 
-    private void singleSubsequentSearch(ConditionalAttribute conditionalAttribute)
+    private void subsequentDelete(ArrayList<ConditionalAttribute> conditions)
+            throws NKInterfaceException {
+        for (ConditionalAttribute condition : conditions) {
+            singleSubsequentDelete(condition);
+        }
+    }
+
+    private void singleSubsequentSearch(ConditionalAttribute condition)
             throws NKInterfaceException {
         Vector<Tuple> selectedResults = new Vector<>();
-        for (Tuple tuple : this.intermediateResults) {
-            if (matches(conditionalAttribute, tuple)) {
+        for (Tuple tuple : this.insertIntermediateResults) {
+            if (matches(condition, tuple)) {
                 selectedResults.add(tuple);
             }
         }
-        this.intermediateResults = selectedResults;
+        this.insertIntermediateResults = selectedResults;
+    }
+
+    private void singleSubsequentDelete(ConditionalAttribute condition)
+            throws NKInterfaceException {
+        for (Tuple tuple : this.deleteIntermediateResults.keySet()) {
+            if (!matches(condition, tuple)) {
+                deleteIntermediateResults.remove(tuple);
+            }
+        }
+    }
+
+    private void executeDeletion() {
+        for (BPlusTreePointer pointer : this.deleteIntermediateResults.values()) {
+            Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), pointer.blockIndex);
+            block.removeTupleAt(pointer.blockOffset);
+        }
+        this.deleteIntermediateResults.clear();
     }
 
     private Vector<Tuple> searchInBlock(ConditionalAttribute condition, Block block)

@@ -15,7 +15,6 @@ public class NKSql {
     public static final String indexHomeDirectory = homeDirectory + "Index/";
     public static final String metadataHomeDirectory = homeDirectory + "Metadata/";
 
-    public static final String blockHeaderPostfix = ".nkbh";
     public static final String dataFilePostfix = ".nkdata";
     public static final String indexFilePostfix = ".nkidx";
     public static final String metadataFilePostfix = ".nkmd";
@@ -32,13 +31,13 @@ public class NKSql {
         bufferManager = new BufferManager();
         catalogManager = new CatalogManager();
         recordManager = new RecordManager();
-        System.out.println("Top.NKSql initialized.");
+        System.out.println("NiKi SQL Server initialized.");
     }
 
     public void close() throws NKInternalException {
         bufferManager.close();
         catalogManager.close();
-        System.out.println("Top.NKSql closed.");
+        System.out.println("Niki SQL Server closed.");
     }
 
     public void createTable(String tableName, ArrayList<MetadataAttribute> attributes)
