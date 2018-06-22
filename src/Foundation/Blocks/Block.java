@@ -30,8 +30,8 @@ public class Block implements Serializable {
     public Boolean isDiscardable;
     public Integer currentSize;
     public Integer capacity;
+    public byte[] storageData = new byte[blockSize];
     private Integer firstAvailablePosition;
-    protected byte[] storageData = new byte[blockSize];
 
     public Block(String fileIdentifier, Integer index, Metadata metadata) {
         this.fileIdentifier = fileIdentifier;
@@ -54,14 +54,14 @@ public class Block implements Serializable {
      */
     public Vector<Tuple> getAllTuples(Metadata metadata) {
         Vector<Tuple> allTuples = new Vector<>();
-        Vector<Integer> allTupleIndices = getAllTupleIndices(metadata);
+        Vector<Integer> allTupleIndices = getAllTupleIndices();
         for (Integer index : allTupleIndices) {
             allTuples.add(getTupleAt(index, metadata));
         }
         return allTuples;
     }
 
-    public Vector<Integer> getAllTupleIndices(Metadata metadata) {
+    public Vector<Integer> getAllTupleIndices() {
         Vector<Integer> allTupleIndices = new Vector<>();
         Vector<Integer> emptyIndices = getAllEmptyIndices();
         for (int index = 0; index < this.capacity; index ++) {

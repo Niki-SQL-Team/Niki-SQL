@@ -4,6 +4,7 @@ import Foundation.Enumeration.DataType;
 import Foundation.Exception.NKInternalException;
 import Foundation.MemoryStorage.BPlusTreeMetadata;
 import Foundation.MemoryStorage.BPlusTreePointer;
+import IndexManager.BPlusTree;
 
 public class BPlusTreeBlock extends Block {
 
@@ -166,6 +167,26 @@ public class BPlusTreeBlock extends Block {
         this.currentSize --;
     }
 
+    /*
+     * This method would split the block into two, in order to make it more convenient in the methods
+     * implementation of B Plus tree
+     * The return value of the methods is the later half of the block
+     */
+    public BPlusTreeBlock split(Integer newBlockIndex) {
+        Integer splitIndex = this.currentSize / 2 + 1;
+        BPlusTreeBlock splitBlock;
+        if (this.dataType.equals(DataType.StringType)) {
+            splitBlock = new BPlusTreeBlock(fileIdentifier, dataType, markerLength, newBlockIndex, isLeafNode);
+        } else {
+            splitBlock = new BPlusTreeBlock(fileIdentifier, dataType, newBlockIndex, isLeafNode);
+        }
+        System.arraycopy(storageData, splitIndex * tupleLength, splitBlock.storageData,
+                0, (currentSize - splitIndex + 1) * tupleLength);
+        splitBlock.currentSize = this.currentSize - this.currentSize / 2;
+        this.currentSize /= 2;
+        return splitBlock;
+    }
+
     public void outputAttributes() {
         for (int i = 0; i < this.currentSize; i ++) {
             Integer offset = tupleLength * i + 2 * singlePointerSize;
@@ -215,7 +236,7 @@ public class BPlusTreeBlock extends Block {
             } else if (centerContent < dataItem) {
                 startIndex = centerIndex;
             } else {
-                return isMandatoryFound ? centerIndex : centerIndex + 1;
+                return isMandatoryFound ? centerIndex + 1 : centerIndex;
             }
         }
         return isMandatoryFound ? endIndex : null;
@@ -273,7 +294,7 @@ public class BPlusTreeBlock extends Block {
             } else if (centerContent.compareTo(dataItem) < 0) {
                 startIndex = centerIndex;
             } else {
-                return isMandatoryFound ? centerIndex : centerIndex + 1;
+                return isMandatoryFound ? centerIndex + 1: centerIndex;
             }
         }
         return isMandatoryFound ? endIndex : null;

@@ -8,11 +8,11 @@ public class FileManager<Type extends Serializable> {
 
     public void storeObject(Type object, String path) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(path);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(object);
-            objectOutputStream.close();
-            fileOutputStream.close();
+//            FileOutputStream fileOutputStream = new FileOutputStream(path);
+//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+//            objectOutputStream.writeObject(object);
+//            objectOutputStream.close();
+//            fileOutputStream.close();
         } catch (Exception exception) {
             handleInternalException(exception, "storeObject");
         }

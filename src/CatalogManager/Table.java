@@ -132,7 +132,7 @@ public class Table implements Serializable {
     private void firstDeleteWithoutIndex(ConditionalAttribute condition) throws NKInterfaceException {
         for (int i = 0; i < this.numberOfBlocks; i ++) {
             Block block = BufferManager.sharedInstance.getBlock(this.getFileIdentifier(), i);
-            Vector<Integer> indices = block.getAllTupleIndices(this.metadata);
+            Vector<Integer> indices = block.getAllTupleIndices();
             for (Integer index : indices) {
                 Tuple tuple = block.getTupleAt(index, this.metadata);
                 BPlusTreePointer pointer = new BPlusTreePointer(i, index);
