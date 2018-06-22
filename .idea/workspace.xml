@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a10e842-66b8-4e9d-9600-c3068c183ced" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Interpreter/Comparison.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Interpreter/Lexer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Interpreter/Num.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Interpreter/Tag.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Interpreter/Token.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Interpreter/Word.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Foundation/Exception/NKInternalException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/Exception/NKInternalException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interpreter/interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpreter/interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interpreter/interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpreter/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Top/NKSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Top/NKSql.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,38 +14,29 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="Interpreter.java" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/../MiniSQL-master/src/Interpreter.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="342">
-                    <caret line="57" column="59" lean-forward="true" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FavoritesManager">
     <favorites_list name="Niki-SQL" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="interpreter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Interpreter/interpreter.java">
+    <leaf>
+      <file leaf-file-name="Interpreter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Interpreter/Interpreter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+            <state relative-caret-position="-937">
+              <caret line="1100" column="25" lean-forward="true" selection-start-line="1100" selection-start-column="25" selection-end-line="1100" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#26313#26321#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="API.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../MiniSQL-master/src/API.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2625">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,13 +44,46 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Tag.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Interpreter/Tag.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NKSql.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="47" column="45" lean-forward="true" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NKInternalException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Exception/NKInternalException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Lexer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Interpreter/Lexer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+            <state relative-caret-position="-1341">
+              <caret line="104" column="23" lean-forward="true" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#384#385#0" expanded="true" />
+                <element signature="e#423#424#0" expanded="true" />
+                <element signature="e#460#461#0" expanded="true" />
                 <element signature="e#497#498#0" expanded="true" />
               </folding>
             </state>
@@ -75,12 +93,8 @@
       <file leaf-file-name="Comparison.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Interpreter/Comparison.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-              <folding>
-                <element signature="e#116#117#0" expanded="true" />
-                <element signature="e#145#146#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="266">
+              <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -89,7 +103,7 @@
         <entry file="file://$PROJECT_DIR$/src/Interpreter/Num.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
-              <caret line="10" column="26" lean-forward="true" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+              <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -98,7 +112,7 @@
         <entry file="file://$PROJECT_DIR$/src/Interpreter/Token.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="209">
-              <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+              <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
               <folding>
                 <element signature="e#94#95#0" expanded="true" />
                 <element signature="e#122#123#0" expanded="true" />
@@ -112,12 +126,8 @@
       <file leaf-file-name="Word.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Interpreter/Word.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" column="37" lean-forward="true" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-              <folding>
-                <element signature="e#216#217#0" expanded="true" />
-                <element signature="e#249#250#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="380">
+              <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -135,7 +145,12 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>currentSize</find>
+      <find>tmpNAME</find>
+      <find>thetoken</find>
     </findStrings>
+    <replaceStrings>
+      <replace>token</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -172,17 +187,19 @@
         <option value="$PROJECT_DIR$/src/Foundation/Block/IntegerBPlusTreeBlock.java" />
         <option value="$PROJECT_DIR$/src/Foundation/Block/FloatBPlusTreeBlock.java" />
         <option value="$PROJECT_DIR$/src/Foundation/Block/Block.java" />
-        <option value="$PROJECT_DIR$/src/Top/NKSql.java" />
         <option value="$PROJECT_DIR$/src/BufferManager/FileManager.java" />
         <option value="$PROJECT_DIR$/src/Foundation/Exception/NKInternalException.java" />
         <option value="$PROJECT_DIR$/src/Interpreter/Comparison.java" />
-        <option value="$PROJECT_DIR$/src/Interpreter/interpreter.java" />
         <option value="$PROJECT_DIR$/src/Interpreter/Num.java" />
         <option value="$PROJECT_DIR$/src/Interpreter/Token.java" />
         <option value="$PROJECT_DIR$/src/Interpreter/Word.java" />
         <option value="$PROJECT_DIR$/src/Interpreter/Tag.java" />
         <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/ConditionalAttribute.java" />
         <option value="$PROJECT_DIR$/src/Interpreter/Lexer.java" />
+        <option value="$PROJECT_DIR$/src/Interpreter/interpreter.java" />
+        <option value="$PROJECT_DIR$/src/Top/NKSql.java" />
+        <option value="$PROJECT_DIR$/../MiniSQL-master/src/Interpreter.java" />
+        <option value="$PROJECT_DIR$/src/Interpreter/Interpreter.java" />
       </list>
     </option>
   </component>
@@ -196,9 +213,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="778" />
-    <option name="y" value="6" />
-    <option name="width" value="1920" />
+    <option name="x" value="396" />
+    <option name="y" value="36" />
+    <option name="width" value="1468" />
     <option name="height" value="1075" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -221,6 +238,12 @@
               <item name="Niki-SQL" type="b2602c69:ProjectViewProjectNode" />
               <item name="Niki-SQL" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Niki-SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki-SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="CatalogManager" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Niki-SQL" type="b2602c69:ProjectViewProjectNode" />
@@ -258,13 +281,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -360,7 +384,9 @@
       <workItem from="1528715682784" duration="8036000" />
       <workItem from="1528728515661" duration="5591000" />
       <workItem from="1528891455559" duration="3658000" />
-      <workItem from="1529214338732" duration="6876000" />
+      <workItem from="1529214338732" duration="9340000" />
+      <workItem from="1529322738333" duration="21000" />
+      <workItem from="1529396115973" duration="9117000" />
     </task>
     <task id="LOCAL-00001" summary="First commit.">
       <created>1528037503484</created>
@@ -401,36 +427,35 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57192000" />
+    <option name="totallyTimeSpent" value="68794000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="623" y="5" width="1536" height="860" extended-state="0" />
-    <editor active="true" />
+    <frame x="317" y="29" width="1174" height="860" extended-state="0" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32969698" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32969698" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32969698" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3287483" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.29431665" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3287483" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Designer" order="3" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.29364005" />
+      <window_info anchor="right" id="Database" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32969698" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32969698" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -438,33 +463,33 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32969698" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32969698" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32969698" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32969698" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28841147" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32969698" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32969698" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32969698" />
       <window_info anchor="right" id="Maven Projects" order="8" />
-      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28841147" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -483,37 +508,18 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../MiniSQL-master/src/Interpreter.java</url>
+          <line>764</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Foundation/Exception/NKInternalException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#145#146#0" expanded="true" />
-            <element signature="e#191#192#0" expanded="true" />
-            <element signature="e#225#226#0" expanded="true" />
-            <element signature="e#277#278#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/Exception/NKInterfaceException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -643,9 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -653,9 +656,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3496">
           <caret line="192" column="5" selection-start-line="189" selection-start-column="4" selection-end-line="192" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -680,20 +680,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/360zip$Temp/360$1/API.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/360zip$Temp/360$2/Interpreter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="632">
-          <caret line="1032" column="48" selection-start-line="1032" selection-start-column="29" selection-end-line="1032" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/360zip$Temp/360$1/API.java" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/360zip$Temp/360$2/Interpreter.java" />
     <entry file="jar://D:/下载包/java-1.8.0-openjdk-1.8.0.171-1.b10.redhat.windows.x86_64/java-1.8.0-openjdk-1.8.0.171-1.b10.redhat.windows.x86_64/src.zip!/java/io/IOException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-399">
@@ -708,48 +696,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/Exception/NKInternalException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
-          <folding>
-            <element signature="e#145#146#0" expanded="true" />
-            <element signature="e#191#192#0" expanded="true" />
-            <element signature="e#225#226#0" expanded="true" />
-            <element signature="e#277#278#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../MiniSQL-master/src/lexer/Lexer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="1" selection-start-line="1" selection-end-line="229" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../MiniSQL-master/src/lexer/Comparison.java">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interpreter/Tag.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
     </entry>
     <entry file="jar://D:/下载包/java-1.8.0-openjdk-1.8.0.171-1.b10.redhat.windows.x86_64/java-1.8.0-openjdk-1.8.0.171-1.b10.redhat.windows.x86_64/src.zip!/java/io/BufferedReader.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -762,9 +717,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -779,34 +731,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-87">
           <caret line="31" column="50" lean-forward="true" selection-start-line="31" selection-start-column="50" selection-end-line="31" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Interpreter/Word.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="37" lean-forward="true" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-          <folding>
-            <element signature="e#216#217#0" expanded="true" />
-            <element signature="e#249#250#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="380">
+          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Interpreter/Num.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="10" column="26" lean-forward="true" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Interpreter/Comparison.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Interpreter/Token.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
-          <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
           <folding>
             <element signature="e#94#95#0" expanded="true" />
             <element signature="e#122#123#0" expanded="true" />
@@ -816,44 +768,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interpreter/Comparison.java">
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Exception/NKInternalException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-          <folding>
-            <element signature="e#116#117#0" expanded="true" />
-            <element signature="e#145#146#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="209">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/下载包/java-1.8.0-openjdk-1.8.0.171-1.b10.redhat.windows.x86_64/java-1.8.0-openjdk-1.8.0.171-1.b10.redhat.windows.x86_64/src.zip!/java/util/Vector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MiniSQL-master/src/CATALOGMANAGER/attribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="56" lean-forward="true" selection-start-line="5" selection-start-column="56" selection-end-line="5" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Interpreter/Lexer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        <state relative-caret-position="-1341">
+          <caret line="104" column="23" lean-forward="true" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
+            <element signature="e#460#461#0" expanded="true" />
             <element signature="e#497#498#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Interpreter/Tag.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../MiniSQL-master/src/API.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2625">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="47" column="45" lean-forward="true" selection-start-line="47" selection-start-column="45" selection-end-line="47" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../MiniSQL-master/src/Interpreter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="57" column="59" lean-forward="true" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
+        <state relative-caret-position="22173">
+          <caret line="1183" column="4" lean-forward="true" selection-start-line="1183" selection-start-column="4" selection-end-line="1183" selection-end-column="4" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#34776#34784#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interpreter/interpreter.java">
+    <entry file="file://$PROJECT_DIR$/src/Interpreter/Interpreter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        <state relative-caret-position="-937">
+          <caret line="1100" column="25" lean-forward="true" selection-start-line="1100" selection-start-column="25" selection-end-line="1100" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#26313#26321#0" expanded="true" />
           </folding>
         </state>
       </provider>

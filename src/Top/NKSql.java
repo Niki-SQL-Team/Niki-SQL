@@ -22,16 +22,16 @@ public class NKSql {
         System.out.println("Top.NKSql initialized.");
     }
 
-    public void close() throws NKInternalException {
+    public static void close() throws NKInternalException {
         System.out.println("Top.NKSql closed.");
     }
 
-    public void createTable(String tableName, ArrayList<MetadataAttribute> attributes)
+    public static void createTable(String tableName, ArrayList<MetadataAttribute> attributes)
             throws NKInterfaceException {
         System.out.println("Table named " + tableName + " created.");
     }
 
-    public void dropTable(String tableName) throws NKInterfaceException {
+    public static void dropTable(String tableName) throws NKInterfaceException {
         System.out.println("Table named " + tableName + " dropped.");
     }
 
@@ -40,15 +40,15 @@ public class NKSql {
         System.out.println("Index named " + indexName + " created.");
     }
 
-    public void dropIndex(String indexName) throws NKInterfaceException {
+    public static void dropIndex(String indexName) throws NKInterfaceException {
         System.out.println("Index named " + indexName + " dropped.");
     }
 
-    public void insertTuple(Tuple newItem, String tableName) throws NKInterfaceException {
+    public static void insertTuple(Tuple newItem, String tableName) throws NKInterfaceException {
         System.out.println("Item inserted.");
     }
 
-    public void dropTuple(String tableName,
+    public static void dropTuple(String tableName,
                           ArrayList<ConditionalAttribute> conditionalAttributes)
             throws NKInterfaceException {
         System.out.println("Tuple dropped.");
