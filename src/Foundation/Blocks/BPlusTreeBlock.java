@@ -57,7 +57,7 @@ public class BPlusTreeBlock extends Block {
     }
 
     public void setTailPointer(Integer blockIndex) {
-        Integer tailOffset = this.attributeLength * markerCapacity;
+        Integer tailOffset = this.attributeLength * markerCapacity + 2 * singlePointerSize;//要和上面一样？
         writeInteger(blockIndex, tailOffset);
     }
 
@@ -225,7 +225,7 @@ public class BPlusTreeBlock extends Block {
         for (int i = 0; i < this.currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             Integer content = getInteger(offset);
-            if (content.equals(dataItem) || (content > dataItem && isMandatoryFound)) {
+            if (content.equals(dataItem) && !isMandatoryFound|| (content > dataItem && isMandatoryFound)) {
                 return i;
             }
         }
@@ -236,7 +236,7 @@ public class BPlusTreeBlock extends Block {
         for (int i = 0; i < this.currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             Float content = getFloat(offset);
-            if (content.equals(dataItem) || (content > dataItem && isMandatoryFound)) {
+            if (content.equals(dataItem) && !isMandatoryFound|| (content > dataItem && isMandatoryFound)) {
                 return i;
             }
         }
@@ -247,7 +247,7 @@ public class BPlusTreeBlock extends Block {
         for (int i = 0; i < currentSize; i ++) {
             Integer offset = attributeLength * i + 2 * singlePointerSize;
             String content = getString(offset);
-            if (content.equals(dataItem) || content.compareTo(dataItem) > 0 && isMandatoryFound) {
+            if (content.equals(dataItem) && !isMandatoryFound|| content.compareTo(dataItem) > 0 && isMandatoryFound) {
                 return i;
             }
         }

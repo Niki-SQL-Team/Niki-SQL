@@ -68,22 +68,39 @@ public class Main {
     }*/
 
     public static void main(String args[]){
+
+
         BufferManager bufferManager = new BufferManager();
-        BPlusTreeBlock myRoot = new BPlusTreeBlock("index_T1_A1", DataType.IntegerType, 0, true);
-        bufferManager.storeBlock(myRoot);
-        BPlusTreePointer p = new BPlusTreePointer(0);
-        BPlusTree bTree = new BPlusTree(DataType.IntegerType, p,"T1","A1",0);
         Converter convert = new Converter();
+        IndexManager indexManager = new IndexManager();
 
+        Index bTree = indexManager.createBlankIndex("T1","A1",DataType.IntegerType);
 
-       /* for(int i = 0; i < 30000; i++){
+        System.out.println("--------------------");
+        System.out.println(bTree.table);
+        System.out.println(bTree.attribute);
+        System.out.println(bTree.dataType);
+        System.out.println(bTree.blockOfTheIndexTree);
+        System.out.println(bTree.currentNodeCount);
+        System.out.println("--------------------");
+
+        /*for(int i = 300; i >= 0; i--){
             byte[] key = convert.convertToBytes(i);
             BPlusTreePointer p1 = new BPlusTreePointer(i, i);
-            bTree.insertKey(key,p1);
+            indexManager.insertNewKey(bTree, key, p1);
+        }
+*/
+       /* for(int i = 0 ; i < 250; i++){
+            byte[] key = convert.convertToBytes(i);
+            bTree.deleteKey(key);
         }*/
 
-        BPlusTreeBlock brb = (BPlusTreeBlock)bufferManager.getBlock("index_T1_A1", 176);
+
+
+        BPlusTreeBlock brb = (BPlusTreeBlock)bufferManager.getBlock("index_T1_A1", 0);
         brb.outputAttributes();
+
+        bufferManager.close();;
         return;
     }
 

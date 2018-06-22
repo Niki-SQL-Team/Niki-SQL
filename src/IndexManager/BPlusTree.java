@@ -17,7 +17,7 @@ public class BPlusTree{
 	private DataType ElementType;
 	private BufferManager bufferManager;
 	private String identifier;
-	private Integer blockIndexCount;
+	public Integer blockIndexCount;
 	private byte[] markerBuffer;
 	private Converter converterOfTree;
 	//构造函数
@@ -148,6 +148,7 @@ public class BPlusTree{
 		}
 		return null;//no use
 	}
+
 	//精确查找
 	public BPlusTreePointer searchKey(byte[] target){
 		return searchKeyForNode(target, getTreeNode(this.root));
@@ -162,9 +163,32 @@ public class BPlusTree{
 		}
 	}
 
+	//属性的pointer修改，基本和search一样
+	public BPlusTreePointer rePoint(byte[] target, BPlusTreePointer newPointer){
+		return rePointForNode(target, newPointer, getTreeNode(this.root));
+	}
+
+	private BPlusTreePointer rePointForNode(byte[] target,  BPlusTreePointer newPointer, BPlusTreeBlock node ){
+		if(node.isLeafNode){//如果搜索到了叶节点
+			Integer index = node.searchIndexFor(target, true);
+			byte[] toBeRemoved = node.getAttribute(index);
+			try{
+				node.remove(toBeRemoved, true);
+			}catch(NKInternalException e){
+				e.describe();
+			}
+			node.insert(toBeRemoved, newPointer);
+
+			 return  newPointer;
+		}
+		else{//没有搜索到叶节点
+			return rePointForNode(target, newPointer, getTreeNode(node.searchFor(target)));
+		}
+	}
+
 	//范围查找
 	//默认返回结果为闭区间查找
-	public Vector<BPlusTreePointer> searchKeyInRange(byte[] startKey, byte[] endKey){//闭区间查找
+	public Vector<BPlusTreePointer> searchKeyInRange(byte[] startKey, byte[] endKey, boolean leftEqual, boolean rightEqual){//闭区间查找
 		if(startKey == null){//左侧无限制
 			BPlusTreeBlock currentNode = getTreeNode((this.root));
 			while(!currentNode.isLeafNode){//找到最左侧的block
@@ -175,7 +199,7 @@ public class BPlusTree{
 			while(currentNode != null) {//从最左侧的block向右侧遍历
 				for (int i = 0; i < currentNode.currentSize; i++) {
 					CompareCondition res = myCompare(endKey, currentNode.getAttribute(i));
-					if (res == CompareCondition.LessThan || res == CompareCondition.EqualTo)//如果一个元素小于等于右边界，加入结果
+					if (res == CompareCondition.LessThan || (res == CompareCondition.EqualTo) && rightEqual)//如果一个元素小于等于右边界，加入结果
 						result.addElement(currentNode.getPointer(i));
 					else//否则表明遇到边界，返回结果
 						return result;
@@ -194,20 +218,20 @@ public class BPlusTree{
 				for(int i = 0; i < currentNode.currentSize; i++){//从这个block向右侧查找
 					if(endKey == null){
 						CompareCondition res =  myCompare(startKey, currentNode.getAttribute(i));
-						if(res == CompareCondition.GreaterThan || res == CompareCondition.EqualTo)
+						if(res == CompareCondition.GreaterThan || (res == CompareCondition.EqualTo) && leftEqual)
 							result.addElement(currentNode.getPointer(i));
 					}
 					else{
 						CompareCondition withStartKey = myCompare(startKey, currentNode.getAttribute(i));
 						CompareCondition withEndKey = myCompare(endKey, currentNode.getAttribute(i));
-						boolean noLessThanLeft = (withStartKey == CompareCondition.GreaterThan || withStartKey == CompareCondition.EqualTo);
-						boolean noBiggerThanRight = (withEndKey == CompareCondition.LessThan || withStartKey == CompareCondition.EqualTo);
+						boolean noLessThanLeft = (withStartKey == CompareCondition.GreaterThan || (withStartKey == CompareCondition.EqualTo) && leftEqual);
+						boolean noBiggerThanRight = (withEndKey == CompareCondition.LessThan || (withEndKey == CompareCondition.EqualTo) && rightEqual);
 						if(noLessThanLeft && noBiggerThanRight)
 							result.addElement(currentNode.getPointer(i));
-						else if(withEndKey == CompareCondition.GreaterThan) return result;
+						else if(!noBiggerThanRight) return result;
 					}
 				}
-				currentNode = (BPlusTreeBlock)bufferManager.getBlock(identifier, currentNode.getTailPointer().blockIndex);
+				currentNode = getTreeNode(currentNode.getTailPointer());
 			}
 			return result;
 		}
@@ -217,6 +241,15 @@ public class BPlusTree{
 	public void deleteKey(byte[] element){
         //触发函数
         //注意root要被merge的情况
+		BPlusTreeBlock treeRoot = (BPlusTreeBlock)bufferManager.getBlock(identifier, this.root.blockIndex);
+		Integer res = deleteKeyForNode(element, treeRoot);
+		this.markerBuffer = null;
+		if(treeRoot.currentSize == 0){
+			BPlusTreePointer newRoot = treeRoot.getPointer(0);
+			this.root = newRoot;
+			bufferManager.removeBlock(identifier,treeRoot.index);
+		}
+
 	}
 	private int deleteKeyForNode(byte[] element, BPlusTreeBlock node){
 		//叶节点就是根节点
@@ -263,6 +296,12 @@ public class BPlusTree{
 			//少于一半，要考虑一些调整
 			else{
 				//需要访问兄弟，递归到上一层处理。
+				try{
+					node.remove(element,true);
+				}
+				catch(NKInternalException e){
+					e.describe();;
+				}
 				return 1;//1 -> sonNodeElementTooFew
 				//借左节点
 				//借右节点
@@ -277,9 +316,11 @@ public class BPlusTree{
 		//递归过程，非叶节点处理
 		if(res == 0) return 0;
 		if(res == 1){//叶子节点提示：该叶子节点元素数目过少
-			Integer sonNodePointerIndex = node.searchIndexFor(element, false);
+
+			Integer sonNodePointerIndex = node.searchIndexFor(element, true);
 			BPlusTreeBlock sonNode = (BPlusTreeBlock) bufferManager.getBlock(identifier, node.getPointer(sonNodePointerIndex).blockIndex);
 			BPlusTreeBlock leftSon = null, rightSon = null;
+			boolean isFromLeaf = sonNode.isLeafNode;
 			if(sonNodePointerIndex != 0) leftSon = (BPlusTreeBlock)bufferManager.getBlock(identifier, node.getPointer(sonNodePointerIndex - 1).blockIndex);
 			if(sonNodePointerIndex != node.markerCapacity) rightSon = (BPlusTreeBlock)bufferManager.getBlock(identifier, node.getPointer(sonNodePointerIndex + 1).blockIndex);
 
@@ -290,12 +331,22 @@ public class BPlusTree{
 				}catch(NKInternalException e){
 					e.describe();
 				}
-				sonNode.insert(leftSon.getAttribute(leftSon.currentSize - 1), presentPointer);
+				if(isFromLeaf)
+					sonNode.insert(leftSon.getAttribute(leftSon.currentSize - 1), presentPointer);
+				else{
+					BPlusTreePointer right = sonNode.getPointer(0);
+					BPlusTreeBlock sonSon = (BPlusTreeBlock)bufferManager.getBlock(identifier, right.blockIndex);
+					byte [] newMarker = sonSon.getAttribute(0);
+					sonNode.insert(presentPointer, newMarker, right);
+				}
+
 				bufferManager.storeBlock(leftSon);
 				bufferManager.storeBlock(sonNode);
 
+
+
 				//下面修改node的路标啊,copy 了 res == 2 的情况
-				Integer index = node.searchIndexFor(element, false);
+				Integer index = node.searchIndexFor(element, true);
 				BPlusTreePointer sonNodePointer = node.searchFor(element);
 				sonNode = (BPlusTreeBlock)bufferManager.getBlock(identifier,sonNodePointer.blockIndex);
 				BPlusTreePointer left = node.getPointer(index - 1);
@@ -318,13 +369,18 @@ public class BPlusTree{
 				}catch(NKInternalException e){
 					e.describe();
 				}
-				sonNode.insert(newMarker,presentPointer);
+				if(isFromLeaf)
+					sonNode.insert(newMarker,presentPointer);
+				else{
+					BPlusTreePointer left = sonNode.getPointer(sonNode.currentSize);
+					sonNode.insert(left, newMarker, presentPointer);
+				}
 				bufferManager.storeBlock(sonNode);
 				bufferManager.storeBlock(rightSon);
 
 				//对于右面的节点，要递归处理路标
 				BPlusTreePointer sonNodePointer = node.searchFor(element);
-				Integer index = node.searchIndexFor(element,false);
+				Integer index = node.searchIndexFor(element,true);
 				byte[] toBeDeleted = node.getAttribute(index);
 				BPlusTreePointer right = node.getPointer(index + 1);
 				try{
@@ -333,26 +389,63 @@ public class BPlusTree{
 				catch(NKInternalException e){
 					e.describe();
 				}
-				node.insert(sonNodePointer, this.markerBuffer, right);
+				node.insert(sonNodePointer, rightSon.getAttribute(0), right);
 				bufferManager.storeBlock(node);
 				return 0;
 			}
-			else{//需要合并
+			else{//需要合并，对叶子节点
+				BPlusTreeBlock destinationNode, sourceNode;
 				if(leftSon != null){//和左儿子合并
-
-
-
+					destinationNode = leftSon;
+					sourceNode = sonNode;
 				}
 				else if(rightSon != null){//和右儿子合并
-
-
+					destinationNode = sonNode;
+					sourceNode = rightSon;
 				}
+				else{
+					return 404;
+				}
+
+				if(isFromLeaf){
+					for(int i = 0; i < sourceNode.currentSize; i++){
+						destinationNode.insert(sourceNode.getAttribute(i), sourceNode.getPointer(i));
+					}
+				}
+				else{
+					BPlusTreePointer leftLast = destinationNode.getPointer(destinationNode.currentSize);
+					BPlusTreePointer rightFirst = sourceNode.getPointer(0);
+					BPlusTreeBlock rightFirstBlock =  (BPlusTreeBlock)(bufferManager.getBlock(identifier,rightFirst.blockIndex));
+					byte[] theMarker = rightFirstBlock.getAttribute(0);
+					destinationNode.insert(leftLast, theMarker, rightFirst);
+					for(int i = 0; i < sourceNode.currentSize; i++){
+						destinationNode.insert(sourceNode.getPointer(i), sourceNode.getAttribute(i), sourceNode.getPointer(i+1));
+					}
+				}
+
+
+				byte[] toBeDeleted = node.getAttribute(node.searchIndexFor(sourceNode.getAttribute(0), true) - 1);
+				try{
+					node.remove(toBeDeleted, true);
+				}catch(NKInternalException e){
+					e.describe();
+				}
+
+				if(isFromLeaf)
+					destinationNode.setTailPointer(sourceNode.getTailPointer().blockIndex);
+
+				bufferManager.removeBlock(identifier, sourceNode.index);
+				bufferManager.storeBlock(destinationNode);
+				if(node.currentSize < node.markerCapacity / 2)
+					return 1;
+				else
+					return 0;
 			}
 		}
 		else if(res == 2){//删除了，或者修改了对应叶子节点的第一个元素
-			Integer index = node.searchIndexFor(element, false);
+			Integer index = node.searchIndexFor(element, true);
 			BPlusTreePointer sonNodePointer = node.searchFor(element);
-			BPlusTreeBlock sonNode = (BPlusTreeBlock)bufferManager.getBlock(identifier,sonNodePointer.blockIndex);
+			BPlusTreeBlock sonNode = (BPlusTreeBlock)bufferManager.getBlock(identifier, sonNodePointer.blockIndex);
 			if(index == 0){
 				this.markerBuffer = sonNode.getAttribute(0);
 				return 3;//非叶节点提示，最下面有一个叶节点的第一个改了，他是我的最左边指针，传给上面看，直到找到不是最左指针
@@ -372,7 +465,7 @@ public class BPlusTree{
 		}
 		else if(res == 3){//递归，知道找到对应儿子节点不是node的第一个指针
 			BPlusTreePointer sonNodePointer = node.searchFor(element);
-			Integer index = node.searchIndexFor(element,false);
+			Integer index = node.searchIndexFor(element,true);
 			if(index == 0) return 3;
 			byte[] toBeDeleted = node.getAttribute(index - 1);
 			BPlusTreePointer left = node.getPointer(index - 1);
@@ -387,10 +480,31 @@ public class BPlusTree{
 			bufferManager.storeBlock(node);
 			return 0;
 		}
-		return 0;
+		else{
+			return 404;
+		}
+
 		//曾经的旧代码
     }
 
+    public Vector<BPlusTreePointer> findAll(){
+		Vector<BPlusTreePointer> res = new Vector<BPlusTreePointer>();
+
+		BPlusTreeBlock currentNode = getTreeNode((this.root));
+		while(!currentNode.isLeafNode){//找到最左侧的block
+			currentNode = getTreeNode(currentNode.getPointer(0));
+		}
+
+		do{
+			for(int i = 0;i <currentNode.currentSize; i++){
+				res.add(currentNode.getPointer(i));
+				//System.out.println(currentNode.getPointer(i).blockIndex);
+			}
+			currentNode = getTreeNode(currentNode.getTailPointer());
+		}while(currentNode != null);
+
+		return res;
+	}
 
     //私有封装函数
 	//key left, node right
@@ -441,183 +555,3 @@ public class BPlusTree{
 		node.insert(left, marker, right);
 	}
 }
-
-/*
-		{
-		//返回true，表明儿子节点没问题，false则要对儿子但进行再分配或者合并
-	    //对子节点递归
-            //如果是非叶节点，递归调用
-		//到了叶节点，先删去相关记录，返回到父节点
-		//在父节点检验对应子节点是否需要合并或者再分配
-		if(!node.isLeafNode){
-			BPlusTreeBlock next = (BPlusTreeBlock)bufferManager.getBlock(identifier, node.searchFor(element).blockIndex);
-			return deleteKeyForNode(element, next);
-		}
-		else if(node.isLeafNode){
-			try{
-				node.remove(element, true);
-			}
-			catch(NKInternalException exception){
-				exception.describe();
-			}
-
-			bufferManager.storeBlock(node);
-			if(node.currentSize < node.markerCapacity / 2) return false;
-			else return true;
-		}
-
-		//进行再分配或者合并,优先考虑
-		Integer sonNodePointerIndex = node.searchIndexFor(element, false);
-		BPlusTreeBlock sonNode = (BPlusTreeBlock) bufferManager.getBlock(identifier, node.getPointer(sonNodePointerIndex).blockIndex);
-		BPlusTreeBlock leftSon = null, rightSon = null;
-		if(sonNodePointerIndex != 0) leftSon = (BPlusTreeBlock)bufferManager.getBlock(identifier, node.getPointer(sonNodePointerIndex - 1).blockIndex);
-		if(sonNodePointerIndex != node.markerCapacity) rightSon = (BPlusTreeBlock)bufferManager.getBlock(identifier, node.getPointer(sonNodePointerIndex + 1).blockIndex);
-
-		//叶子节点
-		if(sonNode.isLeafNode){
-			//先考虑再分配
-			//左面节点的最右边一个转移
-			//或者右边节点的最左边一个转移
-			if(leftSon != null && leftSon.currentSize >= leftSon.markerCapacity / 2){
-				byte[] oneAtrribute = leftSon.getAttribute(leftSon.currentSize - 1);
-				BPlusTreePointer onePointer = leftSon.getPointer(leftSon.currentSize - 1);
-
-				try{
-					leftSon.remove(oneAtrribute, true);
-					Integer indexToBeDeleted = node.searchIndexFor(element, false);
-					node.remove(node.getAttribute(indexToBeDeleted - 1), true);
-					sonNode.insert(oneAtrribute, onePointer);
-					node.insert(node.getPointer(sonNodePointerIndex - 1), oneAtrribute, node.getPointer(sonNodePointerIndex));
-					bufferManager.storeBlock(leftSon);
-					bufferManager.storeBlock(node);
-					bufferManager.storeBlock(sonNode);
-				}
-				catch(NKInternalException exception){
-					exception.describe();
-				}
-
-
-				return true;
-			}
-			else if(rightSon != null && rightSon.currentSize >= rightSon.markerCapacity / 2){
-				byte[] oneAtrribute = rightSon.getAttribute(0);
-				BPlusTreePointer onePointer = rightSon.getPointer(0);
-
-				try{
-					rightSon.remove(oneAtrribute, true);
-					Integer indexToBeDeleted = node.searchIndexFor(element, false);
-					node.remove(node.getAttribute(indexToBeDeleted), true);
-					sonNode.insert(oneAtrribute, onePointer);
-					node.insert(node.getPointer(sonNodePointerIndex), rightSon.getAttribute(0), node.getPointer(sonNodePointerIndex + 1));
-					bufferManager.storeBlock(leftSon);
-					bufferManager.storeBlock(node);
-					bufferManager.storeBlock(sonNode);
-				}
-				catch(NKInternalException exception){
-					exception.describe();
-				}
-
-
-				return true;
-			}
-
-			//这俩都不行
-			//说明兄弟节点都要空了(注意没有兄弟是不可能滴）
-			//那合并吧
-
-			if(leftSon != null){
-				//和左边合并！
-				for(int i = 0; i < sonNode.currentSize; i++){
-					leftSon.insert(sonNode.getAttribute(i), sonNode.getPointer(i));
-				}
-				try{
-					node.remove(node.getAttribute(node.searchIndexFor(sonNode.getAttribute(0), false)),true);
-				}
-				catch(NKInternalException exception){
-					exception.describe();
-				}
-
-				bufferManager.storeBlock(leftSon);
-				bufferManager.storeBlock(node);
-				bufferManager.removeBlock(identifier, sonNode.index);
-
-				if(node.currentSize < node.markerCapacity / 2) return false;
-				else return true;
-			}
-			else if(rightSon != null){
-				//和右边合并！
-				for(int i = 0; i < sonNode.currentSize; i++){
-					rightSon.insert(sonNode.getAttribute(i), sonNode.getPointer(i));
-				}
-				try{
-					node.remove(node.getAttribute(node.searchIndexFor(sonNode.getAttribute(0), false)), false);
-				}
-				catch(NKInternalException exception){
-					exception.describe();
-				}
-
-				bufferManager.storeBlock(rightSon);
-				bufferManager.storeBlock(node);
-				bufferManager.removeBlock(identifier, sonNode.index);
-
-				if(node.currentSize < node.markerCapacity / 2) return false;
-				else return true;
-			}
-		}
-		//非叶节点
-		else{
-			//先考虑再分配
-			//左面节点的最右边一个转移
-			//或者右边节点的最左边一个转移
-			if(leftSon != null && leftSon.currentSize >= leftSon.markerCapacity / 2){
-				byte[] oneMarker = leftSon.getAttribute(leftSon.currentSize - 1);
-				BPlusTreePointer oneLeftPointer = leftSon.getPointer(leftSon.currentSize - 1);
-				BPlusTreePointer oneRightPointer = leftSon.getPointer(leftSon.currentSize);
-
-				try{
-					leftSon.remove(oneMarker, true);
-					Integer indexToBeDeleted = node.searchIndexFor(element, false);
-					node.remove(node.getAttribute(indexToBeDeleted - 1), true);
-					sonNode.insert(oneLeftPointer, oneMarker, oneRightPointer);
-					node.insert(node.getPointer(sonNodePointerIndex - 1), oneMarker, node.getPointer(sonNodePointerIndex));
-					bufferManager.storeBlock(leftSon);
-					bufferManager.storeBlock(node);
-					bufferManager.storeBlock(sonNode);
-				}
-				catch(NKInternalException exception){
-					exception.describe();
-				}
-
-
-				return true;
-			}
-			else if(rightSon != null && rightSon.currentSize >= rightSon.markerCapacity / 2){
-				byte[] oneMarker = rightSon.getAttribute(0);
-				BPlusTreePointer oneLeftPointer = rightSon.getPointer(0);
-				BPlusTreePointer oneRightPointer = rightSon.getPointer(1);
-
-				try{
-					rightSon.remove(oneMarker, false);
-					Integer indexToBeDeleted = node.searchIndexFor(element, false);
-					node.remove(node.getAttribute(indexToBeDeleted), true);
-					sonNode.insert();
-					node.insert(node.getPointer(sonNodePointerIndex), rightSon.getAttribute(0), node.getPointer(sonNodePointerIndex + 1));
-					bufferManager.storeBlock(leftSon);
-					bufferManager.storeBlock(node);
-					bufferManager.storeBlock(sonNode);
-				}
-				catch(NKInternalException exception){
-					exception.describe();
-				}
-
-
-				return true;
-			}
-
-			//都不行，那么考虑进行合并
-
-		}
-
-		return false;
-		}
-		*/

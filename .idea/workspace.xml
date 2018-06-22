@@ -2,24 +2,193 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fb71b64-2106-4d1e-9a79-dde6c459ba73" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/RecordManager/RecordManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/IndexManager/Index.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB Files/Data/data_testTable_0.nkdata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB Files/Metadata/meta_testTable.nkmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/BufferManager/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/BufferManager/FileManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/CatalogManager/Table$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/CatalogManager/Table$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/CatalogManager/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/CatalogManager/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Foundation/MemoryStorage/MetadataAttribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/Foundation/MemoryStorage/MetadataAttribute.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_0.nkidx" beforeDir="false" afterPath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_0.nkidx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_1.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_10.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_100.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_101.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_102.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_103.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_104.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_105.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_106.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_107.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_108.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_109.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_11.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_110.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_111.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_112.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_113.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_114.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_115.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_116.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_117.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_118.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_119.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_12.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_120.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_121.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_122.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_123.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_124.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_125.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_126.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_127.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_128.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_129.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_13.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_130.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_131.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_132.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_133.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_134.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_135.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_136.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_137.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_138.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_139.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_14.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_140.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_141.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_142.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_143.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_144.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_145.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_146.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_147.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_148.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_149.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_15.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_150.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_151.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_152.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_153.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_154.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_155.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_156.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_157.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_158.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_159.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_16.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_160.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_161.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_162.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_163.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_164.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_165.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_166.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_167.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_168.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_169.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_17.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_170.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_171.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_172.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_173.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_174.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_175.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_176.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_18.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_19.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_2.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_20.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_21.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_22.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_23.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_24.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_25.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_26.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_27.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_28.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_29.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_3.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_30.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_31.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_32.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_33.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_34.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_35.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_36.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_37.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_38.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_39.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_4.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_40.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_41.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_42.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_43.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_44.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_45.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_46.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_47.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_48.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_49.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_5.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_50.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_51.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_52.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_53.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_54.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_55.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_56.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_57.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_58.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_59.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_6.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_60.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_61.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_62.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_63.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_64.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_65.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_66.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_67.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_68.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_69.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_7.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_70.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_71.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_72.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_73.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_74.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_75.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_76.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_77.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_78.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_79.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_8.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_80.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_81.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_82.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_83.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_84.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_85.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_86.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_87.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_88.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_89.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_9.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_90.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_91.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_92.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_93.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_94.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_95.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_96.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_97.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_98.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_99.nkidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Foundation/Blocks/BPlusTreeBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/Foundation/Blocks/BPlusTreeBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/IndexManager/BPlusTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/IndexManager/BPlusTree.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/IndexManager/IndexManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/IndexManager/IndexManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Top/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/Top/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CatalogManager/CatalogManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatalogManager/CatalogManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CatalogManager/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatalogManager/Table.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Foundation/MemoryStorage/ConditionalAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/MemoryStorage/ConditionalAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Foundation/MemoryStorage/Tuple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/MemoryStorage/Tuple.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IndexManager/IndexManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexManager/IndexManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Top/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Top/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Top/NKSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Top/NKSql.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,15 +198,42 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="BPlusTree.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/IndexManager/BPlusTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="341" selection-start-line="341" selection-end-line="341" />
+            <state relative-caret-position="437">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#BPlusTree#0;class#BPlusTree#0" />
+                <element signature="method#insertKey#0;class#BPlusTree#0" />
+                <element signature="method#insertKeyForNode#0;class#BPlusTree#0" />
+                <element signature="e#5118#5119#0" expanded="true" />
+                <element signature="e#5180#5181#0" expanded="true" />
+                <element signature="method#searchKeyInRange#0;class#BPlusTree#0" />
+                <element signature="e#5797#5815#0" expanded="true" />
+                <element signature="e#6567#6585#0" expanded="true" />
+                <element signature="method#deleteKey#0;class#BPlusTree#0" />
+                <element signature="method#deleteKeyForNode#0;class#BPlusTree#0" />
+                <element signature="method#findAll#0;class#BPlusTree#0" />
+                <element signature="e#15209#15227#0" expanded="true" />
+                <element signature="method#myCompare#0;class#BPlusTree#0" />
               </folding>
             </state>
           </provider>
@@ -46,8 +242,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="84" column="86" selection-start-line="84" selection-start-column="86" selection-end-line="84" selection-end-column="86" />
+            <state relative-caret-position="380">
+              <caret line="91" column="2" selection-start-line="91" selection-start-column="2" selection-end-line="91" selection-end-column="2" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -55,31 +251,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BufferManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BufferManager/BufferManager.java">
+      <file leaf-file-name="IndexManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/IndexManager/IndexManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#BufferManager#0;class#BufferManager#0" />
-                <element signature="method#removeBlock#0;class#BufferManager#0" />
-                <element signature="method#close#0;class#BufferManager#0" />
-                <element signature="method#blockIndexInBuffer#0;class#BufferManager#0" />
-                <element signature="method#substituteBlock#0;class#BufferManager#0" />
-                <element signature="method#nextReferencePointer#0;class#BufferManager#0" />
-                <element signature="method#createPath#0;class#BufferManager#0" />
-                <element signature="method#isBPlusTreeBlock#0;class#BufferManager#0" />
-              </folding>
+            <state relative-caret-position="342">
+              <caret line="86" column="39" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NKSql.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
+      <file leaf-file-name="Index.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/IndexManager/Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-114">
-              <caret line="10" column="102" selection-start-line="10" selection-start-column="102" selection-end-line="10" selection-end-column="102" />
+            <state>
+              <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -87,17 +272,17 @@
       <file leaf-file-name="BPlusTreeBlock.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1045">
-              <caret line="58" column="16" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
+            <state>
+              <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Block.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/Block.java">
+      <file leaf-file-name="NKSql.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="171">
+              <caret line="22" column="46" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -105,7 +290,7 @@
       <file leaf-file-name="BPlusTreePointer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreePointer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
+            <state relative-caret-position="-149">
               <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
             </state>
           </provider>
@@ -136,6 +321,7 @@
       <find>metadataAttributes</find>
       <find>matches</find>
       <find>blockIndexCount</find>
+      <find>searchIndexFor</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -157,9 +343,11 @@
         <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/Tuple.java" />
         <option value="$PROJECT_DIR$/src/CatalogManager/Table.java" />
         <option value="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" />
+        <option value="$PROJECT_DIR$/src/IndexManager/Index.java" />
+        <option value="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" />
+        <option value="$PROJECT_DIR$/src/IndexManager/IndexManager.java" />
         <option value="$PROJECT_DIR$/src/Top/NKSql.java" />
         <option value="$PROJECT_DIR$/src/Top/Main.java" />
-        <option value="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" />
       </list>
     </option>
   </component>
@@ -173,7 +361,7 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="957" />
+    <option name="x" value="956" />
     <option name="width" value="970" />
     <option name="height" value="1050" />
   </component>
@@ -182,6 +370,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -193,7 +382,18 @@
             <path>
               <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
               <item name="NikiSQL" type="462c0819:PsiDirectoryNode" />
+              <item name="DB Files" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NikiSQL" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NikiSQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="BufferManager" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
@@ -213,14 +413,7 @@
               <item name="NikiSQL" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Foundation" type="462c0819:PsiDirectoryNode" />
-              <item name="Enumeration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NikiSQL" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Foundation" type="462c0819:PsiDirectoryNode" />
-              <item name="MemoryStorage" type="462c0819:PsiDirectoryNode" />
+              <item name="Exception" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NikiSQL" type="b2602c69:ProjectViewProjectNode" />
@@ -239,7 +432,6 @@
         </subPane>
       </pane>
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -337,65 +529,44 @@
       <workItem from="1529294271989" duration="9999000" />
       <workItem from="1529324584558" duration="5804000" />
       <workItem from="1529373959016" duration="4000000" />
+      <workItem from="1529597636187" duration="20137000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62742000" />
+    <option name="totallyTimeSpent" value="82879000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <layout>
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" weight="0.14345992" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info id="Image Layers" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.443038" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info id="Capture Tool" />
-      <window_info id="Designer" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info anchor="right" id="Database" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994374" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info id="Designer" order="2" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27825466" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32911393" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32876712" />
+      <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.48727274" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.27144867" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32876712" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.5369697" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32969698" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2124665" />
+      <window_info anchor="right" id="Database" order="8" weight="0.3297587" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.53586495" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,15 +577,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BufferManager/FileManager.java</url>
-          <line>11</line>
-          <properties />
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="20" />
+      <option name="time" value="26" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -422,54 +585,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-282">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CatalogManager/Table.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Table#0;class#Table#0" />
-            <element signature="method#insertAttributes#0;class#Table#0" />
-            <element signature="method#drop#0;class#Table#0" />
-            <element signature="method#createBlockAndInsert#0;class#Table#0" />
-            <element signature="method#insertIntoAvailableBlock#0;class#Table#0" />
-            <element signature="method#insertIntoBlock#0;class#Table#0" />
-            <element signature="method#makeIndexedSearchFirst#0;class#Table#0" />
-            <element signature="method#getTuple#0;class#Table#0" />
-            <element signature="method#getAttributeFromBlock#0;class#Table#0" />
-            <element signature="method#getAttribute#0;class#Table#0" />
-            <element signature="method#getAttributeIndex#0;class#Table#0" />
-            <element signature="method#getAttributeOffset#0;class#Table#0" />
-            <element signature="method#getAttributeLength#0;class#Table#0" />
-            <element signature="method#getDataTypeSize#0;class#Table#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="56" column="29" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="640">
@@ -502,10 +617,11 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#BufferManager#0;class#BufferManager#0" />
+            <element signature="e#3109#3110#0" expanded="true" />
+            <element signature="e#3153#3154#0" expanded="true" />
             <element signature="method#removeBlock#0;class#BufferManager#0" />
             <element signature="method#close#0;class#BufferManager#0" />
             <element signature="method#blockIndexInBuffer#0;class#BufferManager#0" />
-            <element signature="method#substituteBlock#0;class#BufferManager#0" />
             <element signature="method#nextReferencePointer#0;class#BufferManager#0" />
             <element signature="method#createPath#0;class#BufferManager#0" />
             <element signature="method#isBPlusTreeBlock#0;class#BufferManager#0" />
@@ -545,10 +661,11 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#BufferManager#0;class#BufferManager#0" />
+            <element signature="e#3109#3110#0" expanded="true" />
+            <element signature="e#3153#3154#0" expanded="true" />
             <element signature="method#removeBlock#0;class#BufferManager#0" />
             <element signature="method#close#0;class#BufferManager#0" />
             <element signature="method#blockIndexInBuffer#0;class#BufferManager#0" />
-            <element signature="method#substituteBlock#0;class#BufferManager#0" />
             <element signature="method#nextReferencePointer#0;class#BufferManager#0" />
             <element signature="method#createPath#0;class#BufferManager#0" />
             <element signature="method#isBPlusTreeBlock#0;class#BufferManager#0" />
@@ -602,10 +719,11 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#BufferManager#0;class#BufferManager#0" />
+            <element signature="e#3109#3110#0" expanded="true" />
+            <element signature="e#3153#3154#0" expanded="true" />
             <element signature="method#removeBlock#0;class#BufferManager#0" />
             <element signature="method#close#0;class#BufferManager#0" />
             <element signature="method#blockIndexInBuffer#0;class#BufferManager#0" />
-            <element signature="method#substituteBlock#0;class#BufferManager#0" />
             <element signature="method#nextReferencePointer#0;class#BufferManager#0" />
             <element signature="method#createPath#0;class#BufferManager#0" />
             <element signature="method#isBPlusTreeBlock#0;class#BufferManager#0" />
@@ -676,10 +794,11 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#BufferManager#0;class#BufferManager#0" />
+            <element signature="e#3109#3110#0" expanded="true" />
+            <element signature="e#3153#3154#0" expanded="true" />
             <element signature="method#removeBlock#0;class#BufferManager#0" />
             <element signature="method#close#0;class#BufferManager#0" />
             <element signature="method#blockIndexInBuffer#0;class#BufferManager#0" />
-            <element signature="method#substituteBlock#0;class#BufferManager#0" />
             <element signature="method#nextReferencePointer#0;class#BufferManager#0" />
             <element signature="method#createPath#0;class#BufferManager#0" />
             <element signature="method#isBPlusTreeBlock#0;class#BufferManager#0" />
@@ -832,56 +951,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BufferManager/FileManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#isFileExist#0;class#FileManager#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-114">
-          <caret line="10" column="102" selection-start-line="10" selection-start-column="102" selection-end-line="10" selection-end-column="102" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/DB Files/Index/index_T1_A1_0.nkidx">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreePointer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
+        <state relative-caret-position="-149">
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IndexManager/Index.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Exception/NKInternalException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/Block.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
+    <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1045">
-          <caret line="58" column="16" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
+        <state relative-caret-position="171">
+          <caret line="22" column="46" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BufferManager/BufferManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+        <state relative-caret-position="-311">
+          <caret line="129" column="17" selection-start-line="129" selection-start-column="17" selection-end-line="129" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#BufferManager#0;class#BufferManager#0" />
+            <element signature="e#3109#3110#0" expanded="true" />
+            <element signature="e#3153#3154#0" expanded="true" />
             <element signature="method#removeBlock#0;class#BufferManager#0" />
             <element signature="method#close#0;class#BufferManager#0" />
             <element signature="method#blockIndexInBuffer#0;class#BufferManager#0" />
-            <element signature="method#substituteBlock#0;class#BufferManager#0" />
             <element signature="method#nextReferencePointer#0;class#BufferManager#0" />
             <element signature="method#createPath#0;class#BufferManager#0" />
             <element signature="method#isBPlusTreeBlock#0;class#BufferManager#0" />
@@ -889,10 +1015,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/BufferManager/FileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#isFileExist#0;class#FileManager#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IndexManager/IndexManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="86" column="39" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="84" column="86" selection-start-line="84" selection-start-column="86" selection-end-line="84" selection-end-column="86" />
+        <state relative-caret-position="380">
+          <caret line="91" column="2" selection-start-line="91" selection-start-column="2" selection-end-line="91" selection-end-column="2" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -901,10 +1045,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/IndexManager/BPlusTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="341" selection-start-line="341" selection-end-line="341" />
+        <state relative-caret-position="437">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#BPlusTree#0;class#BPlusTree#0" />
+            <element signature="method#insertKey#0;class#BPlusTree#0" />
+            <element signature="method#insertKeyForNode#0;class#BPlusTree#0" />
+            <element signature="e#5118#5119#0" expanded="true" />
+            <element signature="e#5180#5181#0" expanded="true" />
+            <element signature="method#searchKeyInRange#0;class#BPlusTree#0" />
+            <element signature="e#5797#5815#0" expanded="true" />
+            <element signature="e#6567#6585#0" expanded="true" />
+            <element signature="method#deleteKey#0;class#BPlusTree#0" />
+            <element signature="method#deleteKeyForNode#0;class#BPlusTree#0" />
+            <element signature="method#findAll#0;class#BPlusTree#0" />
+            <element signature="e#15209#15227#0" expanded="true" />
+            <element signature="method#myCompare#0;class#BPlusTree#0" />
           </folding>
         </state>
       </provider>
