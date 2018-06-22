@@ -110,7 +110,7 @@ public class BPlusTreeBlock extends Block {
                 pointerIndex = searchStringFor(stringItem, isMandatoryFound, this.markerLength);
                 break;
         }
-        return pointerIndex;
+        return pointerIndex == null ? -1 : pointerIndex;
     }
 
     /*
@@ -131,14 +131,13 @@ public class BPlusTreeBlock extends Block {
     public void insert(byte[] dataItem, BPlusTreePointer relatedPointer) {
         Integer index = searchIndexFor(dataItem, true);
         index = index < 0 ? (- index - 1) : index;
-        try {
-            shiftRight(index);
-        } catch (Exception exception) {
-            handleInternalException(exception, "insert");
+        if (index < this.currentSize) {
+            Integer initialOffset = index * this.tupleLength;
+            copyStorage(initialOffset, initialOffset + this.tupleLength,
+                    (currentSize - index) * this.tupleLength);
         }
         setPointer(index, relatedPointer);
-        Integer attributeOffset = index * tupleLength + 2 * singlePointerSize;
-        writeToStorage(dataItem, attributeOffset);
+        writeToStorage(dataItem, index * tupleLength + 2 * singlePointerSize);
         this.currentSize ++;
     }
 
@@ -153,13 +152,16 @@ public class BPlusTreeBlock extends Block {
         if (index == null) {
             throw new NKInternalException("dataItem not found when intend to delete.");
         }
-        if (index < currentSize - 1) {
-            shiftAttributeLeft(index + 1);
-            if (isLeftPointerPreserved) {
-                shiftPointerLeft(index + 1);
-            } else if (index < currentSize - 2) {
-                shiftPointerLeft(index + 2);
-            }
+        if (isLeftPointerPreserved && index < this.currentSize) {
+            Integer initialOffset = index * this.tupleLength;
+            copyStorage(initialOffset + tupleLength, initialOffset,
+                    (currentSize - 1 - index) * this.tupleLength);
+        } else {
+            Integer initialOffset = index * this.tupleLength;
+            Integer pointerLength = 2 * singlePointerSize;
+            copyStorage(initialOffset + pointerLength + this.tupleLength,
+                    initialOffset + pointerLength,
+                    (currentSize - 1 - index) * this.tupleLength);
         }
         this.currentSize --;
     }
@@ -186,82 +188,110 @@ public class BPlusTreeBlock extends Block {
         writeInteger(pointer.blockOffset, offsetOffset);
     }
 
-    private void shiftRight(Integer fromIndex) throws NKInternalException {
-        if (this.currentSize.equals(this.markerCapacity)) {
-            throw new NKInternalException("Shift on a full block");
-        }
-        shiftAttributesRight(fromIndex);
-        shiftPointerRight(fromIndex);
-    }
-
-    private void shiftAttributesRight(Integer fromIndex) {
-        for (int i = this.currentSize - 1; i >= fromIndex; i --) {
-            Integer fromOffset = tupleLength * i + 2 * singlePointerSize;
-            Integer toOffset = fromOffset + tupleLength;
-            copyStorage(fromOffset, toOffset, markerLength);
-        }
-    }
-
-    private void shiftPointerRight(Integer fromIndex) {
-        for (int i = this.currentSize; i >= fromIndex; i --) {
-            Integer fromOffset = tupleLength * i;
-            Integer toOffset = fromOffset + tupleLength;
-            copyStorage(fromOffset, toOffset, 2 * singlePointerSize);
-        }
-    }
-
-    private void shiftAttributeLeft(Integer fromIndex) {
-        for (int i = fromIndex; i < this.currentSize; i ++) {
-            Integer fromOffset = tupleLength * i + 2 * singlePointerSize;
-            Integer toOffset = fromOffset - tupleLength;
-            copyStorage(fromOffset, toOffset, markerLength);
-        }
-    }
-
-    private void shiftPointerLeft(Integer fromIndex) {
-        for (int i = fromIndex; i <= this.currentSize; i ++) {
-            Integer fromOffset = tupleLength * i;
-            Integer toOffset = fromOffset - tupleLength;
-            copyStorage(fromOffset, toOffset, 2 * singlePointerSize);
-        }
-    }
-
     private void copyStorage(Integer fromOffset, Integer toOffset, Integer forLength) {
-        byte[] bytes = readFromStorage(fromOffset, forLength);
-        writeToStorage(bytes, toOffset);
+        System.arraycopy(this.storageData, fromOffset, this.storageData, toOffset, forLength);
     }
 
     private Integer searchIntegerFor(Integer dataItem, Boolean isMandatoryFound) {
-        for (int i = 0; i < this.currentSize; i ++) {
-            Integer offset = tupleLength * i + 2 * singlePointerSize;
-            Integer content = getInteger(offset);
-            if (content.equals(dataItem) || (content > dataItem && isMandatoryFound)) {
-                return i;
+        if (this.currentSize == 0) {
+            return null;
+        }
+        Integer startIndex = 0, endIndex = this.currentSize - 1;
+        Integer pointerSize = 2 * singlePointerSize;
+        Integer startContent = getInteger(startIndex * tupleLength + pointerSize);
+        Integer endContent = getInteger(endIndex * tupleLength + pointerSize);
+        Integer returnValue = checkForEarlyQuitSearch(startContent, endContent, startIndex, endIndex,
+                isMandatoryFound, dataItem);
+        if (returnValue == null) {
+            return null;
+        } else if (returnValue != -1) {
+            return returnValue;
+        }
+        while (endIndex - startIndex != 1) {
+            Integer centerIndex = (endIndex + startIndex) / 2;
+            Integer centerContent = getInteger(centerIndex * tupleLength + pointerSize);
+            if (centerContent > dataItem) {
+                endIndex = centerIndex;
+            } else if (centerContent < dataItem) {
+                startIndex = centerIndex;
+            } else {
+                return isMandatoryFound ? centerIndex : centerIndex + 1;
             }
         }
-        return isMandatoryFound ? currentSize : null;
+        return isMandatoryFound ? endIndex : null;
     }
 
     private Integer searchFloatFor(Float dataItem, Boolean isMandatoryFound) {
-        for (int i = 0; i < this.currentSize; i ++) {
-            Integer offset = tupleLength * i + 2 * singlePointerSize;
-            Float content = getFloat(offset);
-            if (content.equals(dataItem) || (content > dataItem && isMandatoryFound)) {
-                return i;
+        if (this.currentSize == 0) {
+            return null;
+        }
+        Integer startIndex = 0, endIndex = this.currentSize - 1;
+        Integer pointerSize = 2 * singlePointerSize;
+        Float startContent = getFloat(startIndex * tupleLength + pointerSize);
+        Float endContent = getFloat(endIndex * tupleLength + pointerSize);
+        Integer returnValue = checkForEarlyQuitSearch(startContent, endContent, startIndex, endIndex,
+                isMandatoryFound, dataItem);
+        if (returnValue == null) {
+            return null;
+        } else if (returnValue != -1) {
+            return returnValue;
+        }
+        while (endIndex - startIndex != 1) {
+            Integer centerIndex = (endIndex + startIndex) / 2;
+            Float centerContent = getFloat(centerIndex * tupleLength + pointerSize);
+            if (centerContent > dataItem) {
+                endIndex = centerIndex;
+            } else if (centerContent < dataItem) {
+                startIndex = centerIndex;
+            } else {
+                return isMandatoryFound ? centerIndex + 1 : centerIndex;
             }
         }
-        return isMandatoryFound ? currentSize : null;
+        return isMandatoryFound ? endIndex : null;
     }
 
     private Integer searchStringFor(String dataItem, Boolean isMandatoryFound, Integer length) {
-        for (int i = 0; i < currentSize; i ++) {
-            Integer offset = tupleLength * i + 2 * singlePointerSize;
-            String content = getString(offset, length);
-            if (content.equals(dataItem) || content.compareTo(dataItem) > 0 && isMandatoryFound) {
-                return i;
+        if (this.currentSize == 0) {
+            return null;
+        }
+        Integer startIndex = 0, endIndex = this.currentSize - 1;
+        Integer pointerSize = 2 * singlePointerSize;
+        String startContent = getString(startIndex * tupleLength + pointerSize, length);
+        String endContent = getString(endIndex * tupleLength + pointerSize, length);
+        Integer returnValue = checkForEarlyQuitSearch(startContent, endContent, startIndex, endIndex,
+                isMandatoryFound, dataItem);
+        if (returnValue == null) {
+            return null;
+        } else if (returnValue != -1) {
+            return returnValue;
+        }
+        while (endIndex - startIndex != 1) {
+            Integer centerIndex = (endIndex + startIndex) / 2;
+            String centerContent = getString(centerIndex * tupleLength, pointerSize);
+            if (centerContent.compareTo(dataItem) > 0) {
+                endIndex = centerIndex;
+            } else if (centerContent.compareTo(dataItem) < 0) {
+                startIndex = centerIndex;
+            } else {
+                return isMandatoryFound ? centerIndex : centerIndex + 1;
             }
         }
-        return isMandatoryFound ? currentSize : null;
+        return isMandatoryFound ? endIndex : null;
+    }
+
+    private <Type extends Comparable<? super Type>>Integer checkForEarlyQuitSearch
+            (Type startContent, Type endContent, Integer startIndex, Integer endIndex,
+             Boolean isMandatoryFound, Type dataItem) {
+        if (startContent.equals(dataItem)) {
+            return startIndex;
+        } else if (endContent.equals(dataItem)) {
+            return  endIndex;
+        } else if (startContent.compareTo(dataItem) > 0) {
+            return  isMandatoryFound ? 0 : null;
+        } else if (endContent.compareTo(dataItem) < 0) {
+            return isMandatoryFound ? endIndex + 1 : null;
+        }
+        return -1;
     }
 
     private BPlusTreePointer getAttributePointer(Integer index) {

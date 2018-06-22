@@ -69,6 +69,7 @@ public class NKSql {
     public void dropTuple(String tableName,
                           ArrayList<ConditionalAttribute> conditionalAttributes)
             throws NKInterfaceException {
+        RecordManager.sharedInstance.deleteInTable(tableName, conditionalAttributes);
         System.out.println("Tuple dropped.");
     }
 

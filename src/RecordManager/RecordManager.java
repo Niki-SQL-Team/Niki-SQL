@@ -34,6 +34,12 @@ public class RecordManager {
         return selectInRawResults(allContentTuple, selectedIndices);
     }
 
+    public void deleteInTable(String tableName, ArrayList<ConditionalAttribute> conditions)
+            throws NKInterfaceException {
+        Table table = getTableNamed(tableName);
+        table.deleteItem(conditions);
+    }
+
     private Vector<Tuple> searchInTable(String tableName, ArrayList<ConditionalAttribute> conditions)
             throws NKInterfaceException {
         Table table = getTableNamed(tableName);

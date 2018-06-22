@@ -31,7 +31,7 @@ public class Block implements Serializable {
     public Integer currentSize;
     public Integer capacity;
     private Integer firstAvailablePosition;
-    private byte[] storageData = new byte[blockSize];
+    protected byte[] storageData = new byte[blockSize];
 
     public Block(String fileIdentifier, Integer index, Metadata metadata) {
         this.fileIdentifier = fileIdentifier;
