@@ -67,7 +67,7 @@ public class BPlusTreeBlock extends Block {
     }
 
     public void setTailPointer(Integer blockIndex) {
-        Integer tailOffset = this.tupleLength * markerCapacity;
+        Integer tailOffset = this.tupleLength * markerCapacity + 2 * singlePointerSize;
         writeInteger(blockIndex, tailOffset);
     }
 
@@ -154,7 +154,7 @@ public class BPlusTreeBlock extends Block {
         }
         if (isLeftPointerPreserved && index < this.currentSize) {
             Integer initialOffset = index * this.tupleLength;
-            copyStorage(initialOffset + tupleLength, initialOffset,
+            copyStorage(initialOffset + this.tupleLength, initialOffset,
                     (currentSize - 1 - index) * this.tupleLength);
         } else {
             Integer initialOffset = index * this.tupleLength;
