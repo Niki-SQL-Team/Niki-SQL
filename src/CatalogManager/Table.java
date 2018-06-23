@@ -37,6 +37,9 @@ public class Table implements Serializable {
     }
 
     public void insertAttributes(Tuple attributeTuple) throws NKInterfaceException {
+        if (!isUnique(attributeTuple)) {
+            throw new NKInterfaceException("Duplicate data found on an unique attribute.");
+        }
         if (availableBlocks.isEmpty()) {
             createBlockAndInsert(attributeTuple);
         } else {
@@ -74,13 +77,37 @@ public class Table implements Serializable {
         if (!conditions.isEmpty()) {
             subsequentDelete(conditions);
         }
-        executeDeletion();
+        // Drop indices first
+        Vector<Integer> emptyBlocks = executeDeletion();
+
     }
 
     public void drop() {
         for (int i = 0; i < this.numberOfBlocks; i ++) {
             BufferManager.sharedInstance.removeBlock(getFileIdentifier(), i);
         }
+    }
+
+    private Boolean isUnique(Tuple tuple) throws NKInterfaceException {
+        for (MetadataAttribute attribute : this.metadata.metadataAttributes.values()) {
+            if (attribute.isUnique) {
+                Integer attributeIndex = this.metadata.getAttributeIndexNamed(attribute.attributeName);
+                ConditionalAttribute condition = getSingleUniqueTestAttribute(attribute,
+                        tuple.get(attributeIndex));
+                ArrayList<ConditionalAttribute> conditions = new ArrayList<>();
+                conditions.add(condition);
+                if (searchFor(conditions).size() != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private ConditionalAttribute getSingleUniqueTestAttribute(MetadataAttribute attribute,
+                                                              String dataItem) {
+        return new ConditionalAttribute(this.tableName, attribute.attributeName,
+                dataItem, CompareCondition.EqualTo);
     }
 
     private void createBlockAndInsert(Tuple attributeTuple) throws NKInterfaceException {
@@ -175,12 +202,17 @@ public class Table implements Serializable {
         }
     }
 
-    private void executeDeletion() {
+    private Vector<Integer> executeDeletion() {
+        Vector<Integer> emptyBlocks = new Vector<>();
         for (BPlusTreePointer pointer : this.deleteIntermediateResults.values()) {
             Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), pointer.blockIndex);
             block.removeTupleAt(pointer.blockOffset);
+            if (block.isDiscardable && !emptyBlocks.contains(block.index)) {
+                emptyBlocks.add(block.index);
+            }
         }
         this.deleteIntermediateResults.clear();
+        return emptyBlocks;
     }
 
     private Vector<Tuple> searchInBlock(ConditionalAttribute condition, Block block)

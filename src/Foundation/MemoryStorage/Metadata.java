@@ -12,8 +12,8 @@ public class Metadata implements Serializable {
 
     public Integer numberOfAttributes;
     private Vector<Integer> attributeOffsetArray;
+    public Map<String, MetadataAttribute> metadataAttributes;
     protected Vector<String> attributeName;
-    protected Map<String, MetadataAttribute> metadataAttributes;
 
     public Metadata(Vector<MetadataAttribute> metadataAttributes) {
         initialize(metadataAttributes);

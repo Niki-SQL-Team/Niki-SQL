@@ -63,7 +63,7 @@ public class NKSql {
 
     public void insertTuple(Tuple newItem, String tableName) throws NKInterfaceException {
         RecordManager.sharedInstance.insertIntoTable(tableName, newItem);
-        System.out.println("Item inserted.");
+        //System.out.println("Item inserted.");
     }
 
     public void dropTuple(String tableName,

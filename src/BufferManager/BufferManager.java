@@ -75,7 +75,14 @@ public class BufferManager {
      * would be inserted as a new block
      */
     public void storeBlock(Block block) {
-        substituteBlock(block, true);
+        Integer blockIndex = blockIndexInBuffer(block.fileIdentifier, block.index);
+        if (blockIndex == -1) {
+            substituteBlock(block, true);
+        } else {
+            bufferedBlocks[blockIndex] = block;
+            referenceBit[blockIndex] = true;
+            isDirty[blockIndex] = true;
+        }
     }
 
     public void removeBlock(String identifier, Integer index) {
