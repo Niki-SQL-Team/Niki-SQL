@@ -23,7 +23,7 @@ public class NKSql {
     public static final Integer maxAttributesPerTable = 32;
     public static final Integer bufferSize = 128;
 
-    private BufferManager bufferManager;
+    public BufferManager bufferManager;
     private CatalogManager catalogManager;
     private RecordManager recordManager;
 
