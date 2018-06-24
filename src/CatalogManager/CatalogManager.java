@@ -2,7 +2,7 @@ package CatalogManager;
 
 import BufferManager.FileManager;
 import Foundation.Exception.NKInterfaceException;
-import Foundation.MemoryStorage.MetadataAttribute;
+import Foundation.MemoryStorage.Metadata;
 import Top.NKSql;
 
 import java.util.HashMap;
@@ -11,22 +11,24 @@ import java.util.Vector;
 
 public class CatalogManager {
 
-    Map<String, Table> tableMetadataBuffer;
-    Vector<String> tableNameInBuffer;
-    FileManager<Table> fileManager;
+    public static CatalogManager sharedInstance;
+    private Map<String, Table> tableMetadataBuffer;
+    private Vector<String> tableNameInBuffer;
+    private FileManager<Table> fileManager;
 
     public CatalogManager() {
+        setSharedInstance();
         this.tableMetadataBuffer = new HashMap<String, Table>();
         this.fileManager = new FileManager<Table>();
         this.tableNameInBuffer = new Vector<>(NKSql.bufferSize);
     }
 
-    public void createTable(String tableName, Vector<MetadataAttribute> metadataAttributes)
+    public void createTable(String tableName, Metadata metadata)
             throws NKInterfaceException {
         if (isTableExists(tableName)) {
             throw new NKInterfaceException("Table named " + tableName + " has already existed.");
         }
-        Table newTable = new Table(tableName, metadataAttributes);
+        Table newTable = new Table(tableName, metadata);
         flushInBuffer(newTable);
         storeTable(newTable);
     }
@@ -46,9 +48,22 @@ public class CatalogManager {
             return tableMetadataBuffer.get(tableName);
         } else {
             Table table = loadTable(tableName);
-            flushInBuffer(table);
-            return table;
+            if (table != null) {
+                flushInBuffer(table);
+                return table;
+            }
+            return null;
         }
+    }
+
+    public void close() {
+        for (Table table : tableMetadataBuffer.values()) {
+            storeTable(table);
+        }
+    }
+
+    private void setSharedInstance() {
+        sharedInstance = this;
     }
 
     private Boolean isTableExists(String tableName) {
@@ -67,6 +82,7 @@ public class CatalogManager {
     }
 
     private void removeTableFromBuffer(String tableName) {
+        storeTable(tableMetadataBuffer.get(tableName));
         tableNameInBuffer.remove(tableName);
         tableMetadataBuffer.remove(tableName);
     }
@@ -76,8 +92,12 @@ public class CatalogManager {
         tableMetadataBuffer.put(table.tableName, table);
     }
 
-    private Table loadTable(String path) {
-        return fileManager.getObject(path);
+    private Table loadTable(String tableName) {
+        if (fileManager.isFileExist(createTablePath(tableName))) {
+            return fileManager.getObject(createTablePath(tableName));
+        } else {
+            return null;
+        }
     }
 
     private void storeTable(Table table) {

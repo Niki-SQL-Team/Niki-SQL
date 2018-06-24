@@ -19,8 +19,9 @@ public class BPlusTree{
 	public Integer blockIndexCount;
 	private byte[] markerBuffer;
 	private Converter converterOfTree;
+	private Integer stringLength;
 	//构造函数
-	public BPlusTree(DataType Type, BPlusTreePointer root, String table, String attribute, Integer nodeCount){
+	public BPlusTree(DataType Type, BPlusTreePointer root, String table, String attribute, Integer nodeCount, Integer stringLength){
 		this.root = root;
 		this.ElementType = Type;
 		this.bufferManager = BufferManager.sharedInstance;
@@ -28,6 +29,7 @@ public class BPlusTree{
 		this.blockIndexCount = nodeCount;
 		this.markerBuffer = null;
 		this.converterOfTree = new Converter();
+		this.stringLength = stringLength;
 	}
 
 	//插入
@@ -38,7 +40,13 @@ public class BPlusTree{
 		if(res == null)
 			return;
 		else{
-			BPlusTreeBlock newRoot = new BPlusTreeBlock(identifier, this.ElementType, ++this.blockIndexCount, false);
+			BPlusTreeBlock newRoot;
+			if(ElementType == DataType.StringType){
+				newRoot = new BPlusTreeBlock(identifier, this.ElementType, ++this.blockIndexCount, false);
+			}
+			else{
+				newRoot = new BPlusTreeBlock(identifier, this.ElementType, stringLength,  ++this.blockIndexCount, false);
+			}
 			newRoot.insert(this.root, getTreeNode(res).getAttribute(0), res);
 			//System.out.println(converterOfTree.convertToInteger(getTreeNode(res).getAttribute(0)));
 			this.root = new BPlusTreePointer(newRoot.index);
@@ -73,7 +81,13 @@ public class BPlusTree{
 		if(node.currentSize >= node.markerCapacity/*满了*/){
 			//叶节点注意连接兄弟指针
 			//目前块一分为二，再选择一块插入新的节点
-			BPlusTreeBlock newNode = new BPlusTreeBlock(identifier, this.ElementType, ++this.blockIndexCount, node.isLeafNode);
+			BPlusTreeBlock newNode;
+			if(ElementType == DataType.StringType){
+				newNode = new BPlusTreeBlock(identifier, this.ElementType, stringLength, ++this.blockIndexCount, node.isLeafNode);
+			}
+			else{
+				newNode = new BPlusTreeBlock(identifier, this.ElementType, ++this.blockIndexCount, node.isLeafNode);
+			}
 			int mid = node.markerCapacity/2;
 			if(node.isLeafNode){//叶节点信息转移
 				for(int i = mid; i < node.markerCapacity ; i++){//这里！检测用代码添加

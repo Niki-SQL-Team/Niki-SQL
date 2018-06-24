@@ -8,4 +8,5 @@ public class Index {//包含index基本信息，提供给外部作为元数据
     public DataType dataType;
     public Integer blockOfTheIndexTree;
     public Integer currentNodeCount;
+    public Integer stringLength;
 }

@@ -96,7 +96,7 @@ public class Main {
         }*/
 
 
-       Vector<BPlusTreePointer> res = indexManager.searchRangely(bTree,convert.convertToBytes(10),convert.convertToBytes(30),true,true);
+       Vector<BPlusTreePointer> res = indexManager.searchRangely(bTree,convert.convertToBytes(5),convert.convertToBytes(45),true,true);
        for(int i = 0; i < res.size(); i++){
            System.out.println(res.elementAt(i).blockIndex);
        }

@@ -35,8 +35,8 @@ public class Converter {
         return null;
     }
 
-    public byte[] convertToBytes(String string) {
-        return extended(string).getBytes();
+    public byte[] convertToBytes(String string, Integer length) {
+        return extended(string, length).getBytes();
     }
 
     public Integer convertToInteger(byte[] bytes) {
@@ -71,9 +71,9 @@ public class Converter {
         return new DataInputStream(byteArrayInputStream);
     }
 
-    private String extended(String string) {
+    private String extended(String string, Integer length) {
         StringBuilder stringBuilder = new StringBuilder(string);
-        while (stringBuilder.length() < NKSql.maxLengthOfString) {
+        while (stringBuilder.length() < length) {
             stringBuilder.append(" ");
         }
         string = stringBuilder.toString();
