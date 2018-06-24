@@ -23,20 +23,25 @@ public class IndexManager{
     //Index Manager的一些列的操作针对一个给定的索引，使用Index Manager其他功能时（除非要创建一个新索引），务必要先调用这个函数设定一个给定的索引
     private void managerInitialize(Index targetObject){
         BPlusTreePointer root = new BPlusTreePointer(targetObject.blockOfTheIndexTree);
-        BPlusTree bTree = new BPlusTree(targetObject.dataType, root, targetObject.table, targetObject.attribute, targetObject.currentNodeCount);
+        BPlusTree bTree = new BPlusTree(targetObject.dataType, root, targetObject.table, targetObject.attribute, targetObject.currentNodeCount, targetObject.stringLength);
         this.workOn = bTree;
         this.identifier = "index_" + targetObject.table + "_" +targetObject.attribute;
         this.blockCount = targetObject.currentNodeCount;
     }
 
     //创建新的索引，返回Index类型， 通知调整workOn
-    public Index createBlankIndex(String table, String attribute, DataType dataType){//建成空的B+树
+    public Index createBlankIndex(String table, String attribute, DataType dataType){// 非String
+        return createBlankIndex(table,attribute,dataType, -1);
+    }
+
+    public Index createBlankIndex(String table, String attribute, DataType dataType, Integer stringlength){//建成空的B+树
+        BufferManager bufferManager = BufferManager.sharedInstance;
         String identifier = "index" + "_" +  table + "_" + attribute;
         BPlusTreeBlock myRoot = new BPlusTreeBlock(identifier, dataType, 0, true);
         myRoot.setTailPointer(-1);
-        BufferManager.sharedInstance.storeBlock(myRoot);
+        bufferManager.storeBlock(myRoot);
         BPlusTreePointer rootPointer = new BPlusTreePointer(0);
-        BPlusTree bTree = new BPlusTree(dataType, rootPointer,table,attribute,0);
+        BPlusTree bTree = new BPlusTree(dataType, rootPointer,table,attribute,0, stringlength);
         workOn = bTree;
 
         Index res = new Index();
@@ -48,12 +53,15 @@ public class IndexManager{
         return res;
     }
 
+
+
     //删除workOn整个索引
     public boolean	dropWholeIndex(Index index){
         managerInitialize(index);
 
+        BufferManager bufferManager = BufferManager.sharedInstance;
         for(int i = 0; i < this.blockCount; i++){
-            BufferManager.sharedInstance.removeBlock(identifier, i);
+            bufferManager.removeBlock(identifier, i);
         }
 
         this.blockCount = -1;

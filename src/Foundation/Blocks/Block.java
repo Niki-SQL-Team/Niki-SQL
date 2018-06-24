@@ -22,7 +22,7 @@ public class Block implements Serializable {
      * capacity is the maximum number of attributes that the block can store
      * storageData is used to store the data of the block
      */
-    public static final Integer blockSize = 4096;
+    public static final Integer blockSize = 8165;
     public String fileIdentifier;
     public Integer index;
     public Integer tupleLength;

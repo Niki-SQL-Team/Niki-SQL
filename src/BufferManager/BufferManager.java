@@ -3,6 +3,8 @@ package BufferManager;
 import Foundation.Blocks.Block;
 import Top.NKSql;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class BufferManager {
@@ -37,6 +39,7 @@ public class BufferManager {
     private Block[] bufferedBlocks = new Block[NKSql.bufferSize];
     private Boolean[] referenceBit = new Boolean[NKSql.bufferSize];
     private Boolean[] isDirty = new Boolean[NKSql.bufferSize];
+    private Map<String, Integer> blockLookUpTable = new LinkedHashMap<>();
     private Integer referencePointer;
     private FileManager<Block> fileManager;
 
@@ -62,6 +65,7 @@ public class BufferManager {
             return block;
         } else {
             block = getBlockFromStorage(path);
+            block.index = index;
             substituteBlock(block, false);
             return block;
         }
@@ -119,14 +123,8 @@ public class BufferManager {
     }
 
     private Integer blockIndexInBuffer(String identifier, Integer index) {
-        for (int i = 0; i < NKSql.bufferSize; i ++) {
-            Block block = bufferedBlocks[i];
-            if (block != null && block.fileIdentifier.equals(identifier)
-                    && block.index.equals(index)) {
-                return i;
-            }
-        }
-        return -1;
+        Integer blockIndex = blockLookUpTable.get(createPath(identifier, index));
+        return blockIndex == null ? -1 : blockIndex;
     }
 
     private void writeBlockToStorage(Block block) {
@@ -138,6 +136,7 @@ public class BufferManager {
         for (int i = 0; i < NKSql.bufferSize; i ++) {
             if (bufferedBlocks[i] == null) {
                 bufferedBlocks[i] = newBlock;
+                blockLookUpTable.put(createPath(newBlock.fileIdentifier, newBlock.index), i);
                 referenceBit[i] = true;
                 this.isDirty[i] = isDirty;
                 nextReferencePointer();
@@ -153,6 +152,10 @@ public class BufferManager {
                     writeBlockToStorage(bufferedBlocks[referencePointer]);
                 }
                 bufferedBlocks[referencePointer] = newBlock;
+                Block blockToRemove = bufferedBlocks[referencePointer];
+                blockLookUpTable.remove(createPath(blockToRemove.fileIdentifier, blockToRemove.index));
+                blockLookUpTable.put(createPath(newBlock.fileIdentifier, newBlock.index),
+                        referencePointer);
                 referenceBit[referencePointer] = true;
                 nextReferencePointer();
                 return;

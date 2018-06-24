@@ -4,13 +4,14 @@ import BufferManager.BufferManager;
 import CatalogManager.CatalogManager;
 import Foundation.Exception.*;
 import Foundation.MemoryStorage.*;
+import IndexManager.IndexManager;
 import RecordManager.RecordManager;
 
 import java.util.ArrayList;
 
 public class NKSql {
 
-    public static final String homeDirectory = "/Users/licanchen/Desktop/Niki SQL/DB Files/";
+    public static final String homeDirectory = "/Users/licanchen/Desktop/DB_Files/";
     public static final String dataHomeDirectory = homeDirectory + "Data/";
     public static final String indexHomeDirectory = homeDirectory + "Index/";
     public static final String metadataHomeDirectory = homeDirectory + "Metadata/";
@@ -23,14 +24,16 @@ public class NKSql {
     public static final Integer maxAttributesPerTable = 32;
     public static final Integer bufferSize = 128;
 
-    public BufferManager bufferManager;
+    private BufferManager bufferManager;
     private CatalogManager catalogManager;
     private RecordManager recordManager;
+    private IndexManager indexManager;
 
     public NKSql() throws NKInternalException {
         bufferManager = new BufferManager();
         catalogManager = new CatalogManager();
         recordManager = new RecordManager();
+        indexManager = new IndexManager();
         System.out.println("NiKi SQL Server initialized.");
     }
 
@@ -54,16 +57,18 @@ public class NKSql {
 
     public void createIndex(String indexName, String tableName, String attributeName)
             throws NKInterfaceException {
+        CatalogManager.sharedInstance.createIndex(indexName, tableName, attributeName);
         System.out.println("Index named " + indexName + " created.");
     }
 
-    public void dropIndex(String indexName) throws NKInterfaceException {
+    public void dropIndex(String indexName, String tableName) throws NKInterfaceException {
+        CatalogManager.sharedInstance.dropIndex(indexName, tableName);
         System.out.println("Index named " + indexName + " dropped.");
     }
 
     public void insertTuple(Tuple newItem, String tableName) throws NKInterfaceException {
         RecordManager.sharedInstance.insertIntoTable(tableName, newItem);
-        //System.out.println("Item inserted.");
+        System.out.println("Item inserted.");
     }
 
     public void dropTuple(String tableName,

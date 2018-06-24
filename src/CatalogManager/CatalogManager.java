@@ -6,6 +6,7 @@ import Foundation.MemoryStorage.Metadata;
 import Top.NKSql;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Vector;
 
@@ -15,12 +16,14 @@ public class CatalogManager {
     private Map<String, Table> tableMetadataBuffer;
     private Vector<String> tableNameInBuffer;
     private FileManager<Table> fileManager;
+    private Map<String, String> indexNameToTableName;
 
     public CatalogManager() {
         setSharedInstance();
         this.tableMetadataBuffer = new HashMap<String, Table>();
         this.fileManager = new FileManager<Table>();
         this.tableNameInBuffer = new Vector<>(NKSql.bufferSize);
+        this.indexNameToTableName = new LinkedHashMap<>();
     }
 
     public void createTable(String tableName, Metadata metadata)
@@ -54,6 +57,17 @@ public class CatalogManager {
             }
             return null;
         }
+    }
+
+    public void createIndex(String indexName, String tableName, String attributeName)
+            throws NKInterfaceException {
+        Table table = getTable(tableName);
+        table.createIndex(attributeName, indexName);
+    }
+
+    public void dropIndex(String indexName, String tableName) throws NKInterfaceException {
+        Table table = getTable(tableName);
+        table.dropIndex(indexName);
     }
 
     public void close() {

@@ -2,15 +2,15 @@ package CatalogManager;
 
 import BufferManager.BufferManager;
 import Foundation.Blocks.Block;
+import Foundation.Blocks.Converter;
 import Foundation.Enumeration.CompareCondition;
 import Foundation.Exception.NKInterfaceException;
 import Foundation.MemoryStorage.*;
+import IndexManager.Index;
+import IndexManager.IndexManager;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 public class Table implements Serializable {
 
@@ -21,6 +21,7 @@ public class Table implements Serializable {
     public Vector<Integer> emptyBlocks;
     private Vector<Tuple> insertIntermediateResults;
     private Map<Tuple, BPlusTreePointer> deleteIntermediateResults;
+    private Map<String, Index> indices;
 
     public Table(String tableName, Metadata metadata)
             throws NKInterfaceException {
@@ -34,6 +35,7 @@ public class Table implements Serializable {
         if (metadata.getTupleLength() > Block.blockSize) {
             throw new NKInterfaceException("Content in definition has exceeded block capacity.");
         }
+        setUpAllIndices();
     }
 
     public void insertAttributes(Tuple attributeTuple) throws NKInterfaceException {
@@ -79,15 +81,90 @@ public class Table implements Serializable {
         }
         // Drop indices first
         Vector<Integer> emptyBlocks = executeDeletion();
+        Vector<Integer> blockTrimRule = createBlockTrimRule(emptyBlocks);
+        // adjust the block index
+    }
 
+    public void createIndex(String attributeName, String indexName) throws NKInterfaceException {
+        setSingleIndex(attributeName, indexName);
+        buildIndex(indexName);
+    }
+
+    public void dropIndex(String indexName) throws NKInterfaceException {
+        Index indexToDrop = this.indices.get(indexName);
+        if (indexToDrop == null) {
+            throw new NKInterfaceException("There's no index named " + indexName);
+        }
+        IndexManager.sharedInstance.dropWholeIndex(this.indices.get(indexName));
     }
 
     public void drop() {
         for (int i = 0; i < this.numberOfBlocks; i ++) {
             BufferManager.sharedInstance.removeBlock(getFileIdentifier(), i);
         }
+        for (Index index : this.indices.values()) {
+            IndexManager.sharedInstance.dropWholeIndex(index);
+        }
     }
 
+    /*
+     * The following 5 methods are supportive methods in indexing
+     */
+    private void setUpAllIndices() throws NKInterfaceException {
+        this.indices = new LinkedHashMap<>();
+        for (MetadataAttribute attribute : this.metadata.metadataAttributes.values()) {
+            if (attribute.isIndexed) {
+                setSingleIndex(attribute.attributeName, attribute.indexName);
+                buildIndex(attribute.indexName);
+            }
+        }
+    }
+
+    private void setSingleIndex(String attributeName, String indexName) {
+        this.metadata.getMetadataAttributeNamed(attributeName).isIndexed = true;
+        this.metadata.getMetadataAttributeNamed(attributeName).setIndexName(indexName);
+        MetadataAttribute attribute = this.metadata.getMetadataAttributeNamed(attributeName);
+        this.indices.put(attribute.indexName, IndexManager.sharedInstance.createBlankIndex(
+                this.tableName, attributeName, attribute.dataType));
+    }
+
+    private void buildIndex(String indexName) throws NKInterfaceException {
+        for (int i = 0; i < this.numberOfBlocks; i ++) {
+            Block block = BufferManager.sharedInstance.getBlock(this.getFileIdentifier(), i);
+            Vector<Integer> dataIndices = block.getAllTupleIndices();
+            for (int j = 0; j < dataIndices.size(); j ++) {
+                BPlusTreePointer pointer = new BPlusTreePointer(i, j);
+                byte[] key = getAttributeBytes(block.getTupleAt(dataIndices.get(i), this.metadata),
+                        this.indices.get(indexName).attribute);
+                IndexManager.sharedInstance.insertNewKey(this.indices.get(indexName), key, pointer);
+            }
+        }
+    }
+
+    private void dropIndexOnTuple(Tuple tuple) throws NKInterfaceException {
+        for (MetadataAttribute attribute : this.metadata.metadataAttributes.values()) {
+            if (attribute.isIndexed) {
+                byte[] keyValue = getAttributeBytes(tuple, attribute.attributeName);
+                IndexManager.sharedInstance.removeKey(this.indices.get(attribute.indexName), keyValue);
+            }
+        }
+    }
+
+    private byte[] getAttributeBytes(Tuple tuple, String attributeName) throws NKInterfaceException {
+        Converter converter = new Converter();
+        Integer index = this.metadata.getAttributeIndexNamed(attributeName);
+        switch (this.metadata.getMetadataAttributeNamed(attributeName).dataType) {
+            case IntegerType: converter.convertToBytes(Integer.valueOf(tuple.get(index)));
+            case FloatType: converter.convertToBytes(Float.valueOf(tuple.get(index)));
+            case StringType: converter.convertToBytes(tuple.get(index),
+                    this.metadata.getMetadataAttributeNamed(attributeName).length);
+        }
+        return null;
+    }
+
+    /*
+     * The following 2 methods are used in uniqueness decision
+     */
     private Boolean isUnique(Tuple tuple) throws NKInterfaceException {
         for (MetadataAttribute attribute : this.metadata.metadataAttributes.values()) {
             if (attribute.isUnique) {
@@ -110,6 +187,9 @@ public class Table implements Serializable {
                 dataItem, CompareCondition.EqualTo);
     }
 
+    /*
+     * The following 3 methods are supportive methods in insertions
+     */
     private void createBlockAndInsert(Tuple attributeTuple) throws NKInterfaceException {
         Block block = new Block(getFileIdentifier(), numberOfBlocks, this.metadata);
         numberOfBlocks ++;
@@ -139,19 +219,9 @@ public class Table implements Serializable {
         block.writeTuple(tuple, this.metadata);
     }
 
-    private void firstSearchWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
-        // Lv Lei's Job
-    }
-
-    private void firstSearchWithoutIndex(ConditionalAttribute condition) throws NKInterfaceException {
-        Vector<Tuple> result = new Vector<>();
-        for (int i = 0; i < this.numberOfBlocks; i ++) {
-            Block block = BufferManager.sharedInstance.getBlock(this.getFileIdentifier(), i);
-            result.addAll(searchInBlock(condition, block));
-        }
-        this.insertIntermediateResults = result;
-    }
-
+    /*
+     * The following 8 methods are supportive methods in deletions
+     */
     private void firstDeleteWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
 
     }
@@ -202,10 +272,11 @@ public class Table implements Serializable {
         }
     }
 
-    private Vector<Integer> executeDeletion() {
+    private Vector<Integer> executeDeletion() throws NKInterfaceException {
         Vector<Integer> emptyBlocks = new Vector<>();
         for (BPlusTreePointer pointer : this.deleteIntermediateResults.values()) {
             Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), pointer.blockIndex);
+            dropIndexOnTuple(block.getTupleAt(pointer.blockOffset, this.metadata));
             block.removeTupleAt(pointer.blockOffset);
             if (block.isDiscardable && !emptyBlocks.contains(block.index)) {
                 emptyBlocks.add(block.index);
@@ -213,6 +284,39 @@ public class Table implements Serializable {
         }
         this.deleteIntermediateResults.clear();
         return emptyBlocks;
+    }
+
+    private Vector<Integer> createBlockTrimRule(Vector<Integer> emptyBlocks) {
+        Collections.sort(emptyBlocks);
+        Vector<Integer> blockTrimRule = new Vector<>();
+        Integer lastBlock = this.numberOfBlocks - 1;
+        for (int i = 0; i < emptyBlocks.size(); i ++) {
+            if (!emptyBlocks.contains(lastBlock)) {
+                blockTrimRule.add(lastBlock);
+                blockTrimRule.add(emptyBlocks.get(i));
+            }
+            lastBlock --;
+            if (lastBlock < 0) {
+                break;
+            }
+        }
+        return blockTrimRule;
+    }
+
+    /*
+     * The following 5 methods are supportive methods in select
+     */
+    private void firstSearchWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
+
+    }
+
+    private void firstSearchWithoutIndex(ConditionalAttribute condition) throws NKInterfaceException {
+        Vector<Tuple> result = new Vector<>();
+        for (int i = 0; i < this.numberOfBlocks; i ++) {
+            Block block = BufferManager.sharedInstance.getBlock(this.getFileIdentifier(), i);
+            result.addAll(searchInBlock(condition, block));
+        }
+        this.insertIntermediateResults = result;
     }
 
     private Vector<Tuple> searchInBlock(ConditionalAttribute condition, Block block)
@@ -250,6 +354,9 @@ public class Table implements Serializable {
         return conditions;
     }
 
+    /*
+     * The following are two general supportive methods
+     */
     private Tuple getTuple(Block block, Integer index) {
         return block.getTupleAt(index, this.metadata);
     }

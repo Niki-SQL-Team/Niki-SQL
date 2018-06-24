@@ -13,6 +13,7 @@ public class MetadataAttribute implements Serializable {
     public Boolean isPrimaryKey;
     public Boolean isUnique;
     public Boolean isIndexed;
+    public String indexName;
 
     public MetadataAttribute(String attributeName, DataType dataType, Integer length,
                              Boolean isPrimaryKey, Boolean isUnique, Boolean isIndexed) {
@@ -35,6 +36,10 @@ public class MetadataAttribute implements Serializable {
         this.isPrimaryKey = isPrimaryKey;
         this.isUnique = isUnique;
         this.isIndexed = isIndexed;
+    }
+
+    public void setIndexName(String indexName) {
+        this.indexName = indexName;
     }
 
     public Integer getAttributeLength() {
