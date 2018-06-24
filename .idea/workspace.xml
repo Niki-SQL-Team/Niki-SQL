@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fb71b64-2106-4d1e-9a79-dde6c459ba73" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_0.nkidx" beforeDir="false" afterPath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_0.nkidx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/BufferManager/BufferManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/BufferManager/BufferManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/IndexManager/IndexManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/IndexManager/IndexManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Top/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/Top/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Top/NKSql.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/Top/NKSql.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BufferManager/BufferManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BufferManager/BufferManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB Files/Index/index_T1_A1_0.nkidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IndexManager/IndexManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexManager/IndexManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Top/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Top/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Top/NKSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Top/NKSql.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,18 +32,21 @@
       <file leaf-file-name="BPlusTree.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/IndexManager/BPlusTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="511" column="51" lean-forward="true" selection-start-line="511" selection-start-column="51" selection-end-line="511" selection-end-column="51" />
+            <state relative-caret-position="171">
+              <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#insertKey#0;class#BPlusTree#0" />
                 <element signature="method#insertKeyForNode#0;class#BPlusTree#0" />
                 <element signature="method#searchKeyForNode#0;class#BPlusTree#0" />
                 <element signature="method#rePoint#0;class#BPlusTree#0" />
                 <element signature="method#rePointForNode#0;class#BPlusTree#0" />
+                <element signature="method#searchKeyInRange#0;class#BPlusTree#0" />
                 <element signature="e#6542#6560#0" expanded="true" />
                 <element signature="method#deleteKey#0;class#BPlusTree#0" />
                 <element signature="method#deleteKeyForNode#0;class#BPlusTree#0" />
                 <element signature="method#findAll#0;class#BPlusTree#0" />
+                <element signature="method#myCompare#0;class#BPlusTree#0" />
                 <element signature="method#generateCompareResult#0;class#BPlusTree#0" />
               </folding>
             </state>
@@ -62,7 +56,7 @@
       <file leaf-file-name="BPlusTreeBlock.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-116">
+            <state relative-caret-position="-458">
               <caret line="28" column="48" lean-forward="true" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -80,20 +74,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Index.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Index.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/IndexManager/Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="20" selection-start-column="20" selection-end-column="20" />
+            <state relative-caret-position="209">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IndexManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IndexManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/IndexManager/IndexManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-216">
-              <caret line="78" column="46" lean-forward="true" selection-start-line="78" selection-start-column="46" selection-end-line="78" selection-end-column="46" />
+            <state relative-caret-position="38">
+              <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
             </state>
           </provider>
         </entry>
@@ -155,10 +149,10 @@
         <option value="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" />
         <option value="$PROJECT_DIR$/src/IndexManager/Index.java" />
         <option value="$PROJECT_DIR$/src/BufferManager/BufferManager.java" />
-        <option value="$PROJECT_DIR$/src/IndexManager/IndexManager.java" />
         <option value="$PROJECT_DIR$/src/Top/NKSql.java" />
-        <option value="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" />
         <option value="$PROJECT_DIR$/src/Top/Main.java" />
+        <option value="$PROJECT_DIR$/src/IndexManager/IndexManager.java" />
+        <option value="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" />
       </list>
     </option>
   </component>
@@ -171,7 +165,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="955" />
     <option name="width" value="970" />
     <option name="height" value="1050" />
@@ -350,16 +344,15 @@
       <workItem from="1529597636187" duration="20137000" />
       <workItem from="1529734270361" duration="1707000" />
       <workItem from="1529737552135" duration="1603000" />
-      <workItem from="1529816275835" duration="4508000" />
+      <workItem from="1529816275835" duration="8389000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91147000" />
+    <option name="totallyTimeSpent" value="95028000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -371,7 +364,7 @@
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27144867" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29817158" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -790,10 +783,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/IndexManager/Index.java">
+    <entry file="file://$PROJECT_DIR$/src/IndexManager/BPlusTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="20" selection-start-column="20" selection-end-column="20" />
+        <state relative-caret-position="171">
+          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#insertKey#0;class#BPlusTree#0" />
+            <element signature="method#insertKeyForNode#0;class#BPlusTree#0" />
+            <element signature="method#searchKeyForNode#0;class#BPlusTree#0" />
+            <element signature="method#rePoint#0;class#BPlusTree#0" />
+            <element signature="method#rePointForNode#0;class#BPlusTree#0" />
+            <element signature="method#searchKeyInRange#0;class#BPlusTree#0" />
+            <element signature="e#6542#6560#0" expanded="true" />
+            <element signature="method#deleteKey#0;class#BPlusTree#0" />
+            <element signature="method#deleteKeyForNode#0;class#BPlusTree#0" />
+            <element signature="method#findAll#0;class#BPlusTree#0" />
+            <element signature="method#myCompare#0;class#BPlusTree#0" />
+            <element signature="method#generateCompareResult#0;class#BPlusTree#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -804,28 +812,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/IndexManager/BPlusTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="511" column="51" lean-forward="true" selection-start-line="511" selection-start-column="51" selection-end-line="511" selection-end-column="51" />
-          <folding>
-            <element signature="method#insertKey#0;class#BPlusTree#0" />
-            <element signature="method#insertKeyForNode#0;class#BPlusTree#0" />
-            <element signature="method#searchKeyForNode#0;class#BPlusTree#0" />
-            <element signature="method#rePoint#0;class#BPlusTree#0" />
-            <element signature="method#rePointForNode#0;class#BPlusTree#0" />
-            <element signature="e#6542#6560#0" expanded="true" />
-            <element signature="method#deleteKey#0;class#BPlusTree#0" />
-            <element signature="method#deleteKeyForNode#0;class#BPlusTree#0" />
-            <element signature="method#findAll#0;class#BPlusTree#0" />
-            <element signature="method#generateCompareResult#0;class#BPlusTree#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-116">
+        <state relative-caret-position="-458">
           <caret line="28" column="48" lean-forward="true" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -835,8 +824,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/IndexManager/IndexManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-216">
-          <caret line="78" column="46" lean-forward="true" selection-start-line="78" selection-start-column="46" selection-end-line="78" selection-end-column="46" />
+        <state relative-caret-position="38">
+          <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IndexManager/Index.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
