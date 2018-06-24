@@ -7,6 +7,7 @@ public enum CompareCondition {
     LessThan,
     NoGreaterThan,
     NoLessThan,
-    NotEqualTo
+    NotEqualTo,
+    All
 
 }

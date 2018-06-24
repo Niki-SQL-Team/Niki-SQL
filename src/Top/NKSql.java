@@ -35,7 +35,7 @@ public class NKSql {
         System.out.println("Table named " + tableName + " dropped.");
     }
 
-    public void createIndex(String indexName, String tableName, String attributeName)
+    public static void createIndex(String indexName, String tableName, String attributeName)
             throws NKInterfaceException {
         System.out.println("Index named " + indexName + " created.");
     }
@@ -54,7 +54,7 @@ public class NKSql {
         System.out.println("Tuple dropped.");
     }
 
-    public ArrayList<Tuple> select(String tableName, ArrayList<String> attributeNames,
+    public static ArrayList<Tuple> select(String tableName, ArrayList<String> attributeNames,
                                    ArrayList<ConditionalAttribute> conditionalAttributes)
             throws NKInterfaceException {
         System.out.println("Select complete.");
