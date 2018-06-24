@@ -36,7 +36,7 @@ public class Interpreter {
         }
     }
 
-    private static void Translating(BufferedReader reader) throws IOException {
+    private static void Translating(BufferedReader reader) throws IOException  {
         Lexer lexer = new Lexer(reader);/* 初始化读取文件变量*/
         while (!lexer.getReaderState()) {/* 是否读取到文件的结尾 */
             if (!isSynCorrect) {
@@ -527,8 +527,11 @@ public class Interpreter {
                                 String tmpValue;
                                 int i = 0;//记录unit的index
                                 while (!token.toString().equals(")")) {
+                                    if (token.toString().equals("'")) token = lexer.scan();
+                                    else if (token.toString().equals(",")) token = lexer.scan();
+                                    else{
+                                        tmpValue = token.toString();
 
-                                    tmpValue = token.toString();
                                     i++;
                                     dataItems.add(tmpValue);
                                       /* else if(isSemaCorrect){
@@ -581,7 +584,7 @@ public class Interpreter {
                                                break;
                                            }
                                        }*/
-                                    token = lexer.scan();
+                                    token = lexer.scan();}
                                     if (token.toString().equals(",")) token = lexer.scan();
                                     else if (token.toString().equals(")")) ;
                                     else {
@@ -601,7 +604,7 @@ public class Interpreter {
                                      */
 
 
-                                    if (isSemaCorrect) {
+
                                         Tuple units = new Tuple(dataItems);
                                         try {
                                             NKSql.insertTuple(units, tmpTableName);
@@ -610,11 +613,7 @@ public class Interpreter {
                                             e.printStackTrace();
                                         }
 
-                                    } else {
-                                        System.out.print(semaErrMsg);
-                                        System.out.println(", insert failed");
-                                        isSemaCorrect = true;
-                                    }
+
 
 
                                 } else {
@@ -656,6 +655,7 @@ public class Interpreter {
                 CompareCondition compareCondition = CompareCondition.EqualTo;
                 ArrayList<ConditionalAttribute> conditionalAttributes = new ArrayList<>();
                 token = lexer.scan();
+
                 if (token.tag == Tag.FROM) {//delete from
                     token = lexer.scan();
                     if (token.tag == Tag.ID) {
@@ -666,12 +666,9 @@ public class Interpreter {
                         if (token.tag == Tag.WHERE) {
                             // 添加搜索条件
                             token = lexer.scan();
-                            while (token.toString() != ";") {
-                                if (token.toString().equals("and")) {
-                                    token = lexer.scan();
-                                }
                                 if (token.tag == Tag.ID) {
                                     tmpAttriName = token.toString();
+                                    token = lexer.scan();
                                     if (token.tag == Tag.OP) {
                                         op = token.toString();
                                         token = lexer.scan();
@@ -704,6 +701,7 @@ public class Interpreter {
                                                     ConditionalAttribute CA = new ConditionalAttribute(tmpTableName, tmpAttriName, tmpValue, compareCondition);
 
                                                     conditionalAttributes.add(CA);        /*int deleteNum = */
+                                                    token = lexer.scan();
 
                                                     /*System.out.println("delete " + deleteNum + " tuples from table " + tmpTableName);*/
                                                 } catch (Exception e) {
@@ -715,6 +713,18 @@ public class Interpreter {
                                                 System.out.println(semaErrMsg + ", delete tuples failed");
                                                 isSemaCorrect = true;
                                             }
+                                            if(token.toString().equals(";")){
+                                                /*int deleteNum = */
+
+                                                /*System.out.println("delete " + deleteNum + " tuples from table " + tmpTableName);*/
+                                                try{
+                                                    NKSql.dropTuple(tmpTableName, conditionalAttributes);
+                                                }
+                                                catch(Exception e){
+                                                    System.out.println("Interpreter error:"+e.getMessage());
+                                                    e.printStackTrace();
+                                                }
+                                            }
 
                                     } else {
                                         if (isSynCorrect) synErrMsg = "Synthetic error near: " + token.toString();
@@ -724,18 +734,7 @@ public class Interpreter {
                                     if (isSynCorrect) synErrMsg = "Synthetic error near: " + token.toString();
                                     isSynCorrect = false;
                                 }
-                                token = lexer.scan();
-                            }
-                            /*int deleteNum = */
 
-                            /*System.out.println("delete " + deleteNum + " tuples from table " + tmpTableName);*/
-                            try{
-                                NKSql.dropTuple(tmpTableName, conditionalAttributes);
-                            }
-                            catch(Exception e){
-                                System.out.println("Interpreter error:"+e.getMessage());
-                                e.printStackTrace();
-                            }
 
                         }else if (token.toString().equals(";")) {
 
@@ -782,14 +781,18 @@ public class Interpreter {
                 String tmpAttriName = null;
                 String op;
                 String tmpValue = null;
-                boolean constantFlag = false;
+                boolean constantFlag=false;
                 CompareCondition compareCondition = CompareCondition.All;
                 ArrayList<ConditionalAttribute> conditionalAttributes = new ArrayList<>();
+                AttriName.add(token.toString());
+                token = lexer.scan();
                 while (token.tag != Tag.FROM && token.tag == Tag.ID) {
                     AttriName.add(token.toString());
                     token = lexer.scan();
+
                 }
-                if (isSynCorrect && token.tag == Tag.FROM) {
+
+                if (token.tag == Tag.FROM) {
                     token = lexer.scan();
                     if (token.tag == Tag.ID) {
                         String tmpTableName = token.toString();
@@ -814,7 +817,7 @@ public class Interpreter {
                                         } else if (token.tag == Tag.FLOATNUM) {
                                             constantFlag = true;
                                         }
-                                        if (token.toString().equals(";")) {
+
 
                                             if (isSemaCorrect && isSynCorrect && constantFlag) {
                                                 /*
@@ -838,14 +841,10 @@ public class Interpreter {
                                                 conditionalAttributes.add(CA);
 
                                             } else {
-                                                System.out.println(semaErrMsg + ", delete tuples failed");
+                                                System.out.println(semaErrMsg + ", select failed");
                                                 isSemaCorrect = true;
                                             }
-                                        } else {
-                                            if (isSynCorrect)
-                                                synErrMsg = "Synthetic error near: " + token.toString();
-                                            isSynCorrect = false;
-                                        }
+
                                     } else {
                                         if (isSynCorrect) synErrMsg = "Synthetic error near: " + token.toString();
                                         isSynCorrect = false;
@@ -870,11 +869,11 @@ public class Interpreter {
                             e.printStackTrace();
                         }
                     } else {
-                        System.out.println(semaErrMsg + ", delete tuples failed");
+                        System.out.println(semaErrMsg + ", select tuples failed1");
                         isSemaCorrect = true;
                     }
                 } else {
-                    System.out.println(semaErrMsg + ", delete tuples failed");
+                    System.out.println(semaErrMsg + ", select tuples failed2");
                     isSemaCorrect = true;
                 }
             } else {
@@ -891,7 +890,8 @@ public class Interpreter {
     //end of Translating
 
     private static void showSelectRes(ArrayList<String> AttriName,ArrayList<Tuple> result) {
-        if(result.size()==0) System.out.println("There  do not exist what you want");
+        if(result==null) System.out.println("There  do not exist what you want");
+        else if(result.size()==0) System.out.println("There  do not exist what you want");
         else {
             for (String item : AttriName) {
                 System.out.print(item+"    ");
