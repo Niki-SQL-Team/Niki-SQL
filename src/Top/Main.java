@@ -84,23 +84,27 @@ public class Main {
         System.out.println(bTree.currentNodeCount);
         System.out.println("--------------------");
 
-        /*for(int i = 300; i >= 0; i--){
+        for(int i = 0; i <=50; i++){
             byte[] key = convert.convertToBytes(i);
             BPlusTreePointer p1 = new BPlusTreePointer(i, i);
             indexManager.insertNewKey(bTree, key, p1);
         }
-*/
+
        /* for(int i = 0 ; i < 250; i++){
             byte[] key = convert.convertToBytes(i);
             bTree.deleteKey(key);
         }*/
 
 
+       Vector<BPlusTreePointer> res = indexManager.searchRangely(bTree,convert.convertToBytes(10),convert.convertToBytes(30),true,true);
+       for(int i = 0; i < res.size(); i++){
+           System.out.println(res.elementAt(i).blockIndex);
+       }
 
-        BPlusTreeBlock brb = (BPlusTreeBlock)bufferManager.getBlock("index_T1_A1", 0);
-        brb.outputAttributes();
-
-        bufferManager.close();;
+       //System.out.println(bTree.blockOfTheIndexTree);
+       // BPlusTreeBlock brb = (BPlusTreeBlock)(bufferManager.getBlock("index_T1_A1", 0));
+      // brb.outputAttributes();;
+        bufferManager.close();
         return;
     }
 

@@ -20,7 +20,7 @@ public class NKSql {
 
     public static final Integer maxLengthOfString = 255;
     public static final Integer maxAttributesPerTable = 32;
-    public static final Integer bufferSize = 8;
+    public static final Integer bufferSize = 128;
 
     private BufferManager bufferManager;
 

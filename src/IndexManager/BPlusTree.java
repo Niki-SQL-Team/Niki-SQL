@@ -209,7 +209,7 @@ public class BPlusTree{
 			return result;//用来解决有边界比现有元素都大的情况
 		}else{//左侧有限制
 			BPlusTreeBlock currentNode = getTreeNode(this.root);
-			while(currentNode.isLeafNode != true){//根据startkey确定位置
+			while(!currentNode.isLeafNode){//根据startkey确定位置
 				currentNode = getTreeNode(currentNode.searchFor(startKey));
 			}
 			
@@ -508,7 +508,7 @@ public class BPlusTree{
 
     //私有封装函数
 	//key left, node right
-	private CompareCondition myCompare(byte[] key1, byte[] key2){
+	private CompareCondition myCompare(byte[] key2, byte[] key1){
 		Converter convertUtility = new Converter();
 		if(this.ElementType == DataType.IntegerType){
 			Integer left = convertUtility.convertToInteger(key1);

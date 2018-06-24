@@ -78,6 +78,7 @@ public class BufferManager {
         substituteBlock(block, true);
     }
 
+
     public void removeBlock(String identifier, Integer index) {
         Integer indexInBuffer = blockIndexInBuffer(identifier, index);
         if (indexInBuffer != -1) {

@@ -31,7 +31,7 @@ public class IndexManager{
 
 	//创建新的索引，返回Index类型， 通知调整workOn
 	public Index createBlankIndex(String table, String attribute, DataType dataType){//建成空的B+树
-		BufferManager bufferManager = new BufferManager();
+		BufferManager bufferManager = BufferManager.sharedInstance;
 		String identifier = "index" + "_" +  table + "_" + attribute;
 		BPlusTreeBlock myRoot = new BPlusTreeBlock(identifier, dataType, 0, true);
 		myRoot.setTailPointer(-1);
@@ -53,7 +53,7 @@ public class IndexManager{
 	public boolean	dropWholeIndex(Index index){
 		managerInitialize(index);
 
-		BufferManager bufferManager = new BufferManager();
+		BufferManager bufferManager = BufferManager.sharedInstance;
 		for(int i = 0; i < this.blockCount; i++){
 			bufferManager.removeBlock(identifier, i);
 		}
