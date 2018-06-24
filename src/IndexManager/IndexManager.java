@@ -12,12 +12,13 @@ import RecordManager.*;
 
 //index管理
 public class IndexManager{
+    public static IndexManager sharedInstance;
     private BPlusTree workOn;//工作对象
     private String identifier;
     private Integer blockCount;
     //构造函数
     public  IndexManager(){
-
+        sharedInstance = this;
     }
 
     //Index Manager的一些列的操作针对一个给定的索引，使用Index Manager其他功能时（除非要创建一个新索引），务必要先调用这个函数设定一个给定的索引

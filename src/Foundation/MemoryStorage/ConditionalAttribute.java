@@ -20,9 +20,6 @@ public class ConditionalAttribute {
         this.attributeName = attributeName;
         this.comparedConstant = comparedConstant;
         this.compareCondition = compareCondition;
-
-        // Actually, the data type should be looked for in the metadata, this is incomplete
-        this.dataType = DataType.IntegerType;
     }
 
     public Boolean satisfies(String dataItem) throws NKInterfaceException {
@@ -45,6 +42,10 @@ public class ConditionalAttribute {
         } else {
             return compare(dataItem, comparedConstant);
         }
+    }
+
+    public void setDataType(DataType dataType) {
+        this.dataType = dataType;
     }
 
     private <Type extends Comparable<? super Type>> Boolean compare(Type a, Type b) {

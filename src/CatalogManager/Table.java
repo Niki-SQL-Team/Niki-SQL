@@ -4,6 +4,7 @@ import BufferManager.BufferManager;
 import Foundation.Blocks.Block;
 import Foundation.Blocks.Converter;
 import Foundation.Enumeration.CompareCondition;
+import Foundation.Enumeration.DataType;
 import Foundation.Exception.NKInterfaceException;
 import Foundation.MemoryStorage.*;
 import IndexManager.Index;
@@ -51,6 +52,7 @@ public class Table implements Serializable {
 
     public Vector<Tuple> searchFor(ArrayList<ConditionalAttribute> conditions)
             throws NKInterfaceException {
+        setConditionDataType(conditions);
         conditions = makeIndexedSearchFirst(conditions);
         ConditionalAttribute firstCondition = conditions.get(0);
         if (this.metadata.getMetadataAttributeNamed(firstCondition.attributeName).isIndexed) {
@@ -151,15 +153,8 @@ public class Table implements Serializable {
     }
 
     private byte[] getAttributeBytes(Tuple tuple, String attributeName) throws NKInterfaceException {
-        Converter converter = new Converter();
         Integer index = this.metadata.getAttributeIndexNamed(attributeName);
-        switch (this.metadata.getMetadataAttributeNamed(attributeName).dataType) {
-            case IntegerType: converter.convertToBytes(Integer.valueOf(tuple.get(index)));
-            case FloatType: converter.convertToBytes(Float.valueOf(tuple.get(index)));
-            case StringType: converter.convertToBytes(tuple.get(index),
-                    this.metadata.getMetadataAttributeNamed(attributeName).length);
-        }
-        return null;
+        return alterStringToByte(tuple.get(index), attributeName);
     }
 
     /*
@@ -223,7 +218,12 @@ public class Table implements Serializable {
      * The following 8 methods are supportive methods in deletions
      */
     private void firstDeleteWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
-
+        Vector<BPlusTreePointer> pointers = getSearchPointerResults(condition);
+        for (BPlusTreePointer pointer : pointers) {
+            Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), pointer.blockIndex);
+            this.deleteIntermediateResults.put(block.getTupleAt(pointer.blockOffset, this.metadata),
+                    pointer);
+        }
     }
 
     private void firstDeleteWithoutIndex(ConditionalAttribute condition) throws NKInterfaceException {
@@ -307,7 +307,11 @@ public class Table implements Serializable {
      * The following 5 methods are supportive methods in select
      */
     private void firstSearchWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
-
+        Vector<BPlusTreePointer> pointers = getSearchPointerResults(condition);
+        for (BPlusTreePointer pointer : pointers) {
+            Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), pointer.blockIndex);
+            this.insertIntermediateResults.add(block.getTupleAt(pointer.blockOffset, this.metadata));
+        }
     }
 
     private void firstSearchWithoutIndex(ConditionalAttribute condition) throws NKInterfaceException {
@@ -354,15 +358,51 @@ public class Table implements Serializable {
         return conditions;
     }
 
+    private Vector<BPlusTreePointer> getSearchPointerResults(ConditionalAttribute condition) {
+        IndexManager indexManager = IndexManager.sharedInstance;
+        byte[] searchKey = alterStringToByte(condition.comparedConstant, condition.attributeName);
+        Vector<BPlusTreePointer> resultPointers = new Vector<>();
+        Index index = this.indices.get(this.metadata.getMetadataAttributeNamed(condition.attributeName)
+                .indexName);
+        switch (condition.compareCondition) {
+            case GreaterThan: resultPointers = indexManager.searchRangely(index, searchKey,
+                    null, false, false); break;
+            case LessThan: resultPointers = indexManager.searchRangely(index, null, searchKey,
+                    false, false); break;
+            case NoGreaterThan: resultPointers = indexManager.searchRangely(index, null,
+                    searchKey, false, true); break;
+            case NoLessThan: resultPointers = indexManager.searchRangely(index, searchKey, null,
+                    true, false); break;
+            case EqualTo: resultPointers.add(indexManager.searchEqually(index, searchKey)); break;
+        }
+        return resultPointers;
+    }
+
     /*
      * The following are two general supportive methods
      */
-    private Tuple getTuple(Block block, Integer index) {
-        return block.getTupleAt(index, this.metadata);
+    private void setConditionDataType(ArrayList<ConditionalAttribute> conditions) {
+        for (ConditionalAttribute condition : conditions) {
+            condition.setDataType(this.metadata.getMetadataAttributeNamed
+                    (condition.attributeName).dataType);
+        }
     }
 
     private String getFileIdentifier() {
         return "data_" + this.tableName;
+    }
+
+    private byte[] alterStringToByte(String content, String attributeName) {
+        Converter converter = new Converter();
+        MetadataAttribute attribute = this.metadata.getMetadataAttributeNamed(attributeName);
+        DataType dataType = attribute.dataType;
+        Integer length = attribute.length;
+        switch (dataType) {
+            case IntegerType: return converter.convertToBytes(Integer.valueOf(content));
+            case FloatType: return converter.convertToBytes(Float.valueOf(content));
+            case StringType: return converter.convertToBytes(content, length);
+        }
+        return null;
     }
 
 }

@@ -19,7 +19,9 @@ import IndexManager.*;
 
 import IndexManager.*;
 
+import java.io.DataInputStream;
 import java.util.*;
+import java.util.concurrent.locks.Condition;
 
 public class Main {
 
@@ -67,7 +69,60 @@ public class Main {
 //    }
 
     public static void main(String args[]) {
-        
+        try {
+            NKSql nkSql = new NKSql();
+
+            ArrayList<MetadataAttribute> attributes = new ArrayList<>();
+            MetadataAttribute attribute_1 = new MetadataAttribute("test_int",
+                    DataType.IntegerType, true, true, true);
+            attribute_1.setIndexName("test_index");
+            MetadataAttribute attribute_2 = new MetadataAttribute("test_float",
+                    DataType.FloatType, false, false, false);
+            MetadataAttribute attribute_3 = new MetadataAttribute("test_string",
+                    DataType.StringType, 255, false, false, false);
+
+            attributes.add(attribute_1);
+            attributes.add(attribute_2);
+            attributes.add(attribute_3);
+
+            nkSql.createTable("test_table", attributes);
+
+            Vector<String> dataItem = new Vector<>();
+            Tuple tuple;
+
+            dataItem.add("3");
+            dataItem.add("3.1415");
+            dataItem.add("Apple Inc");
+            tuple = new Tuple(dataItem);
+            nkSql.insertTuple(tuple, "test_table");
+
+            dataItem.clear();
+            dataItem.add("1");
+            dataItem.add("2.7182");
+            dataItem.add("Alphabet Inc");
+            tuple = new Tuple(dataItem);
+            nkSql.insertTuple(tuple, "test_table");
+
+            dataItem.clear();
+            dataItem.add("2");
+            dataItem.add("6.67");
+            dataItem.add("Tesla Inc");
+            tuple = new Tuple(dataItem);
+            nkSql.insertTuple(tuple, "test_table");
+
+            ArrayList<String> selectTarget = new ArrayList<>();
+            ArrayList<ConditionalAttribute> conditions = new ArrayList<>();
+            selectTarget.add("test_string");
+            conditions.add(new ConditionalAttribute("test_table", "test_string",
+                    "Apple Inc", CompareCondition.EqualTo));
+            ArrayList<Tuple> result = nkSql.select("test_table", selectTarget, conditions);
+
+            nkSql.close();
+        } catch (Exception exception) {
+            ((NKInterfaceException)exception).describe();
+            exception.printStackTrace();
+        }
+
     }
 
 }
