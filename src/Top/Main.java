@@ -85,39 +85,43 @@ public class Main {
             attributes.add(attribute_2);
             attributes.add(attribute_3);
 
-//            nkSql.createTable("test_table", attributes);
+            NKSql.createTable("test_table", attributes);
 
             Vector<String> dataItem = new Vector<>();
             Tuple tuple;
 
-//            dataItem.add("3");
-//            dataItem.add("3.1415");
-//            dataItem.add("Apple Inc");
-//            tuple = new Tuple(dataItem);
-//            nkSql.insertTuple(tuple, "test_table");
-//
-//            dataItem.clear();
-//            dataItem.add("1");
-//            dataItem.add("2.7182");
-//            dataItem.add("Alphabet Inc");
-//            tuple = new Tuple(dataItem);
-//            nkSql.insertTuple(tuple, "test_table");
-//
-//            dataItem.clear();
-//            dataItem.add("2");
-//            dataItem.add("6.67");
-//            dataItem.add("Tesla Inc");
-//            tuple = new Tuple(dataItem);
-//            nkSql.insertTuple(tuple, "test_table");
+            dataItem.add("3");
+            dataItem.add("3.1415");
+            dataItem.add("Apple Inc");
+            tuple = new Tuple(dataItem);
+            NKSql.insertTuple(tuple, "test_table");
+
+            dataItem.clear();
+            dataItem.add("1");
+            dataItem.add("2.7182");
+            dataItem.add("Alphabet Inc");
+            tuple = new Tuple(dataItem);
+            NKSql.insertTuple(tuple, "test_table");
+
+            dataItem.clear();
+            dataItem.add("2");
+            dataItem.add("6.67");
+            dataItem.add("Tesla Inc");
+            tuple = new Tuple(dataItem);
+            NKSql.insertTuple(tuple, "test_table");
+
+
 
             ArrayList<String> selectTarget = new ArrayList<>();
             ArrayList<ConditionalAttribute> conditions = new ArrayList<>();
-            selectTarget.add("test_string");
+            selectTarget.add("*");
             conditions.add(new ConditionalAttribute("test_table", "test_int",
                     "2", CompareCondition.NotEqualTo));
-            ArrayList<Tuple> result = nkSql.select("test_table", selectTarget, conditions);
+            ArrayList<Tuple> result = NKSql.select("test_table", selectTarget, conditions);
 
-            nkSql.close();
+
+
+            NKSql.close();
         } catch (Exception exception) {
             ((NKInterfaceException)exception).describe();
             exception.printStackTrace();

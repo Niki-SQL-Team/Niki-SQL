@@ -24,9 +24,11 @@ public class RecordManager {
 
     public ArrayList<Tuple> selectInTable(String tableName, ArrayList<String> attributeNames,
                               ArrayList<ConditionalAttribute> conditions) throws NKInterfaceException {
-        ArrayList<Tuple> searchResult = new ArrayList<>();
         Table table = getTableNamed(tableName);
         Vector<Tuple> allContentTuple = searchInTable(tableName, conditions);
+        if (attributeNames.get(0).equals("*")) {
+            return new ArrayList<>(allContentTuple);
+        }
         Vector<Integer> selectedIndices = new Vector<>();
         for (String name : attributeNames) {
             selectedIndices.add(table.metadata.getAttributeIndexNamed(name));
