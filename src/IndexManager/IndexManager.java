@@ -58,8 +58,6 @@ public class IndexManager{
         return res;
     }
 
-
-
     //删除workOn整个索引
     public boolean	dropWholeIndex(Index index){
         managerInitialize(index);

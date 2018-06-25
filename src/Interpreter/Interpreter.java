@@ -714,6 +714,7 @@ public class Interpreter {
 
                                         /*System.out.println("delete " + deleteNum + " tuples from table " + tmpTableName);*/
                                         try{
+
                                             NKSql.dropTuple(tmpTableName, conditionalAttributes);
                                         }
                                         catch(NKInterfaceException exception){
@@ -738,9 +739,11 @@ public class Interpreter {
                                  * 执行delete操作
                                  */
                                 try {
-                                    /*change int deleteNum =*/ NKSql.dropTable(tmpTableName);
 
-                                    /* System.out.println("delete " + deleteNum + " tuples from table " + tmpTableName);*/
+                                    ConditionalAttribute CA = new ConditionalAttribute(tmpTableName, null, null, CompareCondition.All);
+
+                                    conditionalAttributes.add(CA);
+                                    NKSql.dropTuple(tmpTableName, conditionalAttributes);
                                 } catch (NKInterfaceException exception) {
                                     exception.describe();
                                 }

@@ -1,10 +1,12 @@
 package BufferManager;
 
 import Foundation.Blocks.Block;
+import Foundation.Exception.NKInternalException;
 import Top.NKSql;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Vector;
 import java.util.regex.Pattern;
 
 public class BufferManager {
@@ -98,6 +100,11 @@ public class BufferManager {
         fileManager.dropFile(path);
     }
 
+    public void handleBlockIndexChange(String fileIdentifier, Vector<Integer> blockTrimVector) {
+        handleBlockIndexChangeInBuffer(fileIdentifier, blockTrimVector);
+        handleBlockIndexChangeInDisk(fileIdentifier, blockTrimVector);
+    }
+
     /*
      * The block should be closed when it's to be recycled, however, the method would be implemented
      * by NKSql, users don't need to call the method
@@ -113,6 +120,33 @@ public class BufferManager {
     /*
      * The following are some private supportive methods
      */
+    private void handleBlockIndexChangeInBuffer(String fileIdentifier,
+                                                Vector<Integer> blockTrimVector) {
+        for (Block block : this.bufferedBlocks) {
+            if (block.fileIdentifier.equals(fileIdentifier)) {
+                for (int i = 0; i < blockTrimVector.size(); i += 2) {
+                    if (block.index.equals(blockTrimVector.get(i))) {
+                        block.index = blockTrimVector.get(i + 1);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void handleBlockIndexChangeInDisk(String fileIdentifier,
+                                              Vector<Integer> blockTrimVector) {
+        try {
+            for (int i = 0; i < blockTrimVector.size(); i += 2) {
+                String oldFileName = createPath(fileIdentifier, blockTrimVector.get(i));
+                String newFileName = createPath(fileIdentifier, blockTrimVector.get(i + 1));
+                fileManager.renameFile(oldFileName, newFileName);
+            }
+        } catch (NKInternalException exception) {
+            exception.describe();
+        }
+    }
+
     private void setSharedInstance() {
         sharedInstance = this;
     }

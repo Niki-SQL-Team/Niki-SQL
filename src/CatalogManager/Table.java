@@ -9,7 +9,6 @@ import Foundation.Exception.NKInterfaceException;
 import Foundation.MemoryStorage.*;
 import IndexManager.Index;
 import IndexManager.IndexManager;
-import Top.NKSql;
 
 import java.io.Serializable;
 import java.util.*;
@@ -89,10 +88,11 @@ public class Table implements Serializable {
         if (!conditions.isEmpty()) {
             subsequentDelete(conditions);
         }
-        // Drop indices first
+        executeDeleteInBPlusTree();
         Vector<Integer> emptyBlocks = executeDeletion();
         Vector<Integer> blockTrimRule = createBlockTrimRule(emptyBlocks);
-        // adjust the block index
+        BufferManager.sharedInstance.handleBlockIndexChange(getFileIdentifier(), blockTrimRule);
+        this.numberOfBlocks -= emptyBlocks.size();
     }
 
     public void createIndex(String attributeName, String indexName) throws NKInterfaceException {
@@ -130,6 +130,24 @@ public class Table implements Serializable {
             if (attribute.isIndexed) {
                 setSingleIndex(attribute.attributeName, attribute.indexName);
                 buildIndex(attribute.indexName);
+            }
+        }
+    }
+
+    private void executeDeleteInBPlusTree() {
+        Vector<Integer> indexedAttributeIndices = new Vector<>();
+        for (int i = 0; i < this.metadata.metadataAttributes.values().size(); i ++) {
+            if (this.metadata.getMetadataAttributeAt(i).isIndexed) {
+                indexedAttributeIndices.add(i);
+            }
+        }
+        for (Tuple tuple : this.deleteIntermediateResults.keySet()) {
+            for (int i = 0; i < indexedAttributeIndices.size(); i ++) {
+                String contentToDelete = tuple.get(i);
+                MetadataAttribute attribute = this.metadata.getMetadataAttributeAt(i);
+                Index index = this.indices.get(attribute.indexName);
+                byte[] deleteTarget = alterStringToByte(contentToDelete, attribute.attributeName);
+                IndexManager.sharedInstance.removeKey(index, deleteTarget);
             }
         }
     }
@@ -436,6 +454,23 @@ public class Table implements Serializable {
             condition.setDataType(this.metadata.getMetadataAttributeNamed
                     (condition.attributeName).dataType);
         }
+    }
+
+    private Vector<Integer> generateBlockTrimVector(Vector<Integer> emptyBlocks) {
+        Collections.sort(emptyBlocks);
+        Integer iterator = 0;
+        Vector<Integer> blockTrimVector = new Vector<>();
+        for (int i = this.numberOfBlocks - 1; i >= 0; i --) {
+            if (!emptyBlocks.contains(i)) {
+                blockTrimVector.add(i);
+                blockTrimVector.add(emptyBlocks.get(iterator));
+                iterator ++;
+            }
+            if (iterator >= emptyBlocks.size() - 1) {
+                break;
+            }
+        }
+        return blockTrimVector;
     }
 
     private String getFileIdentifier() {
