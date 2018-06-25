@@ -2,6 +2,7 @@ package Interpreter;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Vector;
 import Foundation.MemoryStorage.*;
 import Top.NKSql;
@@ -66,29 +67,21 @@ public class Interpreter {
                 }
 
             } else if (token.tag == Tag.EXECFILE) {
-                token = lexer.scan();
-                StringBuilder str= new StringBuilder("");
-                while(!token.toString().equals(";")){
-                    str.append(token.toString());
-                    token = lexer.scan();
-                }
-                File file = new File(token.toString() + ".txt");
-                token = lexer.scan();
-                if (token.toString().equals(";")) {
-
-                    if (file.exists()) {
-                        BufferedReader reader2 = new BufferedReader(new FileReader(file));
-                        Translating(reader2);
-                        isSynCorrect = true;
-
-                    } else {
-                        synErrMsg = "The file " + file.getName() + " doesn't exist";
-                        isSynCorrect = false;
-
-                    }
+//                StringBuilder str= new StringBuilder("");
+//                while(!token.toString().equals(";")){
+//                    str.append(token.toString());
+//                    token = lexer.scan();
+//                }
+                Scanner scanner = new Scanner(System.in);
+                String path = scanner.nextLine();
+                File file = new File(path + ".txt");
+                if (file.exists()) {
+                    BufferedReader reader2 = new BufferedReader(new FileReader(file));
+                    Translating(reader2);
+                    isSynCorrect = true;
 
                 } else {
-                    if (isSynCorrect) synErrMsg = "Synthetic error near: " + token.toString();
+                    synErrMsg = "The file " + file.getName() + " doesn't exist";
                     isSynCorrect = false;
 
                 }
@@ -113,7 +106,6 @@ public class Interpreter {
                                /*
                             * create table 错误种类
                             * 1 table name已存在
-
                                semaErrMsg="The table "+tmpTableName+" already exists";
                                isSemaCorrect=false;
                            }
@@ -536,22 +528,18 @@ public class Interpreter {
                                         i++;
                                         dataItems.add(tmpValue);
                                       /* else if(isSemaCorrect){
-
                                            tmpValue=token.toString();
                                            int tmpLength=CatalogManager.getLength(tmpTableName, i);
                                            String tmpType=CatalogManager.getType(tmpTableName, i);
                                            String tmpAttriName=CatalogManager.getAttriName(tmpTableName, i);
-
                                            if(CatalogManager.inUniqueKey(tmpTableName, tmpAttriName)){
                                                conditionNode tmpCondition=new conditionNode(tmpAttriName,"=",token.toString());
-
                                                if(isSemaCorrect&&NKSql.selectTuples(tmpTableName,null,tmpCondition).size()!=0){
                                                    isSemaCorrect=false;
                                                    semaErrMsg="The value "+token.toString()+" already exists in the unique attrubute "+tmpAttriName;
                                                }
                                            }
                                            if(token.tag==Tag.STR){//字符类型
-
                                                //if(tmpType.equals("char"))tmpLength/=2;
                                                if(!tmpType.equals("char")
                                                        ||tmpLength<tmpValue.getBytes().length){
@@ -562,7 +550,6 @@ public class Interpreter {
                                                units.add(tmpValue);
                                            }
                                            else if(token.tag==Tag.INTNUM){//整型
-
                                                if(!tmpType.toString().equals("int")
                                                        &&!tmpType.equals("float")){
                                                    isSemaCorrect=false;
@@ -572,7 +559,6 @@ public class Interpreter {
                                                units.add(tmpValue);
                                            }
                                            else if(token.tag==Tag.FLOATNUM){//浮点型
-
                                                if(!CatalogManager.getType(tmpTableName, i++).equals("float")){
                                                    isSemaCorrect=false;
                                                    semaErrMsg="The type of value +"+tmpValue+" should be "+tmpType+"("+tmpLength+"), not float";
@@ -596,7 +582,7 @@ public class Interpreter {
                                 }
                                 if (isSemaCorrect/*&&i<CatalogManager.getTableAttriNum(tmpTableName)*/) {
                                     isSemaCorrect = false;
-                                    semaErrMsg = "The number of values is smaller than that of attributes";
+                                    semaErrMsg = "The  than that of attributes";
                                 }
                                 token = lexer.scan();
                                 if (isSynCorrect && token.toString().equals(";")) {

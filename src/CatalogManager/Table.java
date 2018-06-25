@@ -117,7 +117,7 @@ public class Table implements Serializable {
     }
 
     public void drop() {
-        for (int i = 0; i < this.numberOfBlocks; i ++) {
+        for (int i = 0; i < this.numberOfBlocks; i++) {
             BufferManager.sharedInstance.removeBlock(getFileIdentifier(), i);
         }
         for (Index index : this.indices.values()) {
@@ -140,13 +140,13 @@ public class Table implements Serializable {
 
     private void executeDeleteInBPlusTree() {
         Vector<Integer> indexedAttributeIndices = new Vector<>();
-        for (int i = 0; i < this.metadata.metadataAttributes.values().size(); i ++) {
+        for (int i = 0; i < this.metadata.metadataAttributes.values().size(); i++) {
             if (this.metadata.getMetadataAttributeAt(i).isIndexed) {
                 indexedAttributeIndices.add(i);
             }
         }
         for (Tuple tuple : this.deleteIntermediateResults.keySet()) {
-            for (int i = 0; i < indexedAttributeIndices.size(); i ++) {
+            for (int i = 0; i < indexedAttributeIndices.size(); i++) {
                 Integer attributeIndex = indexedAttributeIndices.get(i);
                 String contentToDelete = tuple.get(attributeIndex);
                 MetadataAttribute attribute = this.metadata.getMetadataAttributeAt(attributeIndex);
@@ -164,10 +164,10 @@ public class Table implements Serializable {
         if (tempIndex == null) {
             MetadataAttribute attribute = this.metadata.getMetadataAttributeNamed(attributeName);
             if (attribute.dataType.equals(DataType.StringType)) {
-                tempIndex = IndexManager.sharedInstance.createBlankIndex(getFileIdentifier(),
+                tempIndex = IndexManager.sharedInstance.createBlankIndex(this.tableName,
                         attributeName, attribute.dataType, attribute.length);
             } else {
-                tempIndex = IndexManager.sharedInstance.createBlankIndex(getFileIdentifier(),
+                tempIndex = IndexManager.sharedInstance.createBlankIndex(this.tableName,
                         attributeName, attribute.dataType);
             }
         }
@@ -177,10 +177,10 @@ public class Table implements Serializable {
     }
 
     private void buildIndex(String indexName) throws NKInterfaceException {
-        for (int i = 0; i < this.numberOfBlocks; i ++) {
+        for (int i = 0; i < this.numberOfBlocks; i++) {
             Block block = BufferManager.sharedInstance.getBlock(this.getFileIdentifier(), i);
             Vector<Integer> dataIndices = block.getAllTupleIndices();
-            for (int j = 0; j < dataIndices.size(); j ++) {
+            for (int j = 0; j < dataIndices.size(); j++) {
                 BPlusTreePointer pointer = new BPlusTreePointer(i, j);
                 byte[] key = getAttributeBytes(block.getTupleAt(dataIndices.get(i), this.metadata),
                         this.indices.get(indexName).attribute);
@@ -234,7 +234,7 @@ public class Table implements Serializable {
      */
     private BPlusTreePointer createBlockAndInsert(Tuple attributeTuple) throws NKInterfaceException {
         Block block = new Block(getFileIdentifier(), numberOfBlocks, this.metadata);
-        numberOfBlocks ++;
+        numberOfBlocks++;
         Integer blockOffset = insertIntoBlock(attributeTuple, block);
         if (!block.isFullyOccupied) {
             this.availableBlocks.add(block.index);
@@ -267,7 +267,7 @@ public class Table implements Serializable {
      * The following 8 methods are supportive methods in deletions
      */
     private void deleteAll() {
-        for (int i = 0; i < this.numberOfBlocks; i ++) {
+        for (int i = 0; i < this.numberOfBlocks; i++) {
             Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), i);
             block.removeAllTuple();
             BufferManager.sharedInstance.storeBlock(block);
@@ -288,7 +288,7 @@ public class Table implements Serializable {
     }
 
     private void firstDeleteWithoutIndex(ConditionalAttribute condition) throws NKInterfaceException {
-        for (int i = 0; i < this.numberOfBlocks; i ++) {
+        for (int i = 0; i < this.numberOfBlocks; i++) {
             Block block = BufferManager.sharedInstance.getBlock(this.getFileIdentifier(), i);
             Vector<Integer> indices = block.getAllTupleIndices();
             for (Integer index : indices) {
@@ -351,12 +351,12 @@ public class Table implements Serializable {
         Collections.sort(emptyBlocks);
         Vector<Integer> blockTrimRule = new Vector<>();
         Integer lastBlock = this.numberOfBlocks - 1;
-        for (int i = 0; i < emptyBlocks.size(); i ++) {
+        for (int i = 0; i < emptyBlocks.size(); i++) {
             if (!emptyBlocks.contains(lastBlock)) {
                 blockTrimRule.add(lastBlock);
                 blockTrimRule.add(emptyBlocks.get(i));
             }
-            lastBlock --;
+            lastBlock--;
             if (lastBlock < 0) {
                 break;
             }
@@ -369,7 +369,7 @@ public class Table implements Serializable {
      */
     private Vector<Tuple> selectAll() {
         Vector<Tuple> result = new Vector<>();
-        for (int i = 0; i < this.numberOfBlocks; i ++) {
+        for (int i = 0; i < this.numberOfBlocks; i++) {
             Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), i);
             result.addAll(block.getAllTuples(this.metadata));
         }
@@ -389,7 +389,7 @@ public class Table implements Serializable {
 
     private void firstSearchWithoutIndex(ConditionalAttribute condition) throws NKInterfaceException {
         Vector<Tuple> result = new Vector<>();
-        for (int i = 0; i < this.numberOfBlocks; i ++) {
+        for (int i = 0; i < this.numberOfBlocks; i++) {
             Block block = BufferManager.sharedInstance.getBlock(this.getFileIdentifier(), i);
             result.addAll(searchInBlock(condition, block));
         }
@@ -417,7 +417,7 @@ public class Table implements Serializable {
 
     private ArrayList<ConditionalAttribute> makeIndexedSearchFirst
             (ArrayList<ConditionalAttribute> conditions) {
-        for (int i = 0; i < conditions.size(); i ++) {
+        for (int i = 0; i < conditions.size(); i++) {
             ConditionalAttribute conditionalAttribute = conditions.get(i);
             MetadataAttribute metadataAttribute =
                     this.metadata.getMetadataAttributeNamed(conditionalAttribute.attributeName);
@@ -438,15 +438,25 @@ public class Table implements Serializable {
         Index index = this.indices.get(this.metadata.getMetadataAttributeNamed(condition.attributeName)
                 .indexName);
         switch (condition.compareCondition) {
-            case GreaterThan: resultPointers = indexManager.searchRangely(index, searchKey,
-                    null, false, false); break;
-            case LessThan: resultPointers = indexManager.searchRangely(index, null, searchKey,
-                    false, false); break;
-            case NoGreaterThan: resultPointers = indexManager.searchRangely(index, null,
-                    searchKey, false, true); break;
-            case NoLessThan: resultPointers = indexManager.searchRangely(index, searchKey, null,
-                    true, false); break;
-            case EqualTo: resultPointers.add(indexManager.searchEqually(index, searchKey)); break;
+            case GreaterThan:
+                resultPointers = indexManager.searchRangely(index, searchKey,
+                        null, false, false);
+                break;
+            case LessThan:
+                resultPointers = indexManager.searchRangely(index, null, searchKey,
+                        false, false);
+                break;
+            case NoGreaterThan:
+                resultPointers = indexManager.searchRangely(index, null,
+                        searchKey, false, true);
+                break;
+            case NoLessThan:
+                resultPointers = indexManager.searchRangely(index, searchKey, null,
+                        true, false);
+                break;
+            case EqualTo:
+                resultPointers.add(indexManager.searchEqually(index, searchKey));
+                break;
         }
         return resultPointers;
     }
@@ -465,11 +475,11 @@ public class Table implements Serializable {
         Collections.sort(emptyBlocks);
         Integer iterator = 0;
         Vector<Integer> blockTrimVector = new Vector<>();
-        for (int i = this.numberOfBlocks - 1; i >= 0; i --) {
+        for (int i = this.numberOfBlocks - 1; i >= 0; i--) {
             if (!emptyBlocks.contains(i)) {
                 blockTrimVector.add(i);
                 blockTrimVector.add(emptyBlocks.get(iterator));
-                iterator ++;
+                iterator++;
             }
             if (iterator >= emptyBlocks.size() - 1) {
                 break;
@@ -488,9 +498,12 @@ public class Table implements Serializable {
         DataType dataType = attribute.dataType;
         Integer length = attribute.length;
         switch (dataType) {
-            case IntegerType: return converter.convertToBytes(Integer.valueOf(content));
-            case FloatType: return converter.convertToBytes(Float.valueOf(content));
-            case StringType: return converter.convertToBytes(content, length);
+            case IntegerType:
+                return converter.convertToBytes(Integer.valueOf(content));
+            case FloatType:
+                return converter.convertToBytes(Float.valueOf(content));
+            case StringType:
+                return converter.convertToBytes(content, length);
         }
         return null;
     }

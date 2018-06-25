@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class NKSql {
 
-    public static final String homeDirectory = "/Users/licanchen/Desktop/DB_Files/";
+    private static final String homeDirectory = "/Users/licanchen/Desktop/DB_Files/";
     public static final String dataHomeDirectory = homeDirectory + "Data/";
     public static final String indexHomeDirectory = homeDirectory + "Index/";
     public static final String metadataHomeDirectory = homeDirectory + "Metadata/";
@@ -68,7 +68,7 @@ public class NKSql {
 
     public static void insertTuple(Tuple newItem, String tableName) throws NKInterfaceException {
         RecordManager.sharedInstance.insertIntoTable(tableName, newItem);
-        System.out.println("Item inserted.");
+        //System.out.println("Item inserted.");
     }
 
     public static void dropTuple(String tableName,

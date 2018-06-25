@@ -163,6 +163,7 @@ public class BufferManager {
 
     private void writeBlockToStorage(Block block) {
         String path = createPath(block.fileIdentifier, block.index);
+        this.blockLookUpTable.remove(createPath(block.fileIdentifier, block.index));
         this.fileManager.storeObject(block, path);
     }
 
