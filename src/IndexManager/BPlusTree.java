@@ -567,4 +567,38 @@ public class BPlusTree{
         BPlusTreePointer left = node.searchFor(marker);
         node.insert(left, marker, right);
     }
+
+    public boolean modifyRecordBlockIndex(Vector<Integer> newBlockIndex){
+        if(newBlockIndex.size()% 2 != 0) return false;
+        Vector<Integer> oldIndex = new Vector<>();
+        Vector<Integer> newIndex = new Vector<>();
+        for(int i = 0;i < newBlockIndex.size()-1; i = i +2){
+            oldIndex.add(newBlockIndex.elementAt(i));
+            newIndex.add(newBlockIndex.elementAt(i+1));
+        }
+
+        BPlusTreeBlock currentNode = getTreeNode(this.root);
+        while(!currentNode.isLeafNode){//找到最左侧的block
+            currentNode = getTreeNode(currentNode.getPointer(0));
+        }
+        do{
+            for(int i = 0;i <currentNode.currentSize; i++){
+                int a = oldIndex.indexOf(currentNode.getPointer(i).blockIndex);
+                if(a == -1) continue;
+                else{
+                    byte[] element = currentNode.getAttribute(i);
+                    BPlusTreePointer newPointer = new BPlusTreePointer(newIndex.elementAt(a), currentNode.getPointer(i).blockOffset);
+                    try{
+                        currentNode.remove(element,true);
+                    }
+                    catch(NKInternalException e){
+                        e.describe();
+                    }
+                    currentNode.insert(element, newPointer);
+                }
+            }
+            currentNode = getTreeNode(currentNode.getTailPointer());
+        }while(currentNode != null);
+        return true;
+    }
 }

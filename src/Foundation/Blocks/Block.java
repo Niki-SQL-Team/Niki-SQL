@@ -90,6 +90,13 @@ public class Block implements Serializable {
         }
     }
 
+    public void removeAllTuple() {
+        Vector<Integer> allTupleIndices = getAllTupleIndices();
+        for (Integer index : allTupleIndices) {
+            removeTupleAt(index);
+        }
+    }
+
     public Integer writeTuple(Tuple tuple, Metadata metadata) throws NKInterfaceException {
         try {
             Integer initialOffset = declareOccupancy() * this.tupleLength;

@@ -3,15 +3,27 @@
   <component name="ChangeListManager">
     <list default="true" id="8fb71b64-2106-4d1e-9a79-dde6c459ba73" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/BufferManager/BufferManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/BufferManager/BufferManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/CatalogManager/Table$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/CatalogManager/Table$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/CatalogManager/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/CatalogManager/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Foundation/Blocks/BPlusTreeBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/Foundation/Blocks/BPlusTreeBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Foundation/MemoryStorage/MetadataAttribute$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/Foundation/MemoryStorage/MetadataAttribute$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Foundation/MemoryStorage/MetadataAttribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/Foundation/MemoryStorage/MetadataAttribute.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/IndexManager/BPlusTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/IndexManager/BPlusTree.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/IndexManager/IndexManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/IndexManager/IndexManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Interpreter/Holder.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Interpreter/Interpreter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/Interpreter/Interpreter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/RecordManager/Holder.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Niki SQL/Top/NKSql.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Niki SQL/Top/NKSql.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BufferManager/BufferManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BufferManager/BufferManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CatalogManager/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatalogManager/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Foundation/Blocks/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/Blocks/Block.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IndexManager/IndexManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IndexManager/IndexManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interpreter/Holder.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interpreter/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpreter/Interpreter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RecordManager/Holder.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Top/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Top/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Top/NKSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Top/NKSql.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,8 +38,8 @@
       <file leaf-file-name="IndexManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/IndexManager/IndexManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="69" column="18" selection-start-line="69" selection-start-column="18" selection-end-line="69" selection-end-column="18" />
+            <state relative-caret-position="362">
+              <caret line="116" selection-start-line="116" selection-end-line="116" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#527#528#0" expanded="true" />
@@ -40,34 +52,10 @@
       <file leaf-file-name="Interpreter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Interpreter/Interpreter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="83" column="21" lean-forward="true" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
+            <state relative-caret-position="154">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Table.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/CatalogManager/Table.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="712">
-              <caret line="457" lean-forward="true" selection-start-line="457" selection-end-line="457" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7639#8057#0" />
-                <element signature="e#9121#9428#0" />
-                <element signature="e#11658#12260#0" />
-                <element signature="e#12266#12504#0" />
-                <element signature="e#12510#12748#0" />
-                <element signature="e#12754#13157#0" />
-                <element signature="e#13163#13475#0" />
-                <element signature="e#13481#14162#0" />
-                <element signature="e#14168#14755#0" />
-                <element signature="e#16874#17598#0" />
-                <element signature="e#20371#20372#0" expanded="true" />
-                <element signature="e#20418#20419#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,8 +64,8 @@
       <file leaf-file-name="BufferManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BufferManager/BufferManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
+            <state relative-caret-position="146">
+              <caret line="125" column="32" selection-start-line="125" selection-start-column="32" selection-end-line="125" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#BufferManager#0;class#BufferManager#0" />
@@ -101,13 +89,88 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
+      <file leaf-file-name="Table.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CatalogManager/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="134" column="5" lean-forward="true" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
+            <state relative-caret-position="1441">
+              <caret line="189" column="5" lean-forward="true" selection-start-line="189" selection-start-column="5" selection-end-line="189" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#20954#20955#0" expanded="true" />
+                <element signature="e#21001#21002#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Block.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/Block.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="466">
+              <caret line="92" column="33" selection-start-line="92" selection-start-column="33" selection-end-line="92" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#Block#0;class#Block#0" />
+                <element signature="method#getAllTuples#0;class#Block#0" />
+                <element signature="method#getAllTupleIndices#0;class#Block#0" />
+                <element signature="method#getTupleAt#0;class#Block#0" />
+                <element signature="method#removeAllTuple#0;class#Block#0" />
+                <element signature="method#getInteger#0;class#Block#0" />
+                <element signature="method#getFloat#0;class#Block#0" />
+                <element signature="method#getString#0;class#Block#0" />
+                <element signature="method#writeInteger#0;class#Block#0" />
+                <element signature="method#writeFloat#0;class#Block#0" />
+                <element signature="method#writeString#0;class#Block#0" />
+                <element signature="method#declareOccupancy#0;class#Block#0" />
+                <element signature="method#releaseOccupancy#0;class#Block#0" />
+                <element signature="method#getAttributeAt#0;class#Block#0" />
+                <element signature="method#initializeEmptyList#0;class#Block#0" />
+                <element signature="method#writeAttributeToBlock#0;class#Block#0" />
+                <element signature="method#getAllEmptyIndices#0;class#Block#0" />
+                <element signature="method#handleInternalException#0;class#Block#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BPlusTreeBlock.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="151" selection-start-line="151" selection-end-line="151" />
+              <folding>
+                <element signature="method#getPointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#getAttribute#0;class#BPlusTreeBlock#0" />
+                <element signature="method#getTailPointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#setTailPointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#insert#0;class#BPlusTreeBlock#0" />
+                <element signature="method#insert#1;class#BPlusTreeBlock#0" />
+                <element signature="method#outputAttributes#0;class#BPlusTreeBlock#0" />
+                <element signature="method#setPointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#searchFloatFor#0;class#BPlusTreeBlock#0" />
+                <element signature="method#searchStringFor#0;class#BPlusTreeBlock#0" />
+                <element signature="method#checkForEarlyQuitSearch#0;class#BPlusTreeBlock#0" />
+                <element signature="method#getAttributePointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#getInternalPointer#0;class#BPlusTreeBlock#0" />
+                <element signature="method#getPointerByOffset#0;class#BPlusTreeBlock#0" />
+                <element signature="method#outputPointerAttributes#0;class#BPlusTreeBlock#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BPlusTree.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/IndexManager/BPlusTree.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="265" selection-start-line="265" selection-end-line="265" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6714#6715#0" expanded="true" />
+                <element signature="e#6785#6786#0" expanded="true" />
+                <element signature="e#8398#8416#0" expanded="true" />
+                <element signature="e#9372#9390#0" expanded="true" />
+                <element signature="e#21350#21368#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,8 +179,8 @@
       <file leaf-file-name="BPlusTreeMetadata.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreeMetadata.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="280">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#BPlusTreeMetadata#0;class#BPlusTreeMetadata#0" />
@@ -128,11 +191,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="791">
+              <caret line="130" lean-forward="true" selection-start-line="130" selection-end-line="130" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="NKSql.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-225">
-              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+            <state relative-caret-position="126">
+              <caret line="83" selection-start-line="83" selection-end-line="83" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -151,26 +226,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>createBlockAnd</find>
-      <find>insertIntoAvail</find>
-      <find>isUnique</find>
-      <find>static</find>
-      <find>tmpAttribute</find>
-      <find>tmpAttriName</find>
-      <find>unique</find>
-      <find>MetadataAttribute</find>
-      <find>setUpAll</find>
-      <find>//</find>
-      <find>setSingle</find>
-      <find>createIndex</find>
-      <find>setUpAllIndices</find>
-      <find>buildIndex</find>
-      <find>setUp</find>
-      <find>single</find>
-      <find>dropIndex</find>
-      <find>Exception e</find>
-      <find>conditionalAttri</find>
-      <find>select com</find>
       <find>search</find>
       <find>CompareCondition</find>
       <find>showSelect</find>
@@ -180,7 +235,27 @@
       <find>exec</find>
       <find>execute</find>
       <find>drop</find>
+      <find>else if (token.tag == Tag.EXE</find>
+      <find>bufferManager</find>
+      <find>create index failed</find>
+      <find>createIndex</find>
+      <find>setSingleIndex</find>
+      <find>insertIntermediateResults</find>
+      <find>isUnique</find>
+      <find>searchIndexFor</find>
+      <find>remove(</find>
+      <find>removeKey</find>
+      <find>executeDeletion</find>
+      <find>executeDeleteInBPlusTree</find>
+      <find>dropIndexOnTuple</find>
+      <find>remove</find>
       <find>delete</find>
+      <find>All</find>
+      <find>.All</find>
+      <find>new Condition</find>
+      <find>deletion</find>
+      <find>deleteAll</find>
+      <find>insert</find>
     </findStrings>
     <replaceStrings>
       <replace>tupleLength</replace>
@@ -199,11 +274,8 @@
         <option value="$PROJECT_DIR$/src/Foundation/Enumeration/CompareCondition.java" />
         <option value="$PROJECT_DIR$/src/BufferManager/FileManager.java" />
         <option value="$PROJECT_DIR$/LICENSE" />
-        <option value="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" />
         <option value="$PROJECT_DIR$/src/IndexManager/Index.java" />
         <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/ConditionalAttribute.java" />
-        <option value="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" />
-        <option value="$PROJECT_DIR$/src/Foundation/Blocks/Block.java" />
         <option value="$PROJECT_DIR$/src/Interpreter/Lexer.java" />
         <option value="$PROJECT_DIR$/src/Interpreter/Comparison.java" />
         <option value="$PROJECT_DIR$/src/Interpreter/Num.java" />
@@ -212,14 +284,17 @@
         <option value="$PROJECT_DIR$/src/Interpreter/Word.java" />
         <option value="$PROJECT_DIR$/src/RecordManager/RecordManager.java" />
         <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/Metadata.java" />
-        <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java" />
         <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreeMetadata.java" />
         <option value="$PROJECT_DIR$/src/CatalogManager/CatalogManager.java" />
-        <option value="$PROJECT_DIR$/src/Top/NKSql.java" />
-        <option value="$PROJECT_DIR$/src/Interpreter/Interpreter.java" />
-        <option value="$PROJECT_DIR$/src/IndexManager/IndexManager.java" />
         <option value="$PROJECT_DIR$/src/Top/Main.java" />
+        <option value="$PROJECT_DIR$/src/IndexManager/BPlusTree.java" />
+        <option value="$PROJECT_DIR$/src/IndexManager/IndexManager.java" />
+        <option value="$PROJECT_DIR$/src/Top/NKSql.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java" />
+        <option value="$PROJECT_DIR$/src/Interpreter/Interpreter.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java" />
         <option value="$PROJECT_DIR$/src/BufferManager/BufferManager.java" />
+        <option value="$PROJECT_DIR$/src/Foundation/Blocks/Block.java" />
         <option value="$PROJECT_DIR$/src/CatalogManager/Table.java" />
       </list>
     </option>
@@ -261,6 +336,38 @@
               <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="BufferManager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="CatalogManager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Foundation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Foundation" type="462c0819:PsiDirectoryNode" />
+              <item name="Blocks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Foundation" type="462c0819:PsiDirectoryNode" />
+              <item name="MemoryStorage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Niki SQL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="IndexManager" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Niki SQL" type="b2602c69:ProjectViewProjectNode" />
@@ -389,12 +496,12 @@
       <workItem from="1529841552921" duration="4644000" />
       <workItem from="1529919827282" duration="660000" />
       <workItem from="1529925811572" duration="12092000" />
-      <workItem from="1529940837020" duration="6541000" />
+      <workItem from="1529940837020" duration="16673000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167209000" />
+    <option name="totallyTimeSpent" value="177341000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -419,18 +526,18 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32969698" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.37333333" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.36848485" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32969698" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24678111" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22818312" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.38666666" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.45333335" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -485,19 +592,13 @@
           <option name="timeStamp" value="115" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java</url>
-          <line>29</line>
+          <url>file://$PROJECT_DIR$/src/CatalogManager/Table.java</url>
+          <line>422</line>
           <properties />
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java</url>
-          <line>27</line>
-          <properties />
-          <option name="timeStamp" value="157" />
+          <option name="timeStamp" value="214" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="187" />
+      <option name="time" value="215" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -548,11 +649,8 @@
             <element signature="method#setTailPointer#0;class#BPlusTreeBlock#0" />
             <element signature="method#insert#0;class#BPlusTreeBlock#0" />
             <element signature="method#insert#1;class#BPlusTreeBlock#0" />
-            <element signature="method#remove#0;class#BPlusTreeBlock#0" />
             <element signature="method#outputAttributes#0;class#BPlusTreeBlock#0" />
             <element signature="method#setPointer#0;class#BPlusTreeBlock#0" />
-            <element signature="method#copyStorage#0;class#BPlusTreeBlock#0" />
-            <element signature="method#searchIntegerFor#0;class#BPlusTreeBlock#0" />
             <element signature="method#searchFloatFor#0;class#BPlusTreeBlock#0" />
             <element signature="method#searchStringFor#0;class#BPlusTreeBlock#0" />
             <element signature="method#checkForEarlyQuitSearch#0;class#BPlusTreeBlock#0" />
@@ -643,11 +741,8 @@
             <element signature="method#setTailPointer#0;class#BPlusTreeBlock#0" />
             <element signature="method#insert#0;class#BPlusTreeBlock#0" />
             <element signature="method#insert#1;class#BPlusTreeBlock#0" />
-            <element signature="method#remove#0;class#BPlusTreeBlock#0" />
             <element signature="method#outputAttributes#0;class#BPlusTreeBlock#0" />
             <element signature="method#setPointer#0;class#BPlusTreeBlock#0" />
-            <element signature="method#copyStorage#0;class#BPlusTreeBlock#0" />
-            <element signature="method#searchIntegerFor#0;class#BPlusTreeBlock#0" />
             <element signature="method#searchFloatFor#0;class#BPlusTreeBlock#0" />
             <element signature="method#searchStringFor#0;class#BPlusTreeBlock#0" />
             <element signature="method#checkForEarlyQuitSearch#0;class#BPlusTreeBlock#0" />
@@ -769,11 +864,8 @@
             <element signature="method#setTailPointer#0;class#BPlusTreeBlock#0" />
             <element signature="method#insert#0;class#BPlusTreeBlock#0" />
             <element signature="method#insert#1;class#BPlusTreeBlock#0" />
-            <element signature="method#remove#0;class#BPlusTreeBlock#0" />
             <element signature="method#outputAttributes#0;class#BPlusTreeBlock#0" />
             <element signature="method#setPointer#0;class#BPlusTreeBlock#0" />
-            <element signature="method#copyStorage#0;class#BPlusTreeBlock#0" />
-            <element signature="method#searchIntegerFor#0;class#BPlusTreeBlock#0" />
             <element signature="method#searchFloatFor#0;class#BPlusTreeBlock#0" />
             <element signature="method#searchStringFor#0;class#BPlusTreeBlock#0" />
             <element signature="method#checkForEarlyQuitSearch#0;class#BPlusTreeBlock#0" />
@@ -803,30 +895,10 @@
     <entry file="file://$PROJECT_DIR$/src/Index Manager/IndexManager.java" />
     <entry file="file://$PROJECT_DIR$/src/BufferManager/BufferedBlock.java" />
     <entry file="file://$PROJECT_DIR$/src/CatalogManager/TableMetadata.java" />
-    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreePointer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/lib/src.zip!/java.base/java/util/Vector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="776" selection-start-line="776" selection-end-line="776" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/Tuple.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-          <folding>
-            <element signature="e#164#165#0" expanded="true" />
-            <element signature="e#206#207#0" expanded="true" />
-            <element signature="e#246#247#0" expanded="true" />
-            <element signature="e#294#295#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -867,41 +939,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/ConditionalAttribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="860">
-          <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/Block.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1340">
-          <caret line="107" selection-start-line="107" selection-end-line="107" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Block#0;class#Block#0" />
-            <element signature="method#getAllTuples#0;class#Block#0" />
-            <element signature="method#getAllTupleIndices#0;class#Block#0" />
-            <element signature="method#getTupleAt#0;class#Block#0" />
-            <element signature="method#removeTupleAt#0;class#Block#0" />
-            <element signature="method#getInteger#0;class#Block#0" />
-            <element signature="method#getFloat#0;class#Block#0" />
-            <element signature="method#getString#0;class#Block#0" />
-            <element signature="method#writeInteger#0;class#Block#0" />
-            <element signature="method#writeFloat#0;class#Block#0" />
-            <element signature="method#writeString#0;class#Block#0" />
-            <element signature="method#declareOccupancy#0;class#Block#0" />
-            <element signature="method#releaseOccupancy#0;class#Block#0" />
-            <element signature="method#getAttributeAt#0;class#Block#0" />
-            <element signature="method#initializeEmptyList#0;class#Block#0" />
-            <element signature="method#writeAttributeToBlock#0;class#Block#0" />
-            <element signature="method#getAllEmptyIndices#0;class#Block#0" />
-            <element signature="method#handleInternalException#0;class#Block#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -954,97 +991,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/Metadata.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Metadata#1;class#Metadata#0" />
-            <element signature="method#getMetadataAttributeNamed#0;class#Metadata#0" />
-            <element signature="method#getMetadataAttributeAt#0;class#Metadata#0" />
-            <element signature="method#getAttributeIndexNamed#0;class#Metadata#0" />
-            <element signature="e#1780#1781#0" expanded="true" />
-            <element signature="e#1839#1840#0" expanded="true" />
-            <element signature="method#initialize#0;class#Metadata#0" />
-            <element signature="method#setAttributeName#0;class#Metadata#0" />
-            <element signature="method#setMetadataAttributes#0;class#Metadata#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-549">
-          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
-          <folding>
-            <element signature="method#getPointer#0;class#BPlusTreeBlock#0" />
-            <element signature="method#getAttribute#0;class#BPlusTreeBlock#0" />
-            <element signature="method#getTailPointer#0;class#BPlusTreeBlock#0" />
-            <element signature="method#setTailPointer#0;class#BPlusTreeBlock#0" />
-            <element signature="method#insert#0;class#BPlusTreeBlock#0" />
-            <element signature="method#insert#1;class#BPlusTreeBlock#0" />
-            <element signature="method#remove#0;class#BPlusTreeBlock#0" />
-            <element signature="method#outputAttributes#0;class#BPlusTreeBlock#0" />
-            <element signature="method#setPointer#0;class#BPlusTreeBlock#0" />
-            <element signature="method#copyStorage#0;class#BPlusTreeBlock#0" />
-            <element signature="method#searchIntegerFor#0;class#BPlusTreeBlock#0" />
-            <element signature="method#searchFloatFor#0;class#BPlusTreeBlock#0" />
-            <element signature="method#searchStringFor#0;class#BPlusTreeBlock#0" />
-            <element signature="method#checkForEarlyQuitSearch#0;class#BPlusTreeBlock#0" />
-            <element signature="method#getAttributePointer#0;class#BPlusTreeBlock#0" />
-            <element signature="method#getInternalPointer#0;class#BPlusTreeBlock#0" />
-            <element signature="method#getPointerByOffset#0;class#BPlusTreeBlock#0" />
-            <element signature="method#outputPointerAttributes#0;class#BPlusTreeBlock#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CatalogManager/CatalogManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="67" column="42" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#createTable#0;class#CatalogManager#0" />
-            <element signature="method#dropTable#0;class#CatalogManager#0" />
-            <element signature="method#getTable#0;class#CatalogManager#0" />
-            <element signature="method#createIndex#0;class#CatalogManager#0" />
-            <element signature="method#close#0;class#CatalogManager#0" />
-            <element signature="method#isTableExists#0;class#CatalogManager#0" />
-            <element signature="method#flushInBuffer#0;class#CatalogManager#0" />
-            <element signature="method#removeTableFromBuffer#0;class#CatalogManager#0" />
-            <element signature="method#addTableToBuffer#0;class#CatalogManager#0" />
-            <element signature="method#loadTable#0;class#CatalogManager#0" />
-            <element signature="method#createTablePath#0;class#CatalogManager#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RecordManager/RecordManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#insertIntoTable#0;class#RecordManager#0" />
-            <element signature="method#deleteInTable#0;class#RecordManager#0" />
-            <element signature="method#getTableNamed#0;class#RecordManager#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getAttributeLength#0;class#MetadataAttribute#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Interpreter/Lexer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
@@ -1059,10 +1005,139 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/BufferManager/FileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreePointer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/Metadata.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getMetadataAttributeNamed#0;class#Metadata#0" />
+            <element signature="method#getMetadataAttributeAt#0;class#Metadata#0" />
+            <element signature="method#getAttributeIndexNamed#0;class#Metadata#0" />
+            <element signature="e#1780#1781#0" expanded="true" />
+            <element signature="e#1839#1840#0" expanded="true" />
+            <element signature="method#setAttributeName#0;class#Metadata#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/ConditionalAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="712">
+          <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/MetadataAttribute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="639">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getAttributeLength#0;class#MetadataAttribute#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/Tuple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#164#165#0" expanded="true" />
+            <element signature="e#206#207#0" expanded="true" />
+            <element signature="e#246#247#0" expanded="true" />
+            <element signature="e#294#295#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CatalogManager/CatalogManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#dropTable#0;class#CatalogManager#0" />
+            <element signature="method#getTable#0;class#CatalogManager#0" />
+            <element signature="method#close#0;class#CatalogManager#0" />
+            <element signature="method#isTableExists#0;class#CatalogManager#0" />
+            <element signature="method#flushInBuffer#0;class#CatalogManager#0" />
+            <element signature="method#removeTableFromBuffer#0;class#CatalogManager#0" />
+            <element signature="method#addTableToBuffer#0;class#CatalogManager#0" />
+            <element signature="method#loadTable#0;class#CatalogManager#0" />
+            <element signature="method#createTablePath#0;class#CatalogManager#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RecordManager/RecordManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#insertIntoTable#0;class#RecordManager#0" />
+            <element signature="method#deleteInTable#0;class#RecordManager#0" />
+            <element signature="method#getTableNamed#0;class#RecordManager#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="791">
+          <caret line="130" lean-forward="true" selection-start-line="130" selection-end-line="130" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreeMetadata.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#BPlusTreeMetadata#0;class#BPlusTreeMetadata#0" />
+            <element signature="method#getAttributes#0;class#BPlusTreeMetadata#0" />
+            <element signature="method#getAttributes#1;class#BPlusTreeMetadata#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/IndexManager/BPlusTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="520" lean-forward="true" selection-start-line="520" selection-end-line="520" />
+        <state relative-caret-position="286">
+          <caret line="265" selection-start-line="265" selection-end-line="265" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#6714#6715#0" expanded="true" />
@@ -1076,8 +1151,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/IndexManager/IndexManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="69" column="18" selection-start-line="69" selection-start-column="18" selection-end-line="69" selection-end-column="18" />
+        <state relative-caret-position="362">
+          <caret line="116" selection-start-line="116" selection-end-line="116" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#527#528#0" expanded="true" />
@@ -1086,55 +1161,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/BPlusTreeBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="151" selection-start-line="151" selection-end-line="151" />
+          <folding>
+            <element signature="method#getPointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#getAttribute#0;class#BPlusTreeBlock#0" />
+            <element signature="method#getTailPointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#setTailPointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#insert#0;class#BPlusTreeBlock#0" />
+            <element signature="method#insert#1;class#BPlusTreeBlock#0" />
+            <element signature="method#outputAttributes#0;class#BPlusTreeBlock#0" />
+            <element signature="method#setPointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#searchFloatFor#0;class#BPlusTreeBlock#0" />
+            <element signature="method#searchStringFor#0;class#BPlusTreeBlock#0" />
+            <element signature="method#checkForEarlyQuitSearch#0;class#BPlusTreeBlock#0" />
+            <element signature="method#getAttributePointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#getInternalPointer#0;class#BPlusTreeBlock#0" />
+            <element signature="method#getPointerByOffset#0;class#BPlusTreeBlock#0" />
+            <element signature="method#outputPointerAttributes#0;class#BPlusTreeBlock#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Interpreter/Interpreter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="83" column="21" lean-forward="true" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BufferManager/FileManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="38" column="6" lean-forward="true" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#642#672#0" expanded="true" />
-            <element signature="e#1092#1116#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Top/NKSql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-225">
-          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Foundation/MemoryStorage/BPlusTreeMetadata.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#BPlusTreeMetadata#0;class#BPlusTreeMetadata#0" />
-            <element signature="method#getAttributes#0;class#BPlusTreeMetadata#0" />
-            <element signature="method#getAttributes#1;class#BPlusTreeMetadata#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Top/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="134" column="5" lean-forward="true" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
+        <state relative-caret-position="154">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1143,8 +1197,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BufferManager/BufferManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="146">
+          <caret line="125" column="32" selection-start-line="125" selection-start-column="32" selection-end-line="125" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#BufferManager#0;class#BufferManager#0" />
@@ -1167,24 +1221,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CatalogManager/Table.java">
+    <entry file="file://$PROJECT_DIR$/src/Foundation/Blocks/Block.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="712">
-          <caret line="457" lean-forward="true" selection-start-line="457" selection-end-line="457" />
+        <state relative-caret-position="466">
+          <caret line="92" column="33" selection-start-line="92" selection-start-column="33" selection-end-line="92" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7639#8057#0" />
-            <element signature="e#9121#9428#0" />
-            <element signature="e#11658#12260#0" />
-            <element signature="e#12266#12504#0" />
-            <element signature="e#12510#12748#0" />
-            <element signature="e#12754#13157#0" />
-            <element signature="e#13163#13475#0" />
-            <element signature="e#13481#14162#0" />
-            <element signature="e#14168#14755#0" />
-            <element signature="e#16874#17598#0" />
-            <element signature="e#20371#20372#0" expanded="true" />
-            <element signature="e#20418#20419#0" expanded="true" />
+            <element signature="method#Block#0;class#Block#0" />
+            <element signature="method#getAllTuples#0;class#Block#0" />
+            <element signature="method#getAllTupleIndices#0;class#Block#0" />
+            <element signature="method#getTupleAt#0;class#Block#0" />
+            <element signature="method#removeAllTuple#0;class#Block#0" />
+            <element signature="method#getInteger#0;class#Block#0" />
+            <element signature="method#getFloat#0;class#Block#0" />
+            <element signature="method#getString#0;class#Block#0" />
+            <element signature="method#writeInteger#0;class#Block#0" />
+            <element signature="method#writeFloat#0;class#Block#0" />
+            <element signature="method#writeString#0;class#Block#0" />
+            <element signature="method#declareOccupancy#0;class#Block#0" />
+            <element signature="method#releaseOccupancy#0;class#Block#0" />
+            <element signature="method#getAttributeAt#0;class#Block#0" />
+            <element signature="method#initializeEmptyList#0;class#Block#0" />
+            <element signature="method#writeAttributeToBlock#0;class#Block#0" />
+            <element signature="method#getAllEmptyIndices#0;class#Block#0" />
+            <element signature="method#handleInternalException#0;class#Block#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CatalogManager/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1441">
+          <caret line="189" column="5" lean-forward="true" selection-start-line="189" selection-start-column="5" selection-end-line="189" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#20954#20955#0" expanded="true" />
+            <element signature="e#21001#21002#0" expanded="true" />
           </folding>
         </state>
       </provider>

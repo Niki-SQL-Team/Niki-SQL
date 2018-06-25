@@ -22,7 +22,10 @@ public class MetadataAttribute implements Serializable {
         this.length = length;
         this.isPrimaryKey = isPrimaryKey;
         this.isUnique = isUnique;
-        this.isIndexed = isUnique;
+        if (this.isPrimaryKey) {
+            this.isUnique = true;
+        }
+        this.isIndexed = this.isUnique;
         this.indexName = this.attributeName;
     }
 
@@ -36,12 +39,22 @@ public class MetadataAttribute implements Serializable {
         this.length = 0;
         this.isPrimaryKey = isPrimaryKey;
         this.isUnique = isUnique;
+        if (this.isPrimaryKey) {
+            this.isUnique = true;
+        }
+        this.isIndexed = this.isUnique;
         this.isIndexed = isUnique;
         this.indexName = this.attributeName;
     }
 
     public void setIndexName(String indexName) {
         this.indexName = indexName;
+    }
+
+    public void setAsPrimaryKey() {
+        this.isPrimaryKey = true;
+        this.isUnique = true;
+        this.isIndexed = true;
     }
 
     public Integer getAttributeLength() {

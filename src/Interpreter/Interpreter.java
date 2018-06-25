@@ -54,8 +54,7 @@ public class Interpreter {
                     System.out.println("THANK YOU FOR USING!");
                     try {
                         NKSql.close();
-                    } catch (NKInternalException exception) {
-                        exception.describe();
+                    } catch (Exception exception) {
                         exception.printStackTrace();
                     }
                     reader.close();
@@ -68,6 +67,11 @@ public class Interpreter {
 
             } else if (token.tag == Tag.EXECFILE) {
                 token = lexer.scan();
+                StringBuilder str= new StringBuilder("");
+                while(!token.toString().equals(";")){
+                    str.append(token.toString());
+                    token = lexer.scan();
+                }
                 File file = new File(token.toString() + ".txt");
                 token = lexer.scan();
                 if (token.toString().equals(";")) {
@@ -269,7 +273,7 @@ public class Interpreter {
                                 } else {
                                     for (MetadataAttribute attribute : tmpAttributes) {
                                         if (attribute.attributeName.equals(tmpPrimaryKey)) {
-                                            attribute.isPrimaryKey = true;
+                                            attribute.setAsPrimaryKey();
                                         }
                                     }
                                 }

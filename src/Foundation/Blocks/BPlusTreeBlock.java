@@ -156,8 +156,8 @@ public class BPlusTreeBlock extends Block {
         if (isLeftPointerPreserved && index < this.currentSize) {
             Integer initialOffset = index * this.tupleLength;
             copyStorage(initialOffset + this.tupleLength, initialOffset,
-                    (currentSize - 1 - index) * this.tupleLength);
-        } else {
+                    (currentSize - index) * this.tupleLength);
+        } else if (index < this.currentSize - 1) {
             Integer initialOffset = index * this.tupleLength;
             Integer pointerLength = 2 * singlePointerSize;
             copyStorage(initialOffset + pointerLength + this.tupleLength,

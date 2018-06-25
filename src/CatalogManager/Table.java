@@ -41,8 +41,10 @@ public class Table implements Serializable {
 
     public void insertAttributes(Tuple attributeTuple) throws NKInterfaceException {
         if (!isUnique(attributeTuple)) {
+            this.insertIntermediateResults.clear();
             throw new NKInterfaceException("Duplicate data found on an unique attribute.");
         }
+        this.insertIntermediateResults.clear();
         BPlusTreePointer pointer;
         if (availableBlocks.isEmpty()) {
             pointer = createBlockAndInsert(attributeTuple);
@@ -77,6 +79,9 @@ public class Table implements Serializable {
     }
 
     public void deleteItem(ArrayList<ConditionalAttribute> conditions) throws NKInterfaceException {
+        if (conditions.get(0).compareCondition == CompareCondition.All) {
+            deleteAll();
+        }
         conditions = makeIndexedSearchFirst(conditions);
         ConditionalAttribute firstCondition = conditions.get(0);
         if (this.metadata.getMetadataAttributeNamed(firstCondition.attributeName).isIndexed) {
@@ -90,8 +95,7 @@ public class Table implements Serializable {
         }
         executeDeleteInBPlusTree();
         Vector<Integer> emptyBlocks = executeDeletion();
-        Vector<Integer> blockTrimRule = createBlockTrimRule(emptyBlocks);
-        BufferManager.sharedInstance.handleBlockIndexChange(getFileIdentifier(), blockTrimRule);
+        handleBlockDeletion(emptyBlocks);
         this.numberOfBlocks -= emptyBlocks.size();
     }
 
@@ -143,8 +147,9 @@ public class Table implements Serializable {
         }
         for (Tuple tuple : this.deleteIntermediateResults.keySet()) {
             for (int i = 0; i < indexedAttributeIndices.size(); i ++) {
-                String contentToDelete = tuple.get(i);
-                MetadataAttribute attribute = this.metadata.getMetadataAttributeAt(i);
+                Integer attributeIndex = indexedAttributeIndices.get(i);
+                String contentToDelete = tuple.get(attributeIndex);
+                MetadataAttribute attribute = this.metadata.getMetadataAttributeAt(attributeIndex);
                 Index index = this.indices.get(attribute.indexName);
                 byte[] deleteTarget = alterStringToByte(contentToDelete, attribute.attributeName);
                 IndexManager.sharedInstance.removeKey(index, deleteTarget);
@@ -190,15 +195,6 @@ public class Table implements Serializable {
                 Index index = this.indices.get(attribute.indexName);
                 byte[] key = getAttributeBytes(tuple, attribute.attributeName);
                 IndexManager.sharedInstance.insertNewKey(index, key, pointer);
-            }
-        }
-    }
-
-    private void dropIndexOnTuple(Tuple tuple) throws NKInterfaceException {
-        for (MetadataAttribute attribute : this.metadata.metadataAttributes.values()) {
-            if (attribute.isIndexed) {
-                byte[] keyValue = getAttributeBytes(tuple, attribute.attributeName);
-                IndexManager.sharedInstance.removeKey(this.indices.get(attribute.indexName), keyValue);
             }
         }
     }
@@ -270,6 +266,15 @@ public class Table implements Serializable {
     /*
      * The following 8 methods are supportive methods in deletions
      */
+    private void deleteAll() {
+        for (int i = 0; i < this.numberOfBlocks; i ++) {
+            Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), i);
+            block.removeAllTuple();
+            BufferManager.sharedInstance.storeBlock(block);
+        }
+    }
+
+
     private void firstDeleteWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
         Vector<BPlusTreePointer> pointers = getSearchPointerResults(condition);
         for (BPlusTreePointer pointer : pointers) {
@@ -332,11 +337,11 @@ public class Table implements Serializable {
         Vector<Integer> emptyBlocks = new Vector<>();
         for (BPlusTreePointer pointer : this.deleteIntermediateResults.values()) {
             Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), pointer.blockIndex);
-            dropIndexOnTuple(block.getTupleAt(pointer.blockOffset, this.metadata));
             block.removeTupleAt(pointer.blockOffset);
             if (block.isDiscardable && !emptyBlocks.contains(block.index)) {
                 emptyBlocks.add(block.index);
             }
+            BufferManager.sharedInstance.storeBlock(block);
         }
         this.deleteIntermediateResults.clear();
         return emptyBlocks;
@@ -488,6 +493,16 @@ public class Table implements Serializable {
             case StringType: return converter.convertToBytes(content, length);
         }
         return null;
+    }
+
+    private void handleBlockDeletion(Vector<Integer> emptyBlocks) {
+        if (emptyBlocks.size() != 0) {
+            Vector<Integer> blockTrimRule = createBlockTrimRule(emptyBlocks);
+            BufferManager.sharedInstance.handleBlockIndexChange(getFileIdentifier(), blockTrimRule);
+            for (Index index : this.indices.values()) {
+                IndexManager.sharedInstance.modifyBlockIndex(index, blockTrimRule);
+            }
+        }
     }
 
 }

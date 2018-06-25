@@ -123,7 +123,7 @@ public class BufferManager {
     private void handleBlockIndexChangeInBuffer(String fileIdentifier,
                                                 Vector<Integer> blockTrimVector) {
         for (Block block : this.bufferedBlocks) {
-            if (block.fileIdentifier.equals(fileIdentifier)) {
+            if (block != null && block.fileIdentifier.equals(fileIdentifier)) {
                 for (int i = 0; i < blockTrimVector.size(); i += 2) {
                     if (block.index.equals(blockTrimVector.get(i))) {
                         block.index = blockTrimVector.get(i + 1);

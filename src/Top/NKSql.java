@@ -37,7 +37,7 @@ public class NKSql {
         System.out.println("NiKi SQL Server initialized.");
     }
 
-    public static void close() throws NKInternalException {
+    public static void close() {
         bufferManager.close();
         catalogManager.close();
         System.out.println("Niki SQL Server closed.");

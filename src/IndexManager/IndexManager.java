@@ -58,6 +58,12 @@ public class IndexManager{
         return res;
     }
 
+    public boolean modifyBlockIndex(Index index, Vector<Integer> oldAndNewBlockIndex){
+        managerInitialize(index);
+
+        return workOn.modifyRecordBlockIndex(oldAndNewBlockIndex);
+    }
+
     //删除workOn整个索引
     public boolean	dropWholeIndex(Index index){
         managerInitialize(index);
