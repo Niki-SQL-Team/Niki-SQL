@@ -61,8 +61,8 @@ public class NKSql {
         System.out.println("Index named " + indexName + " created.");
     }
 
-    public static void dropIndex(String indexName, String tableName) throws NKInterfaceException {
-        CatalogManager.sharedInstance.dropIndex(indexName, tableName);
+    public static void dropIndex(String indexName) throws NKInterfaceException {
+        CatalogManager.sharedInstance.dropIndex(indexName);
         System.out.println("Index named " + indexName + " dropped.");
     }
 

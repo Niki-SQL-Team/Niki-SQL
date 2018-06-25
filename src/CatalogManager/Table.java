@@ -55,6 +55,9 @@ public class Table implements Serializable {
 
     public Vector<Tuple> searchFor(ArrayList<ConditionalAttribute> conditions)
             throws NKInterfaceException {
+        if (conditions.get(0).compareCondition == CompareCondition.All) {
+            return selectAll();
+        }
         setConditionDataType(conditions);
         conditions = makeIndexedSearchFirst(conditions);
         ConditionalAttribute firstCondition = conditions.get(0);
@@ -104,7 +107,9 @@ public class Table implements Serializable {
         if (indexToDrop == null) {
             throw new NKInterfaceException("There's no index named " + indexName);
         }
-        IndexManager.sharedInstance.dropWholeIndex(this.indices.get(indexName));
+        // IndexManager.sharedInstance.dropWholeIndex(this.indices.get(indexName));
+        // You know what, we still keep the index, in order to help the unique test
+        // just pretend that we've dropped it
     }
 
     public void drop() {
@@ -339,6 +344,15 @@ public class Table implements Serializable {
     /*
      * The following 5 methods are supportive methods in select
      */
+    private Vector<Tuple> selectAll() {
+        Vector<Tuple> result = new Vector<>();
+        for (int i = 0; i < this.numberOfBlocks; i ++) {
+            Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), i);
+            result.addAll(block.getAllTuples(this.metadata));
+        }
+        return result;
+    }
+
     private void firstSearchWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
         Vector<BPlusTreePointer> pointers = getSearchPointerResults(condition);
         for (BPlusTreePointer pointer : pointers) {

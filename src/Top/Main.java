@@ -18,6 +18,7 @@ import Foundation.Enumeration.*;
 import IndexManager.*;
 
 import IndexManager.*;
+import Interpreter.Interpreter;
 
 import java.io.DataInputStream;
 import java.util.*;
@@ -68,64 +69,69 @@ public class Main {
 //        return sb.toString();
 //    }
 
+//    public static void main(String args[]) {
+//        try {
+//            NKSql nkSql = new NKSql();
+//
+//            ArrayList<MetadataAttribute> attributes = new ArrayList<>();
+//            MetadataAttribute attribute_1 = new MetadataAttribute("test_int",
+//                    DataType.IntegerType, true, true);
+//            attribute_1.setIndexName("test_index");
+//            MetadataAttribute attribute_2 = new MetadataAttribute("test_float",
+//                    DataType.FloatType, false, true);
+//            MetadataAttribute attribute_3 = new MetadataAttribute("test_string",
+//                    DataType.StringType, 255, false, true);
+//
+//            attributes.add(attribute_1);
+//            attributes.add(attribute_2);
+//            attributes.add(attribute_3);
+//
+//            NKSql.createTable("test_table", attributes);
+//
+//            Vector<String> dataItem = new Vector<>();
+//            Tuple tuple;
+//
+//            dataItem.add("3");
+//            dataItem.add("3.1415");
+//            dataItem.add("Apple Inc");
+//            tuple = new Tuple(dataItem);
+//            NKSql.insertTuple(tuple, "test_table");
+//
+//            dataItem.clear();
+//            dataItem.add("1");
+//            dataItem.add("2.7182");
+//            dataItem.add("Alphabet Inc");
+//            tuple = new Tuple(dataItem);
+//            NKSql.insertTuple(tuple, "test_table");
+//
+//            dataItem.clear();
+//            dataItem.add("2");
+//            dataItem.add("6.67");
+//            dataItem.add("Tesla Inc");
+//            tuple = new Tuple(dataItem);
+//            NKSql.insertTuple(tuple, "test_table");
+//
+//
+//
+//            ArrayList<String> selectTarget = new ArrayList<>();
+//            ArrayList<ConditionalAttribute> conditions = new ArrayList<>();
+//            selectTarget.add("*");
+//            conditions.add(new ConditionalAttribute("test_table", "test_int",
+//                    "2", CompareCondition.NotEqualTo));
+//            ArrayList<Tuple> result = NKSql.select("test_table", selectTarget, conditions);
+//
+//
+//
+//            NKSql.close();
+//        } catch (Exception exception) {
+//            exception.printStackTrace();
+//        }
+//
+//    }
+
     public static void main(String args[]) {
-        try {
-            NKSql nkSql = new NKSql();
-
-            ArrayList<MetadataAttribute> attributes = new ArrayList<>();
-            MetadataAttribute attribute_1 = new MetadataAttribute("test_int",
-                    DataType.IntegerType, true, true);
-            attribute_1.setIndexName("test_index");
-            MetadataAttribute attribute_2 = new MetadataAttribute("test_float",
-                    DataType.FloatType, false, true);
-            MetadataAttribute attribute_3 = new MetadataAttribute("test_string",
-                    DataType.StringType, 255, false, true);
-
-            attributes.add(attribute_1);
-            attributes.add(attribute_2);
-            attributes.add(attribute_3);
-
-            NKSql.createTable("test_table", attributes);
-
-            Vector<String> dataItem = new Vector<>();
-            Tuple tuple;
-
-            dataItem.add("3");
-            dataItem.add("3.1415");
-            dataItem.add("Apple Inc");
-            tuple = new Tuple(dataItem);
-            NKSql.insertTuple(tuple, "test_table");
-
-            dataItem.clear();
-            dataItem.add("1");
-            dataItem.add("2.7182");
-            dataItem.add("Alphabet Inc");
-            tuple = new Tuple(dataItem);
-            NKSql.insertTuple(tuple, "test_table");
-
-            dataItem.clear();
-            dataItem.add("2");
-            dataItem.add("6.67");
-            dataItem.add("Tesla Inc");
-            tuple = new Tuple(dataItem);
-            NKSql.insertTuple(tuple, "test_table");
-
-
-
-            ArrayList<String> selectTarget = new ArrayList<>();
-            ArrayList<ConditionalAttribute> conditions = new ArrayList<>();
-            selectTarget.add("*");
-            conditions.add(new ConditionalAttribute("test_table", "test_int",
-                    "2", CompareCondition.NotEqualTo));
-            ArrayList<Tuple> result = NKSql.select("test_table", selectTarget, conditions);
-
-
-
-            NKSql.close();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-
+        Interpreter interpreter = new Interpreter();
+        Interpreter.startInterpreter(args);
     }
 
 }

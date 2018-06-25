@@ -54,9 +54,9 @@ public class Interpreter {
                     System.out.println("THANK YOU FOR USING!");
                     try {
                         NKSql.close();
-                    } catch (Exception e) {
-                        System.out.println("Interpreter error:" + e.getMessage());
-                        e.printStackTrace();
+                    } catch (NKInternalException exception) {
+                        exception.describe();
+                        exception.printStackTrace();
                     }
                     reader.close();
                     System.exit(0);
@@ -276,9 +276,8 @@ public class Interpreter {
                                 if (isSemaCorrect) {
                                     try {
                                         NKSql.createTable(tmpTableName, tmpAttributes);
-                                    } catch (Exception e) {
-                                        System.out.println("Interpreter error:" + e.getMessage());
-                                        e.printStackTrace();
+                                    } catch (NKInterfaceException exception) {
+                                        exception.describe();
                                     }
 
                                 } else {
@@ -351,9 +350,8 @@ public class Interpreter {
                                             if (isSemaCorrect) {
                                                 try {
                                                     NKSql.createIndex(tmpIndexName, tmpTableName, tmpAttriName);
-                                                } catch (Exception e) {
-                                                    System.out.println("Interpreter error:" + e.getMessage());
-                                                    e.printStackTrace();
+                                                } catch (NKInterfaceException exception) {
+                                                    exception.describe();
                                                 }
 
                                             } else {
@@ -422,9 +420,8 @@ public class Interpreter {
                             if (isSemaCorrect) {
                                 try {
                                     NKSql.dropTable(tmpTableName);
-                                } catch (Exception e) {
-                                    System.out.println("Interpreter error:" + e.getMessage());
-                                    e.printStackTrace();
+                                } catch (NKInterfaceException exception) {
+                                    exception.describe();
                                 }
                             } else {
                                 System.out.print(semaErrMsg);
@@ -468,10 +465,10 @@ public class Interpreter {
                              * */
                             if (isSemaCorrect) {
                                 try {
-                                   //// NKSql.dropIndex(tmpIndexName);
-                                } catch (Exception e) {
-                                    System.out.println("Interpreter error:" + e.getMessage());
-                                    e.printStackTrace();
+                                    NKSql.dropIndex(tmpIndexName);
+                                } catch (NKInterfaceException exception) {
+                                    exception.describe();
+
                                 }
                             } else {
                                 System.out.print(semaErrMsg);
@@ -608,9 +605,8 @@ public class Interpreter {
                                     Tuple units = new Tuple(dataItems);
                                     try {
                                         NKSql.insertTuple(units, tmpTableName);
-                                    } catch (Exception e) {
-                                        System.out.println("Interpreter error:" + e.getMessage());
-                                        e.printStackTrace();
+                                    } catch (NKInterfaceException exception) {
+                                        exception.describe();
                                     }
 
 
@@ -720,9 +716,8 @@ public class Interpreter {
                                         try{
                                             NKSql.dropTuple(tmpTableName, conditionalAttributes);
                                         }
-                                        catch(Exception e){
-                                            System.out.println("Interpreter error:"+e.getMessage());
-                                            e.printStackTrace();
+                                        catch(NKInterfaceException exception){
+                                            exception.describe();
                                         }
                                     }
 
@@ -746,9 +741,8 @@ public class Interpreter {
                                     /*change int deleteNum =*/ NKSql.dropTable(tmpTableName);
 
                                     /* System.out.println("delete " + deleteNum + " tuples from table " + tmpTableName);*/
-                                } catch (Exception e) {
-                                    System.out.println("Interpreter error:" + e.getMessage());
-                                    e.printStackTrace();
+                                } catch (NKInterfaceException exception) {
+                                    exception.describe();
                                 }
                             } else {
                                 System.out.println(semaErrMsg + ", delete tuples failed");
@@ -796,16 +790,18 @@ public class Interpreter {
                     token = lexer.scan();
                     if (token.tag == Tag.ID) {
                         String tmpTableName = token.toString();
+                        token= lexer.scan();
                         if (token.tag == Tag.WHERE) {
 
                             // 添加 搜索条件
                             token = lexer.scan();
-                            while (token.toString() != ";") {
+                            while (!token.toString().equals(";")) {
                                 if (token.toString().equals("and")) {
                                     token = lexer.scan();
                                 }
                                 if (token.tag == Tag.ID) {
                                     tmpAttriName = token.toString();
+                                    token = lexer.scan();
                                     if (token.tag == Tag.OP) {
                                         op = token.toString();
                                         token = lexer.scan();
@@ -853,7 +849,8 @@ public class Interpreter {
                                     if (isSynCorrect) synErrMsg = "Synthetic error near: " + token.toString();
                                     isSynCorrect = false;
                                 }
-                            }token = lexer.scan();
+                                token = lexer.scan();
+                            }
                         } else if (token.toString().equals(";")) {
                             ConditionalAttribute CA = new ConditionalAttribute(tmpTableName, null, null, CompareCondition.All);
 
@@ -863,10 +860,9 @@ public class Interpreter {
                         ArrayList<Tuple> result = new ArrayList<>();
                         try {
                             result = NKSql.select(tmpTableName, AttriName, conditionalAttributes);
-                            //showSelectRes(AttriName,result);
-                        } catch (Exception e) {
-                            System.out.println("Interpreter error:" + e.getMessage());
-                            e.printStackTrace();
+                            showSelectRes(AttriName,result);
+                        } catch (NKInterfaceException exception) {
+                            exception.describe();
                         }
                     } else {
                         System.out.println(semaErrMsg + ", select tuples failed1");
@@ -889,7 +885,7 @@ public class Interpreter {
     //end of while
     //end of Translating
 
-    private void showSelectRes(ArrayList<String> AttriName,ArrayList<Tuple> result) {
+    private static void showSelectRes(ArrayList<String> AttriName,ArrayList<Tuple> result) {
         if(result==null) System.out.println("There  do not exist what you want");
         else if(result.size()==0) System.out.println("There  do not exist what you want");
         else {

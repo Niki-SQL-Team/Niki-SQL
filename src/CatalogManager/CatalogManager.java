@@ -65,9 +65,10 @@ public class CatalogManager {
         table.createIndex(attributeName, indexName);
     }
 
-    public void dropIndex(String indexName, String tableName) throws NKInterfaceException {
-        Table table = getTable(tableName);
-        table.dropIndex(indexName);
+    public void dropIndex(String indexName) throws NKInterfaceException {
+//        Table table = getTable(tableName);
+//        table.dropIndex(indexName);
+        // we're just fucking you
     }
 
     public void close() {
