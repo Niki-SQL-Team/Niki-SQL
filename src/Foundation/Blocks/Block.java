@@ -90,7 +90,7 @@ public class Block implements Serializable {
         }
     }
 
-    public void writeTuple(Tuple tuple, Metadata metadata) throws NKInterfaceException {
+    public Integer writeTuple(Tuple tuple, Metadata metadata) throws NKInterfaceException {
         try {
             Integer initialOffset = declareOccupancy() * this.tupleLength;
             for (int i = 0; i < metadata.numberOfAttributes; i ++) {
@@ -99,9 +99,11 @@ public class Block implements Serializable {
                 String item = tuple.get(i);
                 writeAttributeToBlock(item, attribute, offset);
             }
+            return initialOffset / this.tupleLength;
         } catch (NKInternalException exception) {
             handleInternalException(exception, "writeTuple");
         }
+        return -1;
     }
 
     /*

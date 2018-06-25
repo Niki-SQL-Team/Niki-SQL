@@ -43,11 +43,13 @@ public class Table implements Serializable {
         if (!isUnique(attributeTuple)) {
             throw new NKInterfaceException("Duplicate data found on an unique attribute.");
         }
+        BPlusTreePointer pointer;
         if (availableBlocks.isEmpty()) {
-            createBlockAndInsert(attributeTuple);
+            pointer = createBlockAndInsert(attributeTuple);
         } else {
-            insertIntoAvailableBlock(attributeTuple);
+            pointer = insertIntoAvailableBlock(attributeTuple);
         }
+        insertIntoIndex(attributeTuple, pointer);
     }
 
     public Vector<Tuple> searchFor(ArrayList<ConditionalAttribute> conditions)
@@ -55,7 +57,9 @@ public class Table implements Serializable {
         setConditionDataType(conditions);
         conditions = makeIndexedSearchFirst(conditions);
         ConditionalAttribute firstCondition = conditions.get(0);
-        if (this.metadata.getMetadataAttributeNamed(firstCondition.attributeName).isIndexed) {
+        MetadataAttribute attribute = this.metadata.getMetadataAttributeNamed(firstCondition
+                .attributeName);
+        if (attribute.isIndexed && firstCondition.compareCondition != CompareCondition.NotEqualTo) {
             firstSearchWithIndex(firstCondition);
         } else {
             firstSearchWithoutIndex(firstCondition);
@@ -143,6 +147,16 @@ public class Table implements Serializable {
         }
     }
 
+    private void insertIntoIndex(Tuple tuple, BPlusTreePointer pointer) throws NKInterfaceException {
+        for (MetadataAttribute attribute : this.metadata.metadataAttributes.values()) {
+            if (attribute.isIndexed) {
+                Index index = this.indices.get(attribute.indexName);
+                byte[] key = getAttributeBytes(tuple, attribute.attributeName);
+                IndexManager.sharedInstance.insertNewKey(index, key, pointer);
+            }
+        }
+    }
+
     private void dropIndexOnTuple(Tuple tuple) throws NKInterfaceException {
         for (MetadataAttribute attribute : this.metadata.metadataAttributes.values()) {
             if (attribute.isIndexed) {
@@ -185,33 +199,35 @@ public class Table implements Serializable {
     /*
      * The following 3 methods are supportive methods in insertions
      */
-    private void createBlockAndInsert(Tuple attributeTuple) throws NKInterfaceException {
+    private BPlusTreePointer createBlockAndInsert(Tuple attributeTuple) throws NKInterfaceException {
         Block block = new Block(getFileIdentifier(), numberOfBlocks, this.metadata);
         numberOfBlocks ++;
-        insertIntoBlock(attributeTuple, block);
+        Integer blockOffset = insertIntoBlock(attributeTuple, block);
         if (!block.isFullyOccupied) {
             this.availableBlocks.add(block.index);
         }
         BufferManager.sharedInstance.storeBlock(block);
+        return new BPlusTreePointer(this.numberOfBlocks - 1, blockOffset);
     }
 
-    private void insertIntoAvailableBlock(Tuple attributeTuple) throws NKInterfaceException {
+    private BPlusTreePointer insertIntoAvailableBlock(Tuple attributeTuple) throws NKInterfaceException {
         BufferManager bufferManager = BufferManager.sharedInstance;
         Integer blockIndexToInsert = availableBlocks.firstElement();
         Block block = bufferManager.getBlock(getFileIdentifier(), blockIndexToInsert);
-        insertIntoBlock(attributeTuple, block);
+        Integer blockOffset = insertIntoBlock(attributeTuple, block);
         if (block.isFullyOccupied) {
             availableBlocks.remove(blockIndexToInsert);
         }
         BufferManager.sharedInstance.storeBlock(block);
+        return new BPlusTreePointer(blockIndexToInsert, blockOffset);
     }
 
-    private void insertIntoBlock(Tuple tuple, Block block)
+    private Integer insertIntoBlock(Tuple tuple, Block block)
             throws NKInterfaceException {
         if (!tuple.size().equals(this.metadata.numberOfAttributes)) {
             throw new NKInterfaceException("Insert values don't correspond to its metadata.");
         }
-        block.writeTuple(tuple, this.metadata);
+        return block.writeTuple(tuple, this.metadata);
     }
 
     /*
@@ -220,6 +236,9 @@ public class Table implements Serializable {
     private void firstDeleteWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
         Vector<BPlusTreePointer> pointers = getSearchPointerResults(condition);
         for (BPlusTreePointer pointer : pointers) {
+            if (pointer == null) {
+                continue;
+            }
             Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), pointer.blockIndex);
             this.deleteIntermediateResults.put(block.getTupleAt(pointer.blockOffset, this.metadata),
                     pointer);
@@ -309,6 +328,9 @@ public class Table implements Serializable {
     private void firstSearchWithIndex(ConditionalAttribute condition) throws NKInterfaceException {
         Vector<BPlusTreePointer> pointers = getSearchPointerResults(condition);
         for (BPlusTreePointer pointer : pointers) {
+            if (pointer == null) {
+                continue;
+            }
             Block block = BufferManager.sharedInstance.getBlock(getFileIdentifier(), pointer.blockIndex);
             this.insertIntermediateResults.add(block.getTupleAt(pointer.blockOffset, this.metadata));
         }

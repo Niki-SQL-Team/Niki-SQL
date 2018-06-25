@@ -83,7 +83,7 @@ public class BPlusTreeBlock extends Block {
      */
     public BPlusTreePointer searchFor(byte[] dataItem) {
         Integer index = searchIndexFor(dataItem, !this.isLeafNode);
-        return index == null ? null : getPointer(index);
+        return index == -1 ? null : getPointer(index);
     }
 
     /*
