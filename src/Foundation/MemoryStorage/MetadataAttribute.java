@@ -16,17 +16,18 @@ public class MetadataAttribute implements Serializable {
     public String indexName;
 
     public MetadataAttribute(String attributeName, DataType dataType, Integer length,
-                             Boolean isPrimaryKey, Boolean isUnique, Boolean isIndexed) {
+                             Boolean isPrimaryKey, Boolean isUnique) {
         this.attributeName = attributeName;
         this.dataType = dataType;
         this.length = length;
         this.isPrimaryKey = isPrimaryKey;
         this.isUnique = isUnique;
-        this.isIndexed = isIndexed;
+        this.isIndexed = isUnique;
+        this.indexName = this.attributeName;
     }
 
     public MetadataAttribute(String attributeName, DataType dataType, Boolean isPrimaryKey,
-                             Boolean isUnique, Boolean isIndexed) throws NKInternalException {
+                             Boolean isUnique) throws NKInternalException {
         if (dataType == DataType.StringType) {
             throw new NKInternalException("StringType requires length.");
         }
@@ -35,7 +36,8 @@ public class MetadataAttribute implements Serializable {
         this.length = 0;
         this.isPrimaryKey = isPrimaryKey;
         this.isUnique = isUnique;
-        this.isIndexed = isIndexed;
+        this.isIndexed = isUnique;
+        this.indexName = this.attributeName;
     }
 
     public void setIndexName(String indexName) {

@@ -9,6 +9,7 @@ import Foundation.Exception.NKInterfaceException;
 import Foundation.MemoryStorage.*;
 import IndexManager.Index;
 import IndexManager.IndexManager;
+import Top.NKSql;
 
 import java.io.Serializable;
 import java.util.*;
@@ -92,8 +93,10 @@ public class Table implements Serializable {
     }
 
     public void createIndex(String attributeName, String indexName) throws NKInterfaceException {
+        if (!this.metadata.getMetadataAttributeNamed(attributeName).isUnique) {
+            throw new NKInterfaceException("Indices can only be built on unique attributes.");
+        }
         setSingleIndex(attributeName, indexName);
-        buildIndex(indexName);
     }
 
     public void dropIndex(String indexName) throws NKInterfaceException {
@@ -128,10 +131,21 @@ public class Table implements Serializable {
 
     private void setSingleIndex(String attributeName, String indexName) {
         this.metadata.getMetadataAttributeNamed(attributeName).isIndexed = true;
+        String previousIndexName = this.metadata.getMetadataAttributeNamed(attributeName).indexName;
+        Index tempIndex = this.indices.get(previousIndexName);
+        if (tempIndex == null) {
+            MetadataAttribute attribute = this.metadata.getMetadataAttributeNamed(attributeName);
+            if (attribute.dataType.equals(DataType.StringType)) {
+                tempIndex = IndexManager.sharedInstance.createBlankIndex(getFileIdentifier(),
+                        attributeName, attribute.dataType, attribute.length);
+            } else {
+                tempIndex = IndexManager.sharedInstance.createBlankIndex(getFileIdentifier(),
+                        attributeName, attribute.dataType);
+            }
+        }
         this.metadata.getMetadataAttributeNamed(attributeName).setIndexName(indexName);
-        MetadataAttribute attribute = this.metadata.getMetadataAttributeNamed(attributeName);
-        this.indices.put(attribute.indexName, IndexManager.sharedInstance.createBlankIndex(
-                this.tableName, attributeName, attribute.dataType));
+        this.indices.remove(previousIndexName);
+        this.indices.put(indexName, tempIndex);
     }
 
     private void buildIndex(String indexName) throws NKInterfaceException {

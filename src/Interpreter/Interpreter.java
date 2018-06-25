@@ -187,14 +187,14 @@ public class Interpreter {
 
                                         if (token.toString().equals(",")) {
                                             try {
-                                                //tmpAttributes.add(new MetadataAttribute(tmpAttriName, dataType, tmpLength, tmpIsP, tmpIsU));
+                                                tmpAttributes.add(new MetadataAttribute(tmpAttriName, dataType, tmpLength, tmpIsP, tmpIsU));
                                             } catch (Exception e) {
                                                 System.out.println("Interpreter error:" + e.getMessage());
                                                 e.printStackTrace();
                                             }
                                         } else if (token.toString().equals(")")) {
                                             try {
-                                                //tmpAttributes.add(new MetadataAttribute(tmpAttriName, dataType, tmpLength, tmpIsP, tmpIsU));
+                                                tmpAttributes.add(new MetadataAttribute(tmpAttriName, dataType, tmpLength, tmpIsP, tmpIsU));
                                             } catch (Exception e) {
                                                 System.out.println("Interpreter error:" + e.getMessage());
                                                 e.printStackTrace();
@@ -468,7 +468,7 @@ public class Interpreter {
                              * */
                             if (isSemaCorrect) {
                                 try {
-                                    //NKSql.dropIndex(tmpIndexName);
+                                   //// NKSql.dropIndex(tmpIndexName);
                                 } catch (Exception e) {
                                     System.out.println("Interpreter error:" + e.getMessage());
                                     e.printStackTrace();

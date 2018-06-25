@@ -38,7 +38,11 @@ public class IndexManager{
     public Index createBlankIndex(String table, String attribute, DataType dataType, Integer stringlength){//建成空的B+树
         BufferManager bufferManager = BufferManager.sharedInstance;
         String identifier = "index" + "_" +  table + "_" + attribute;
-        BPlusTreeBlock myRoot = new BPlusTreeBlock(identifier, dataType, 0, true);
+        BPlusTreeBlock myRoot;
+        if(dataType == DataType.StringType)
+            myRoot = new BPlusTreeBlock(identifier, dataType, stringlength,0, true);
+        else
+            myRoot = new BPlusTreeBlock(identifier, dataType,0, true);
         myRoot.setTailPointer(-1);
         bufferManager.storeBlock(myRoot);
         BPlusTreePointer rootPointer = new BPlusTreePointer(0);

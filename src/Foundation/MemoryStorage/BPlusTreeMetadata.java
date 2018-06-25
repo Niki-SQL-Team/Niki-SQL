@@ -22,11 +22,11 @@ public class BPlusTreeMetadata extends Metadata {
     private static Vector<MetadataAttribute> getAttributes(DataType dataType, Integer length) {
         try {
             MetadataAttribute indexPointer = new MetadataAttribute("Index Pointer",
-                    DataType.IntegerType, false, false, false);
+                    DataType.IntegerType, false, false);
             MetadataAttribute offsetPointer = new MetadataAttribute("Offset Pointer",
-                    DataType.IntegerType, false, false, false);
+                    DataType.IntegerType, false, false);
             MetadataAttribute marker = new MetadataAttribute("Marker", dataType, length,
-                    false, false, false);
+                    false, false);
             Vector<MetadataAttribute> attributes = new Vector<>();
             attributes.add(indexPointer);
             attributes.add(offsetPointer);
@@ -41,11 +41,11 @@ public class BPlusTreeMetadata extends Metadata {
     private static Vector<MetadataAttribute> getAttributes(DataType dataType) {
         try {
             MetadataAttribute indexPointer = new MetadataAttribute("Index Pointer",
-                    DataType.IntegerType, false, false, false);
+                    DataType.IntegerType, false, false);
             MetadataAttribute offsetPointer = new MetadataAttribute("Offset Pointer",
-                    DataType.IntegerType, false, false, false);
+                    DataType.IntegerType, false, false);
             MetadataAttribute marker = new MetadataAttribute("Marker", dataType,
-                    false, false, false);
+                    false, false);
             Vector<MetadataAttribute> attributes = new Vector<>();
             attributes.add(indexPointer);
             attributes.add(offsetPointer);

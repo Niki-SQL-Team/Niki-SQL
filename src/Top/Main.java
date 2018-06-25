@@ -74,12 +74,12 @@ public class Main {
 
             ArrayList<MetadataAttribute> attributes = new ArrayList<>();
             MetadataAttribute attribute_1 = new MetadataAttribute("test_int",
-                    DataType.IntegerType, true, true, true);
+                    DataType.IntegerType, true, true);
             attribute_1.setIndexName("test_index");
             MetadataAttribute attribute_2 = new MetadataAttribute("test_float",
-                    DataType.FloatType, false, false, false);
+                    DataType.FloatType, false, true);
             MetadataAttribute attribute_3 = new MetadataAttribute("test_string",
-                    DataType.StringType, 255, false, false, false);
+                    DataType.StringType, 255, false, true);
 
             attributes.add(attribute_1);
             attributes.add(attribute_2);
@@ -123,7 +123,6 @@ public class Main {
 
             NKSql.close();
         } catch (Exception exception) {
-            ((NKInterfaceException)exception).describe();
             exception.printStackTrace();
         }
 
