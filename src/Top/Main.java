@@ -26,6 +26,34 @@ import java.util.concurrent.locks.Condition;
 
 public class Main {
 
+//    public static void main(String args[]) {
+//        try {
+//            NKSql nkSql = new NKSql();
+//
+//            MetadataAttribute attribute = new MetadataAttribute("integer", DataType.IntegerType, true, true);
+//            ArrayList<MetadataAttribute> metadataAttributes = new ArrayList<>();
+//            metadataAttributes.add(attribute);
+//
+//            NKSql.createTable("test_run", metadataAttributes);
+//
+//            Vector<String> dataItem = new Vector<>();
+//
+//            for (int i = 0; i < 100000; i ++) {
+//                dataItem.add(String.valueOf(i));
+//                NKSql.insertTuple(new Tuple(dataItem), "test_run");
+//                dataItem.clear();
+//                if (i % 1000 == 0) {
+//                    System.out.print("\r" + i / 1000 + "% Done.");
+//                }
+//            }
+//
+//            NKSql.close();
+//
+//        } catch (Exception exception) {
+//            exception.printStackTrace();
+//        }
+//    }
+
     public static void main(String args[]) {
         try {
             NKSql nkSql = new NKSql();

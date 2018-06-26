@@ -288,7 +288,7 @@ public class BPlusTreeBlock extends Block {
         }
         while (endIndex - startIndex != 1) {
             Integer centerIndex = (endIndex + startIndex) / 2;
-            String centerContent = getString(centerIndex * tupleLength, pointerSize);
+            String centerContent = getString(centerIndex * tupleLength + pointerSize, length);
             if (centerContent.compareTo(dataItem) > 0) {
                 endIndex = centerIndex;
             } else if (centerContent.compareTo(dataItem) < 0) {

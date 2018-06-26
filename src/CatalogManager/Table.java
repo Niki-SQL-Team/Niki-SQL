@@ -79,8 +79,9 @@ public class Table implements Serializable {
     }
 
     public void deleteItem(ArrayList<ConditionalAttribute> conditions) throws NKInterfaceException {
-        if (conditions.get(0).compareCondition == CompareCondition.All) {
+        if (conditions == null || conditions.size() == 0 || conditions.get(0).compareCondition == CompareCondition.All) {
             deleteAll();
+            return;
         }
         conditions = makeIndexedSearchFirst(conditions);
         ConditionalAttribute firstCondition = conditions.get(0);
@@ -95,7 +96,7 @@ public class Table implements Serializable {
         }
         executeDeleteInBPlusTree();
         Vector<Integer> emptyBlocks = executeDeletion();
-        handleBlockDeletion(emptyBlocks);
+        //handleBlockDeletion(emptyBlocks);
         this.numberOfBlocks -= emptyBlocks.size();
     }
 

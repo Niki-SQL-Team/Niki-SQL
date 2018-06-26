@@ -2,7 +2,6 @@ package Interpreter;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Vector;
 import Foundation.MemoryStorage.*;
 import Top.NKSql;
@@ -67,21 +66,28 @@ public class Interpreter {
                 }
 
             } else if (token.tag == Tag.EXECFILE) {
-//                StringBuilder str= new StringBuilder("");
-//                while(!token.toString().equals(";")){
-//                    str.append(token.toString());
-//                    token = lexer.scan();
-//                }
-                Scanner scanner = new Scanner(System.in);
-                String path = scanner.nextLine();
-                File file = new File(path + ".txt");
-                if (file.exists()) {
-                    BufferedReader reader2 = new BufferedReader(new FileReader(file));
-                    Translating(reader2);
-                    isSynCorrect = true;
+                token = lexer.scan();
+                StringBuilder str= new StringBuilder("");
+                while(!token.toString().equals(";")){
+                    str.append(token.toString());
+                    token = lexer.scan();
+                }
+                File file = new File(str + ".txt");
+                if (token.toString().equals(";")) {
+
+                    if (file.exists()) {
+                        BufferedReader reader2 = new BufferedReader(new FileReader(file));
+                        Translating(reader2);
+                        isSynCorrect = true;
+
+                    } else {
+                        synErrMsg = "The file " + file.getName() + " doesn't exist";
+                        isSynCorrect = false;
+
+                    }
 
                 } else {
-                    synErrMsg = "The file " + file.getName() + " doesn't exist";
+                    if (isSynCorrect) synErrMsg = "Synthetic error near: " + token.toString();
                     isSynCorrect = false;
 
                 }
@@ -579,10 +585,6 @@ public class Interpreter {
                                         isSynCorrect = false;
                                         break;
                                     }
-                                }
-                                if (isSemaCorrect/*&&i<CatalogManager.getTableAttriNum(tmpTableName)*/) {
-                                    isSemaCorrect = false;
-                                    semaErrMsg = "The  than that of attributes";
                                 }
                                 token = lexer.scan();
                                 if (isSynCorrect && token.toString().equals(";")) {
